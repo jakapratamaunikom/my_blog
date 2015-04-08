@@ -1,0 +1,25 @@
+.navbar-header
+  button.navbar-toggle.collapsed data-target=".navbar-collapse" data-toggle="collapse" type="button" 
+    span.sr-only Toggle navigation
+    span.icon-bar
+    span.icon-bar
+    span.icon-bar
+  = link_to 'Админка Алексей В.', admin_root_path, class: 'navbar-brand'
+.collapse.navbar-collapse
+  ul.nav.navbar-nav
+
+    li.dropdown role="presentation" class="#{'active' if current_controller?('admin/articles')}"
+      a.dropdown-toggle data-toggle="dropdown" href="#" 
+        | Статьи
+        span.caret
+      ul.dropdown-menu role="menu" 
+        li class="#{'active' if current_page?(admin_articles_path)}"
+          = link_to 'Список', admin_articles_path
+        li class="#{'active' if current_page?(new_admin_article_path)}"
+          = link_to 'Добавить', new_admin_article_path
+
+  ul.nav.navbar-nav.navbar-right
+    li
+      = link_to '#', title: 'Обычный вид' do
+        span.glyphicon.glyphicon-log-out
+    

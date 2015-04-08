@@ -10,10 +10,12 @@ html
   body
     .navbar.navbar-default.navbar-fixed-top role="navigation" 
       .container-fluid
+        = render 'admin/shared/topbar'
 
     .container
+      br
+      = render 'admin/shared/breadcrumbs'
       = yield
-      h1
-        '!!!'
+
     javascript:
       displayNotices("#{notice}")

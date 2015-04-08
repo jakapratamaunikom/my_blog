@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
     get '/' => "main#index", as: 'root'
+    resources :articles
   end
 
 end
