@@ -21,14 +21,14 @@ RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Main do
       expect(@breadcrumbs.items.length).to eq(1)
     end
   
-    it 'render by settings which return html_safe string' do
-      setting = VAlexL::MyBlog::Decorators::Breadcrumbs::Setting.new VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_CONTAINER_TEMPLATE,
+    it 'render by breadcrumb template which return html_safe string' do
+      template = VAlexL::MyBlog::Decorators::Breadcrumbs::Template.new VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_CONTAINER_TEMPLATE,
                                                                       VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_SIMPLE_ITEM_TEMPLATE,
                                                                       VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_LAST_ITEM_TEMPLATE
 
       @breadcrumbs.add_item('Main', :root_path)
       @breadcrumbs.add_item('Another page', :some_another_path)
-      expect(@breadcrumbs.render(setting)).to eq("<ol class=\"breadcrumb\"><li><a href=\"/\">Main</a></li><li>Another page</li></ol>".html_safe)
+      expect(@breadcrumbs.render(template)).to eq("<ol class=\"breadcrumb\"><li><a href=\"/\">Main</a></li><li>Another page</li></ol>".html_safe)
     end
   end
 

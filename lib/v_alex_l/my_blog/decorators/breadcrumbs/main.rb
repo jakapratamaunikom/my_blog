@@ -9,10 +9,10 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Main
     items.push VAlexL::MyBlog::Decorators::Breadcrumbs::Item.new(title, path)
   end
 
-  def render(tasty_breadcrumb_setting)
-    printer = VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new  tasty_breadcrumb_setting.container_template,
-                                                                    tasty_breadcrumb_setting.simple_item_template,
-                                                                    tasty_breadcrumb_setting.last_item_template
+  def render(tasty_breadcrumbs_template)
+    printer = VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new  tasty_breadcrumbs_template.container,
+                                                                    tasty_breadcrumbs_template.simple_item,
+                                                                    tasty_breadcrumbs_template.last_item
     printer.render_items(items)
   end
 
