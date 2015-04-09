@@ -5,7 +5,9 @@ RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Printer do
     allow(VAlexL::MyBlog::Decorators::Breadcrumbs::Printer).to receive(:root_path).and_return('/')
     allow(VAlexL::MyBlog::Decorators::Breadcrumbs::Printer).to receive(:some_another_path).and_return('/some_another_path')
 
-    @printer = VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new
+    @printer = VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_CONTAINER_TEMPLATE, 
+                                                                    VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_SIMPLE_ITEM_TEMPLATE, 
+                                                                    VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_LAST_ITEM_TEMPLATE
   end
 
   describe 'has method' do
@@ -34,9 +36,9 @@ RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Printer do
     end
 
     it 'setup in constructor' do
-      expect(@printer.container).to eq('ul.my_breadcrumb')
-      expect(@printer.simple_item).to eq('li.simple_item a.a_simple_item')
-      expect(@printer.last_item).to eq('li.last_item span.s_last_item')
+      expect(@printer.container_template).to eq('ul.my_breadcrumb')
+      expect(@printer.simple_item_template).to eq('li.simple_item a.a_simple_item')
+      expect(@printer.last_item_template).to eq('li.last_item span.s_last_item')
     end
 
     it 'render_simple_item by new template' do

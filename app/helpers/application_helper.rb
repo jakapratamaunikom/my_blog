@@ -9,6 +9,6 @@ module ApplicationHelper
   end
 
   def display_breadcrumbs
-    VAlexL::MyBlog::Decorators::Breadcrumbs.new.render
+    VAlexL::MyBlog::Decorators::Breadcrumbs::Main.render
   end
 end

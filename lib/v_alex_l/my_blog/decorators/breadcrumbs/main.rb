@@ -7,11 +7,14 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Main
     end
 
     def printer
-      @printer ||= VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new
+      @printer ||= VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new container_template, simple_item_template, last_item_template
       @printer
     end
 
     def reset_items
+      puts '!!!!!!!!!!'
+      puts 'reset_items'
+      puts '!!!!!!!!!!'
       @items = nil
     end
 
@@ -22,10 +25,26 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Main
     def get_items
       items.get_all
     end
+
+    def container_template
+      return VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_CONTAINER_TEMPLATE unless @container_template
+      @container_template
+    end 
+
+    def simple_item_template
+      return VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_SIMPLE_ITEM_TEMPLATE unless @simple_item_template
+      @simple_item_template
+    end
+
+    def last_item_template  
+      return VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_LAST_ITEM_TEMPLATE unless @last_item_template  
+      @last_item_template  
+    end
+
+    def render
+      items = VAlexL::MyBlog::Decorators::Breadcrumbs::Main.get_items
+      VAlexL::MyBlog::Decorators::Breadcrumbs::Main.printer.render_items(items)
+    end
   end
 
-  def render
-    items = VAlexL::MyBlog::Decorators::Breadcrumbs::Main.get_items
-    VAlexL::MyBlog::Decorators::Breadcrumbs::Main.printer.render_items(items)
-  end
 end

@@ -3,23 +3,27 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Printer
   include ActionView::Helpers::TagHelper
   include ActionView::Context
   
-  attr_reader :container, :simple_item, :last_item
-  def initialize(container='ol.breadcrumb', simple_item='li a', last_item='li')
-    @container   = container
-    @simple_item = simple_item
-    @last_item   = last_item
+  DEFAULT_CONTAINER_TEMPLATE   = 'ol.breadcrumb'
+  DEFAULT_SIMPLE_ITEM_TEMPLATE = 'li a'
+  DEFAULT_LAST_ITEM_TEMPLATE   = 'li'
+
+  attr_reader :container_template, :simple_item_template, :last_item_template
+  def initialize(container_template, simple_item_template, last_item_template)
+    @container_template   = container_template
+    @simple_item_template = simple_item_template
+    @last_item_template   = last_item_template
   end
 
   def render_simple_item(item)
-    render_item_by_template simple_item.clone, item
+    render_item_by_template simple_item_template.clone, item
   end
 
   def render_last_item(item)
-    render_item_by_template last_item.clone, item
+    render_item_by_template last_item_template.clone, item
   end
 
   def render_items(items)
-    render_container_by_template container.clone, items
+    render_container_by_template container_template.clone, items
   end
 
   private
