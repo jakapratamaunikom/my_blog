@@ -8,17 +8,17 @@ RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Main do
 
 
   describe 'has method' do
-    it 'items which return instance of VAlexL::MyBlog::Decorators::Breadcrumbs::Items' do
+    it 'items which return array of instance of VAlexL::MyBlog::Decorators::Breadcrumbs::Item' do
       items = @breadcrumbs.items
-      expect(items.instance_of?(VAlexL::MyBlog::Decorators::Breadcrumbs::Items)).to eq(true)
+      all_items_is_instance_of_breadcrumb_item = items.all?{|i| i.instance_of?(VAlexL::MyBlog::Decorators::Breadcrumbs::Item)}
+      expect(all_items_is_instance_of_breadcrumb_item).to eq(true)
     end
 
     it 'methods add_item which add new item to breadcrumbs' do
-      expect(@breadcrumbs.items.get_all).to eq([])
+      expect(@breadcrumbs.items).to eq([])
       @breadcrumbs.add_item('Main', :root_path)
       
-      expect(@breadcrumbs.items.get_all.length).to eq(1)
-      expect(@breadcrumbs.items.get_all.first.instance_of?(VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item)).to eq(true)
+      expect(@breadcrumbs.items.length).to eq(1)
     end
   
     it 'render by settings which return html_safe string' do

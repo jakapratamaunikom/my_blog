@@ -5,8 +5,8 @@ RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Printer do
     @printer = VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_CONTAINER_TEMPLATE, 
                                                                     VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_SIMPLE_ITEM_TEMPLATE, 
                                                                     VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_LAST_ITEM_TEMPLATE
-    @first_item = VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item.new 'Main', :root_path
-    @last_item  = VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item.new 'Another page', :some_another_path
+    @first_item = VAlexL::MyBlog::Decorators::Breadcrumbs::Item.new 'Main', :root_path
+    @last_item  = VAlexL::MyBlog::Decorators::Breadcrumbs::Item.new 'Another page', :some_another_path
     @items      = [@first_item, @last_item]
   end
 
