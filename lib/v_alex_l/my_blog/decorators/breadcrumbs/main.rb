@@ -22,17 +22,6 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Main
     def get_items
       items.get_all
     end
-
-    def set_container(container)
-    end
-
-    # def set_single_item(single_item)
-    #   SIGNLE_ITEM = single_item
-    # end
-
-    # def set_last_item(last_item)
-    #   LAST_ITEM = last_item
-    # end
   end
 
   def render
