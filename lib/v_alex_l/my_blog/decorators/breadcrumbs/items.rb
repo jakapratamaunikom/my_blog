@@ -2,14 +2,15 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Items
   class Item
     include Rails.application.routes.url_helpers
 
-    attr_reader :title, :route_helper_method
-    def initialize(title, route_helper_method)
+    attr_reader :title
+    def initialize(title, url_or_route_helper_method)
       @title = title
-      @route_helper_method  = route_helper_method
+      @url_or_route_helper_method  = url_or_route_helper_method
     end
 
     def url
-      send(route_helper_method)
+      return @url_or_route_helper_method if @url_or_route_helper_method.instance_of?(String)
+      send(@url_or_route_helper_method)
     end
   end
 

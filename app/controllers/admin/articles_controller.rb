@@ -10,12 +10,12 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def show
-    add_breadcrumb 'Моя типо первая статья', :new_admin_article_path
+    add_breadcrumb 'Моя типо первая статья', admin_article_path(1)
   end
 
   def edit
-    add_breadcrumb 'Моя типо первая статья', :some_path
-    add_breadcrumb 'Моя типо первая статья', :new_admin_article_path
+    add_breadcrumb 'Моя типо первая статья', admin_article_path(1)
+    add_breadcrumb 'Моя типо первая статья', edit_admin_article_path(1)
 
   end
 

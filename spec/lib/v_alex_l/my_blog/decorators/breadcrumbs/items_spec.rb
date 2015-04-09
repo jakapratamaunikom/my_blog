@@ -4,21 +4,22 @@ RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item do
   before(:each) do
     allow(VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item).to receive(:admin_root_path).and_return('/admin')
     @title = 'Title of page'
-    @route_helper_method  = :admin_root_path
-    @item = VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item.new @title, @route_helper_method
+    @url_or_route_helper_method = :admin_root_path
+    @item = VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item.new @title, @url_or_route_helper_method
   end
 
-  describe 'has method' do
-    it 'title returns Title of page' do
-      expect(@item.title).to eq(@title)
-    end
+  it 'has method title returns Title of page' do
+    expect(@item.title).to eq(@title)
+  end
 
-    it 'route_helper_method returns route_helper_method' do
-      expect(@item.route_helper_method).to eq(@route_helper_method)
-    end
-
-    it 'url returns /admin' do
+  describe 'has_method url' do
+    it 'try execute route helper if url_or_route_helper_method is symbol' do
       expect(@item.url).to eq('/admin')
+    end
+    
+    it 'nothing do if url_or_route_helper_method is string' do
+      @item = VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item.new @title, '/some_string_is_path'
+      expect(@item.url).to eq('/some_string_is_path')
     end
   end
 end
