@@ -6,15 +6,15 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Main
       @items
     end
 
-    def printer
-      @printer ||= VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new container_template, simple_item_template, last_item_template
-      @printer
+    def setting # by default craete setting with default value
+                # setting changes in controller by method set_container_template, set_simple_item_template, etc
+      @setting ||= VAlexL::MyBlog::Decorators::Breadcrumbs::Setting.new VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_CONTAINER_TEMPLATE,
+                                                                        VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_SIMPLE_ITEM_TEMPLATE,
+                                                                        VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_LAST_ITEM_TEMPLATE 
+      @setting
     end
 
     def reset_items
-      puts '!!!!!!!!!!'
-      puts 'reset_items'
-      puts '!!!!!!!!!!'
       @items = nil
     end
 
@@ -25,11 +25,6 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Main
     def get_items
       items.get_all
     end
-
-    def container_template
-      return VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_CONTAINER_TEMPLATE unless @container_template
-      @container_template
-    end 
 
     def simple_item_template
       return VAlexL::MyBlog::Decorators::Breadcrumbs::Printer::DEFAULT_SIMPLE_ITEM_TEMPLATE unless @simple_item_template
@@ -42,8 +37,11 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Main
     end
 
     def render
-      items = VAlexL::MyBlog::Decorators::Breadcrumbs::Main.get_items
-      VAlexL::MyBlog::Decorators::Breadcrumbs::Main.printer.render_items(items)
+      items   = VAlexL::MyBlog::Decorators::Breadcrumbs::Main.get_items
+      printer = VAlexL::MyBlog::Decorators::Breadcrumbs::Printer.new  setting.container_template,
+                                                                      setting.simple_item_template,
+                                                                      setting.last_item_template
+      printer.render_items(items)
     end
   end
 

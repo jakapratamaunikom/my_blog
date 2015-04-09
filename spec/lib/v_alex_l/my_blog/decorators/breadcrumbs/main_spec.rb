@@ -4,7 +4,9 @@ require 'rails_helper'
 RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Main do
   before(:each) do
     VAlexL::MyBlog::Decorators::Breadcrumbs::Main.reset_items 
+    @breadcrumbs = VAlexL::MyBlog::Decorators::Breadcrumbs::Main.new
   end
+
 
   describe 'has method of class' do
     it 'items which return instance of VAlexL::MyBlog::Decorators::Breadcrumbs::Items' do
@@ -12,9 +14,9 @@ RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Main do
       expect(items.instance_of?(VAlexL::MyBlog::Decorators::Breadcrumbs::Items)).to eq(true)
     end
 
-    it 'printer which return instance of VAlexL::MyBlog::Decorators::Breadcrumbs::Printer' do
-      printer = VAlexL::MyBlog::Decorators::Breadcrumbs::Main.printer
-      expect(printer.instance_of?(VAlexL::MyBlog::Decorators::Breadcrumbs::Printer)).to eq(true)
+    it 'setting which return instance of VAlexL::MyBlog::Decorators::Breadcrumbs::Setting' do
+      setting = VAlexL::MyBlog::Decorators::Breadcrumbs::Main.setting
+      expect(setting.instance_of?(VAlexL::MyBlog::Decorators::Breadcrumbs::Setting)).to eq(true)
     end
 
     it 'methods add_item which add new item to breadcrumbs items and get_items which returns all breadcrumbs items' do
