@@ -7,7 +7,6 @@ class Admin::ArticlesController < Admin::BaseController
 
   def new
     add_breadcrumb 'Создание новой статьи', :new_admin_article_path
-    
   end
 
 end
