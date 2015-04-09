@@ -1,7 +1,7 @@
 class Admin::MainController < Admin::BaseController    
-  set_container_template "ul.wow.yes.of-course"
   
   def index
+    set_container_template "ul.wow.yes.of-course"
     add_breadcrumb 'Главная', :admin_root_path
   end
 end
