@@ -19,6 +19,7 @@ end
 Spork.each_run do
   # This code will be runs each time when you run specs.
   Dir[Rails.root + "app/**/*.rb"].each do |file|
+    next if file.include?("/concerns/")
     load file
   end
   FactoryGirl.reload

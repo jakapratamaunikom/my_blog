@@ -9,4 +9,14 @@ class Admin::ArticlesController < Admin::BaseController
     add_breadcrumb 'Создание новой статьи', :new_admin_article_path
   end
 
+  def show
+    add_breadcrumb 'Моя типо первая статья', :new_admin_article_path
+  end
+
+  def edit
+    add_breadcrumb 'Моя типо первая статья', :some_path
+    add_breadcrumb 'Моя типо первая статья', :new_admin_article_path
+
+  end
+
 end

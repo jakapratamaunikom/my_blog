@@ -1,5 +1,4 @@
 class VAlexL::MyBlog::Decorators::Breadcrumbs::Printer
-  include Rails.application.routes.url_helpers
   include ActionView::Helpers::TagHelper
   include ActionView::Context
   
@@ -53,13 +52,13 @@ class VAlexL::MyBlog::Decorators::Breadcrumbs::Printer
     end
 
     def render_item_by_template(template, item)
-      return item[0] if template.blank?
+      return item.title if template.blank?
       tag_with_classes = template.split(' ')[0]
       html_tag         = tag_with_classes.split(".")[0]
       html_classes     = tag_with_classes.split(".")[1..-1].join(" ")
       options = {}
       options[:class] = html_classes if html_classes.present?
-      options[:href]  = send(item[1]) if html_tag.eql?('a')
+      options[:href]  = item.url     if html_tag.eql?('a')
       content_tag html_tag, options do
         template.slice!(tag_with_classes)
         render_item_by_template template.strip!, item

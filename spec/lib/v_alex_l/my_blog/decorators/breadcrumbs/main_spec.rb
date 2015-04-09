@@ -16,7 +16,9 @@ RSpec.describe VAlexL::MyBlog::Decorators::Breadcrumbs::Main do
     it 'methods add_item which add new item to breadcrumbs' do
       expect(@breadcrumbs.items.get_all).to eq([])
       @breadcrumbs.add_item('Main', :root_path)
-      expect(@breadcrumbs.items.get_all).to eq([['Main', :root_path]])
+      
+      expect(@breadcrumbs.items.get_all.length).to eq(1)
+      expect(@breadcrumbs.items.get_all.first.instance_of?(VAlexL::MyBlog::Decorators::Breadcrumbs::Items::Item)).to eq(true)
     end
   
     it 'render by settings which return html_safe string' do
