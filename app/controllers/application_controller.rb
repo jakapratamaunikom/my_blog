@@ -8,7 +8,13 @@ class ApplicationController < ActionController::Base
     VAlexL::MyBlog::Decorators::Breadcrumbs::Main.reset_items
   end
 
-  def add_breadcrumb(item, path, html_options={})
+  def self.add_breadcrumb(item, path)
+    before_filter do |controller|
+      controller.send(:add_breadcrumb, item, path)
+    end
+  end
+    
+  def add_breadcrumb(item, path)
     puts '!!!!!!!!!!!!!!!'
     puts "add_breadcrumb"
     puts '!!!!!!!!!!!!!!!'

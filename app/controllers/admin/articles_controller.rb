@@ -1,6 +1,6 @@
 class Admin::ArticlesController < Admin::BaseController
-  before_action { add_breadcrumb 'Админка', :admin_root_path }
-  before_action { add_breadcrumb 'Статьи',  :admin_articles_path }
+  add_breadcrumb 'Админка', :admin_root_path
+  add_breadcrumb 'Статьи',  :admin_articles_path
 
   def index
   end
