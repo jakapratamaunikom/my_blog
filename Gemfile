@@ -40,6 +40,9 @@ gem 'bootstrap-sass', '~> 3.2.0'
 #For form objects
 gem 'virtus'
 
+gem 'tasty_breadcrumbs', git: 'git@github.com:valexl/tasty_breadcrumbs.git'
+# gem 'tasty_breadcrumbs', path: '/Users/valexl/workspace/tasty_breadcrumbs/'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

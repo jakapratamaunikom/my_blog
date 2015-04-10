@@ -1,0 +1,4 @@
+ru:
+  form_objects:
+    article:
+      should_have_full_content_least_one_laguage: 'dd'
