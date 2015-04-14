@@ -1,0 +1,10 @@
+ru:
+  activerecord:
+    attributes:
+      article:
+        title_ru:   'Заголовок'
+        content_ru: 'Описание'
+        image_ru:   'Аватар'
+        title_en:   'Title'
+        content_en: 'Content'
+        image_en:   'Avatar'

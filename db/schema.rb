@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408132816) do
+ActiveRecord::Schema.define(version: 20150414154503) do
 
   create_table "articles", force: :cascade do |t|
-    t.string   "title"
-    t.text     "content"
-    t.string   "image_path"
-    t.string   "lang"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "title_ru"
+    t.string   "title_en"
+    t.text     "content_ru"
+    t.text     "content_en"
+    t.string   "image_ru"
+    t.string   "image_en"
   end
 
 end

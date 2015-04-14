@@ -7,6 +7,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   def new
     add_tasty_breadcrumb 'Создание новой статьи', :new_admin_article_path
+    @article = Article.new
   end
 
   def show

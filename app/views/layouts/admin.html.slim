@@ -12,10 +12,12 @@ html
       .container-fluid
         = render 'admin/shared/topbar'
 
-    .container
-      br
-      = display_tasty_breadcrumbs
-      = yield
+    .container-fluid
+      .row
+        .col-xs-12.col-sm-10.col-sm-offset-1
+          br
+          = display_tasty_breadcrumbs
+          = yield
 
     javascript:
       displayNotices("#{notice}")
