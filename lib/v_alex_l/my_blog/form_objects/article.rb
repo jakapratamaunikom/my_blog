@@ -26,13 +26,13 @@ class VAlexL::MyBlog::FormObjects::Article
   end
 
   def save
-    @article.save
+    return @article.save if valid?
+    false
   end
 
   private
     def should_have_full_content_least_one_laguage
-      if title_ru.blank? || image_ru.blank? || content_ru.blank? || title_en.blank? || image_en.blank? || content_en.blank?
-        errors.add(:self, :should_have_full_content_least_one_laguage)
-      end
+      return if (title_ru.present? && image_ru.present? && content_ru.present?) || (title_en.present? && image_en.present? && content_en.present?)
+      errors.add(:article, :should_have_full_content_least_one_laguage)
     end
 end

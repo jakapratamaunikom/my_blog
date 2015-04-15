@@ -2,3 +2,15 @@ ru:
   form_objects:
     article:
       should_have_full_content_least_one_laguage: 'dd'
+      article: ''
+
+
+      ru:
+  activemodel:
+    errors:
+      models:
+        v_alex_l/my_blog/form_objects/article:
+          attributes:
+            article:
+              should_have_full_content_least_one_laguage:   'Необходимо указать полную инфу о статье, хотя бы на одном языке (заголовок, описание, аватар)'
+              
