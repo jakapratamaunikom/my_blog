@@ -8,7 +8,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    {'title_ru' => '!!!!!!!!', 'title_en' => nil}
+    {'title_ru' => nil, 'title_en' => nil}
   }
 
   let(:valid_session) { {} }

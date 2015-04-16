@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require underscore
 //= require bootstrap-sprockets
-//= require frola
+//= require_tree ./admin
+
+

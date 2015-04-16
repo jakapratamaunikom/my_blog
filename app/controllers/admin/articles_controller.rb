@@ -14,6 +14,7 @@ class Admin::ArticlesController < Admin::BaseController
   def new
     add_tasty_breadcrumb 'Создание новой статьи', :new_admin_article_path
     @article = Article.new
+    @article_form = VAlexL::MyBlog::FormObjects::Article.new @article
   end
 
   def create
@@ -35,6 +36,8 @@ class Admin::ArticlesController < Admin::BaseController
 
   def edit
     @article = Article.find(params[:id])
+    @article_form = VAlexL::MyBlog::FormObjects::Article.new @article
+    
     add_tasty_breadcrumb @article, admin_article_path(1)
     add_tasty_breadcrumb 'Редактирование', edit_admin_article_path(1)
   end

@@ -1,0 +1,22 @@
+class ArticleForm
+  constructor: (el) ->
+    @el = el
+    @setupPreview()
+
+  setupPreview: ->
+    for input in @el.find("input[type=file]")
+      do (input) =>
+        preview = @el.find("[data-source=#{$(input).data('type')}]")
+        $(input).change (event) -> 
+          file = input.files[0]
+          reader = new FileReader()
+          
+          reader.onload = (e) ->
+            image_base64 = e.target.result
+            preview.attr("src", image_base64)
+            preview.removeClass('hide')
+          reader.readAsDataURL(file)
+
+
+
+window.ArticleForm = ArticleForm

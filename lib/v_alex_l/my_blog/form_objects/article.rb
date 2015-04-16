@@ -11,7 +11,10 @@ class VAlexL::MyBlog::FormObjects::Article
     
   attr_reader :article
 
-  validate :should_have_full_content_least_one_laguage
+  validates :title_ru, presence: true,   if: Proc.new {|a| a.title_en.blank?}
+  validates :title_en, presence: true,   if: Proc.new {|a| a.title_ru.blank?}
+  validates :content_ru, presence: true, if: Proc.new {|a| a.content_en.blank?}
+  validates :content_en, presence: true, if: Proc.new {|a| a.content_ru.blank?}
 
   def self.human_attribute_name(attr, options = {}) #для отображения сообщений валидации
     name   = I18n.t('form_objects.article')[attr]
@@ -32,13 +35,8 @@ class VAlexL::MyBlog::FormObjects::Article
     @article.title_en   = title_en
     @article.content_en = content_en
     @article.image_en   = image_en
-    return @article.save if valid?
+    return @article.save! if valid?
     false
   end
 
-  private
-    def should_have_full_content_least_one_laguage
-      return if (title_ru.present? && image_ru.present? && content_ru.present?) || (title_en.present? && image_en.present? && content_en.present?)
-      errors.add(:article, :should_have_full_content_least_one_laguage)
-    end
 end

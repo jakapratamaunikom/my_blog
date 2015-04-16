@@ -1,4 +1,4 @@
-= form_for([:admin, @article_form.article], html: { :class => 'form-horizontal' }) do |f| 
+= form_for([:admin, @article_form.article], html: { :class => 'form-horizontal', :multipart => true }) do |f|
   - if @article_form.errors.any? 
     - unless @article_form.errors.full_messages.length.zero?
       .alert.alert-danger
@@ -30,7 +30,12 @@
           .row
             = f.label :image_ru, class: 'col-sm-2 col-md-2 control-label'
             .col-md-8.col-sm-10
-              = f.file_field :image_ru
+              = f.file_field :image_ru, 'data-type' => 'image_ru'
+              br
+              - if @article_form.article.image_ru.to_s.present?
+                img height="100" width="100" data-source='image_ru' src="#{@article_form.article.image_ru.to_s}"
+              - else
+                img.hide height="100" width="100" data-source='image_ru'
         hr
         .form-group
           .row
@@ -50,6 +55,8 @@
             = f.label :image_en, class: 'col-sm-2 col-md-2 control-label'
             .col-md-8.col-sm-10
               = f.file_field :image_en
+              br
+              img height="100" width="100"
         hr
         .form-group
           .row
@@ -67,3 +74,4 @@
 javascript:
   $("textarea").editable({inlineMode: false})
   $("a[href='http://editor.froala.com']").parent().hide()
+  new ArticleForm($("form"))

@@ -5,8 +5,8 @@ FactoryGirl.define do
     title_en { generate :random_title}
     content_en "MyText"
     content_ru "МойТекст"
-    image_ru   "img"
-    image_en   "img"
+    image_ru   "#{::Rails.root}/spec/files.img.jpeg"
+    image_en   "#{::Rails.root}/spec/files.img.jpeg"
   end
 
 end

@@ -12,11 +12,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer', platforms: :ruby
 gem 'execjs'
 
-
 # Slim
 gem 'slim'
 gem 'slim-rails'
-
 
 # Use spine-js as the JavaScript library
 gem "json2-rails"
@@ -40,9 +38,12 @@ gem 'bootstrap-sass', '~> 3.2.0'
 #For form objects
 gem 'virtus'
 
-gem 'tasty_breadcrumbs', git: 'git@github.com:valexl/tasty_breadcrumbs.git'
+gem 'tasty_breadcrumbs', git: 'git://github.com/valexl/tasty_breadcrumbs.git'
 # gem 'tasty_breadcrumbs', path: '/Users/valexl/workspace/tasty_breadcrumbs/'
 
+#For working with images
+gem "rmagick"
+gem 'carrierwave'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

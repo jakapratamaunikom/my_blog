@@ -1,8 +1,10 @@
 ru:
   form_objects:
     article:
-      should_have_full_content_least_one_laguage: 'dd'
-      article: ''
+      title_ru:   'Заголовок (ru)'
+      content_ru: 'Описание (ru)'
+      title_en:   'Заголовок (en)'
+      content_en: 'Описание (en)'
 
 
       ru:
