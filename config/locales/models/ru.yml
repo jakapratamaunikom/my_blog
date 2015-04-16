@@ -2,9 +2,9 @@ ru:
   activerecord:
     attributes:
       article:
-        title_ru:   'Заголовок'
-        content_ru: 'Описание'
-        image_ru:   'Аватар'
-        title_en:   'Title'
-        content_en: 'Content'
-        image_en:   'Avatar'
+        title_ru:   'Заголовок (ru)'
+        content_ru: 'Описание (ru)'
+        image_ru:   'Аватар (ru)'
+        title_en:   'Заголовок (en)'
+        content_en: 'Описание (en)'
+        image_en:   'Аватар (en)'

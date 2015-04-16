@@ -11,10 +11,10 @@ class VAlexL::MyBlog::FormObjects::Article
     
   attr_reader :article
 
-  validates :title_ru, presence: true,   if: Proc.new {|a| a.title_en.blank?}
-  validates :title_en, presence: true,   if: Proc.new {|a| a.title_ru.blank?}
-  validates :content_ru, presence: true, if: Proc.new {|a| a.content_en.blank?}
-  validates :content_en, presence: true, if: Proc.new {|a| a.content_ru.blank?}
+  validates :content_ru, presence: true, if: Proc.new {|a| a.title_ru.present?}
+  validates :content_en, presence: true, if: Proc.new {|a| a.title_en.present?}
+
+  validate :should_have_title_least_one_languate
 
   def self.human_attribute_name(attr, options = {}) #для отображения сообщений валидации
     name   = I18n.t('form_objects.article')[attr]
@@ -38,5 +38,12 @@ class VAlexL::MyBlog::FormObjects::Article
     return @article.save! if valid?
     false
   end
+
+  private
+    def should_have_title_least_one_languate
+      return if title_ru.present? || title_en.present?
+      errors.add(:article, :should_have_title_least_one_languate)
+    end
+
 
 end

@@ -1,18 +1,16 @@
 ru:
   form_objects:
     article:
+      article:    'Статья'
       title_ru:   'Заголовок (ru)'
       content_ru: 'Описание (ru)'
       title_en:   'Заголовок (en)'
       content_en: 'Описание (en)'
 
-
-      ru:
   activemodel:
     errors:
       models:
         v_alex_l/my_blog/form_objects/article:
           attributes:
             article:
-              should_have_full_content_least_one_laguage:   'Необходимо указать полную инфу о статье, хотя бы на одном языке (заголовок, описание, аватар)'
-              
+              should_have_title_least_one_languate: 'должна содержать заголовок хотя бы на одном языке'
