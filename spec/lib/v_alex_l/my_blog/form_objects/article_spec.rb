@@ -89,6 +89,13 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
               @article_form.save
               }.to change(Article, :count).by(0)
         end
+
+        it 'return arcticle with new attributes' do
+          @invalid_params[:title_ru] = 'Invalid params'
+          @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
+          expect(@article_form.save).to eq(false)
+          expect(@article_form.article.title_ru).to eq(@invalid_params[:title_ru])
+        end
       end
     end
   end

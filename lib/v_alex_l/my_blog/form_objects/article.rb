@@ -26,6 +26,12 @@ class VAlexL::MyBlog::FormObjects::Article
   end
 
   def save
+    @article.title_ru   = title_ru
+    @article.content_ru = content_ru
+    @article.image_ru   = image_ru
+    @article.title_en   = title_en
+    @article.content_en = content_en
+    @article.image_en   = image_en
     return @article.save if valid?
     false
   end

@@ -1,11 +1,11 @@
-= form_for([:admin, @article], html: { :class => 'form-horizontal' }) do |f| 
-  - if @article.errors.any? 
-    - unless f.object.errors.full_messages.length.zero?
+= form_for([:admin, @article_form.article], html: { :class => 'form-horizontal' }) do |f| 
+  - if @article_form.errors.any? 
+    - unless @article_form.errors.full_messages.length.zero?
       .alert.alert-danger
         strong 
           'Исправьте ошибки:
         ul
-          - f.object.errors.full_messages.each do |msg|
+          - @article_form.errors.full_messages.each do |msg|
             li
               = msg
 
@@ -36,7 +36,7 @@
           .row
             = f.label :content_ru, class: 'col-sm-2 col-md-2 control-label'
             .col-md-8.col-sm-10
-              = f.text_area :content_ru, class: 'form-control'
+              = f.text_area :content_ru, class: 'form-control', rows: 50
 
 
       #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" 
@@ -56,5 +56,14 @@
             = f.label :content_en, class: 'col-sm-2 col-md-2 control-label'
             .col-md-8.col-sm-10
               = f.text_area :content_en, class: 'form-control'
+      .form-group
+        .row
+          .col-md-8.col-sm-10.col-sm-offset-2.col-md-offset-2
+            .btn-group.pull-right
+              = f.submit 'Сохранить', class: 'btn btn-primary'
+              = link_to 'Отмена', :back, class: 'btn btn-default'
 
 
+javascript:
+  $("textarea").editable({inlineMode: false})
+  $("a[href='http://editor.froala.com']").parent().hide()
