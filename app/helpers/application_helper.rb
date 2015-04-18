@@ -1,6 +1,18 @@
 module ApplicationHelper
   def get_page_title
-    'Блог Алексея В.'
+    if current_controller?('admin/main')
+      'Админка'
+    elsif current_controller?('admin/articles') && params[:action] == 'index'
+      'Статьи'
+    elsif current_controller?('admin/articles') && ['new', 'create'].include?(params[:action])
+      'Создание новой статьи'
+    elsif current_controller?('admin/articles') && ['edit', 'update'].include?(params[:action])
+      'Редактирование статьи'
+    elsif current_controller?('admin/articles') && params[:action] == 'show'
+      'Просмотр статьи'
+    else
+      'Блог Алексея В.'
+    end
   end
 
   def current_controller?(controller_names)

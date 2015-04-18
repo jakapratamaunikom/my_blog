@@ -4,7 +4,7 @@ class ArticleForm
     @setupPreview()
 
   setupPreview: ->
-    for input in @el.find("input[type=file]")
+    for input in @el.find("[rel=avatar]")
       do (input) =>
         preview = @el.find("[data-source=#{$(input).data('type')}]")
         $(input).change (event) -> 

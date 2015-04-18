@@ -19,50 +19,13 @@
           | EN
     #myTabContent.tab-content
       br
+
       #ru.tab-pane.fade.active.in aria-labelledby="ru-tab" role="tabpanel" 
-        .form-group
-          .row
-            = f.label :title_ru, class: 'col-sm-2 col-md-2 control-label'
-            .col-md-8.col-sm-10
-              = f.text_field :title_ru, class: 'form-control'
-
-        .form-group
-          .row
-            = f.label :image_ru, class: 'col-sm-2 col-md-2 control-label'
-            .col-md-8.col-sm-10
-              = f.file_field :image_ru, 'data-type' => 'image_ru'
-              br
-              - if @article_form.article.image_ru.to_s.present?
-                img height="100" width="100" data-source='image_ru' src="#{@article_form.article.image_ru.to_s}"
-              - else
-                img.hide height="100" width="100" data-source='image_ru'
-        hr
-        .form-group
-          .row
-            = f.label :content_ru, class: 'col-sm-2 col-md-2 control-label'
-            .col-md-8.col-sm-10
-              = f.text_area :content_ru, class: 'form-control', rows: 50
-
-
+        = render 'admin/articles/form/article_fields', f: f, lang: 'ru'
       #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" 
-        .form-group
-          .row
-            = f.label :title_en, class: 'col-sm-2 col-md-2 control-label'
-            .col-md-8.col-sm-10
-              = f.text_field :title_en, class: 'form-control'
-        .form-group
-          .row
-            = f.label :image_en, class: 'col-sm-2 col-md-2 control-label'
-            .col-md-8.col-sm-10
-              = f.file_field :image_en
-              br
-              img height="100" width="100"
-        hr
-        .form-group
-          .row
-            = f.label :content_en, class: 'col-sm-2 col-md-2 control-label'
-            .col-md-8.col-sm-10
-              = f.text_area :content_en, class: 'form-control'
+        = render 'admin/articles/form/article_fields', f: f, lang: 'en'
+
+
       .form-group
         .row
           .col-md-8.col-sm-10.col-sm-offset-2.col-md-offset-2

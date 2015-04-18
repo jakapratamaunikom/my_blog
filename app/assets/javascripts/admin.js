@@ -14,6 +14,19 @@
 //= require jquery_ujs
 //= require underscore
 //= require bootstrap-sprockets
+//= require messenger
+//= require messenger-theme-future
+
 //= require_tree ./admin
 
+displayNotices = function (notice){
+  if (notice.length > 0) {
+    Messenger({
+      extraClasses: 'messenger-fixed messenger-on-right messenger-on-bottom',
+    }).post({
+        message: notice,
+      })
+
+  }
+}
 
