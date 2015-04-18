@@ -1,5 +1,20 @@
 .col-md-8.blog-main
   .row
+    - @articles.each do |article|
+        .col-md-6.col-sm-6
+          article.blog-teaser
+            header
+              = image_tag article.image_ru.try(:thumb_183x183), alt: article.title_ru
+              h3
+                = link_to article.title_ru, article
+              span.meta 24 July 2013, Alexey V.
+              hr/
+            .body
+              = truncate_html(article.content_ru, length: 100, separator: ' ', omission: '...')
+            .clearfix
+              = link_to "'Подробнее", article, class: 'btn btn-tales-one'
+    
+  .row
     .col-md-6.col-sm-6
       article.blog-teaser
         header

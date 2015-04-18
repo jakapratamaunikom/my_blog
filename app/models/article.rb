@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  scope :published, -> {all}
   mount_uploader :image_ru, AvatarUploader
   mount_uploader :image_en, AvatarUploader
 

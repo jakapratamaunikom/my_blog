@@ -5,22 +5,26 @@ footer
         .col-md-4.footer-widget
           h3
             i.fa.fa-cog
-            | Statistics
-          span Even we sometimes loose track of how many articles we actually have here.  This one helps:
+            = I18n.t('views.footer.statistic')
+          span 
+            = I18n.t('views.footer.statistic_hint')
           .stats
             .line
               span.counter 27
-              span.caption Articles
+              span.caption 
+                = I18n.t('views.footer.statistic')
             .line
               span.counter 208
-              span.caption Comments
+              span.caption
+                = I18n.t('views.footer.comments')
             .line
               span.counter 2
-              span.caption Authors
+              span.caption
+                = I18n.t('views.footer.applications_in_portfolio')
         .col-md-4.footer-widget
           h3
             i.fa.fa-star
-            | Hall of Fame
+            = I18n.t('views.footer.hall_of_fame')
           ul.tales-list
             li
               a href="index.html"  Why we Need to Encrypt All Communication
@@ -35,12 +39,8 @@ footer
         .col-md-4.footer-widget
           h3
             i.fa.fa-envelope
-            | Contact Me
-          span I'm happy to hear from my readers. Thoughts, feedback, critique - all welcome! Drop me a line:
+            = I18n.t('views.footer.contacts_info')
+          span 
+            = I18n.t('views.footer.feedback_info')
           span.email
-            a href="index.html#" > jimmy@notanactualemail.com
-            | , PGP key 0x5AK0BEA1
-  .widewrapper.copyright
-    .container
-      | Designed by
-      a href="http://hackerthemes.com"  HackerThemes
+            = mail_to '17valexl@gmail.com'
