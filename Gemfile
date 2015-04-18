@@ -45,6 +45,9 @@ gem 'tasty_breadcrumbs', git: 'git://github.com/valexl/tasty_breadcrumbs.git'
 gem "rmagick"
 gem 'carrierwave'
 
+#For truncate html
+gem 'truncate_html'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
