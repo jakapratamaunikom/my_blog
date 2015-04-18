@@ -1,0 +1,33 @@
+header
+  .widewrapper.masthead
+    .container
+      a#logo href="index.html" 
+        img alt=("Tales Blog") src="#{image_path 'tales/tales-logo.png'}" /
+      #mobile-nav-toggle.pull-right
+        a data-target=(".tales-nav .navbar-collapse") data-toggle="collapse" href="index.html#" 
+          i.fa.fa-bars
+      nav.pull-right.tales-nav
+        .collapse.navbar-collapse
+          ul.nav.nav-pills.navbar-nav
+            li.dropdown.active
+              a.dropdown-toggle data-toggle="dropdown" href="index.html#" 
+                | Blog
+                b.caret
+              ul.dropdown-menu
+                li
+                  a href="index.html"  Blog
+                li
+                  a href="blog-detail.html"  Blog Detail
+            li
+              a href="about.html"  About
+            li
+              a href="credits.html"  Credits
+  .widewrapper.subheader
+    .container
+      .tales-breadcrumb
+        a href="index.html#"  Blog
+      .tales-searchbox
+        form accept-charset="utf-8" action="index.html#" method="get" 
+          button.searchbutton type="submit" 
+            i.fa.fa-search
+          input#searchbox.searchfield placeholder="Search" type="text" /
