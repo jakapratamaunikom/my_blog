@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
-//= require bootstrap-sprockets
+//= require 'bootstrap/bootstrap.min'
+//= require 'modernizr/modernizr'
