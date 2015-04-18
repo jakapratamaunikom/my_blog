@@ -1,0 +1,17 @@
+.thumbnail role="tabpanel"
+  img.article-img src="#{article.send("image_#{lang}").try(:thumb_242x200).to_s}"
+
+  .caption
+    - if article.send("fully_filled_#{lang}?")
+      h3
+        = article.send("title_#{lang}")
+      .article-content
+        = truncate_html(article.send("content_#{lang}"), length: 100, separator: ' ', omission: '...')
+    - else
+      .alert.alert-warning role="alert"
+        strong
+          'Братиш, заполнить нужно!
+  hr
+  p
+    = link_to 'Изменить', edit_admin_article_path(article, lang: lang), class: 'btn btn-primary'
+    = link_to 'Просмотр', admin_article_path(article, lang: lang), class: 'btn btn-default'
