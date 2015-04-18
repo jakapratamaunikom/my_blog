@@ -306,6 +306,11 @@ hr {
   float: left;
   margin-top: 19px;
 }
+.tales-breadcrumb a.breadcrumb-item:after {
+  content: "/";
+  margin: 0 10px 0 10px;
+}
+
 .tales-breadcrumb a {
   color: #7b8690;
 }
