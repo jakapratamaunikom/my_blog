@@ -1,9 +1,10 @@
 ru:
   views:
     header:
-      blog:     'Блог'
-      about_me: 'О себе'
-      search:   'Поиск'
+      blog:      'Блог'
+      about_me:  'О себе'
+      search:    'Поиск'
+      portfolio: 'Портфолио'
 
     footer:
       statistic: 'Статистика'
@@ -12,7 +13,7 @@ ru:
       applications_in_portfolio: 'Портфолио'
       statistic_hint: 'Статистика по блогу, с помощью которой я определяю уровень своей крутости :)'
 
-      hall_of_fame: 'Доска почета'
+      hall_of_fame:  'Доска почета'
 
       contacts_info: 'Свяжитесь со мной'
       feedback_info: 'Буду рад общению с читателями. Замечания, обратная связь, критика. Все приветствуется и одобряется!'

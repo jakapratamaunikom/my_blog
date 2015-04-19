@@ -7,10 +7,11 @@
               = image_tag article.image_ru.try(:thumb_183x183), alt: article.title_ru
               h3
                 = link_to article.title_ru, article
-              span.meta 24 July 2013, Alexey V.
+              span.meta 
+                = article.created_at
               hr/
             .body
-              = truncate_html(article.content_ru, length: 100, separator: ' ', omission: '...')
+              = truncate_html(article.content_ru, length: 200, separator: ' ', omission: '...')
             .clearfix
               = link_to "'Подробнее", article, class: 'btn btn-tales-one'
     
@@ -75,7 +76,8 @@
 aside.col-md-4.blog-aside
   .aside-widget
     header
-      h3 Read next...
+      h3 
+        = I18n.t("views.articles.read_next")
     .body
       ul.tales-list
         li
@@ -90,7 +92,8 @@ aside.col-md-4.blog-aside
           a href="index.html#"  Last Made-Up Headline, I Swear!
   .aside-widget
     header
-      h3 Authors Favorites
+      h3 
+        = I18n.t("views.articles.popular")
     .body
       ul.tales-list
         li
@@ -105,7 +108,9 @@ aside.col-md-4.blog-aside
           a href="index.html#"  Last Made-Up Headline, I Swear!
   .aside-widget
     header
-      h3 Tags
+      h3 
+        = I18n.t("views.articles.tags")
+
     .body.clearfix
       ul.tags
         li

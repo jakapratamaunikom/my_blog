@@ -1,0 +1,7 @@
+ru:
+  views:
+    articles:
+      read_next: 'Читать еще...'
+      popular:   'Популярное'
+      tags:      'Теги'
+

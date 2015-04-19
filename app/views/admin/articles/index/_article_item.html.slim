@@ -5,8 +5,6 @@
     - if article.send("fully_filled_#{lang}?")
       h3
         = article.send("title_#{lang}")
-      .article-content
-        = truncate_html(article.send("content_#{lang}"), length: 100, separator: ' ', omission: '...')
     - else
       .alert.alert-warning role="alert"
         strong
