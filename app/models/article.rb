@@ -1,6 +1,6 @@
 class Article < ActiveRecord::Base
   LANGUAGES = %w(ru en)
-  scope :published, -> {all}
+  scope :published, -> {where("articles.published_ru = ? OR articles.published_en = ?", true, true)}
   mount_uploader :image_ru, AvatarUploader
   mount_uploader :image_en, AvatarUploader
 

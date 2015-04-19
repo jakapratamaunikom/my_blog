@@ -1,0 +1,10 @@
+---
+:about_me:
+  :ru:
+    :title: "Заголовок что то там"
+    :content: "Содержимое о себе."
+    :image: "Фотка так же о себе"
+  :en:
+    :title: New title
+    :content: New content
+    :image: New image
