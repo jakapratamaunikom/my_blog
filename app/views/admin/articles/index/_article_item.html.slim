@@ -1,10 +1,15 @@
 .thumbnail role="tabpanel"
-  img.article-img src="#{article.send("image_#{language}").try(:thumb_242x200).to_s}"
+  img.article-img src="#{article.image(language).try(:thumb_242x200).to_s}"
 
   .caption
     - if article.send("fully_filled_#{language}?")
       h3
         = article.title(language)
+      p
+        - if article.published?(language)
+          = link_to 'Снять с публикации?', toggle_published_status_admin_article_path(article), class: 'text-danger'
+        - else
+          = link_to 'Опубликовать?', toggle_published_status_admin_article_path(article), class: 'text-success'
     - else
       .alert.alert-warning role="alert"
         strong

@@ -15,6 +15,52 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'has method' do
+    it 'published? wiche return published status for given language' do
+      @article.published_ru = false
+      @article.published_en = false
+
+      expect(@article.published?(:ru)).to eq(false)
+      expect(@article.published?(:en)).to eq(false)
+     
+      @article.published_ru = true
+      @article.published_en = true
+    
+      expect(@article.published?('ru')).to eq(true)
+      expect(@article.published?('en')).to eq(true)
+    end
+
+    it 'toggle_published! change article as published for language to opposite of current' do
+      @article.published_ru = false
+      @article.published_en = true
+
+      @article.toggle_published!(:ru)
+      @article.toggle_published!('en')
+      expect(@article.published?(:ru)).to eq(true)
+      expect(@article.published?(:en)).to eq(false)
+    end
+
+
+    it 'set_published! mark article as published for language' do
+      @article.published_ru = false
+      @article.published_en = false
+
+      @article.set_published!(:ru)
+      @article.set_published!('en')
+      expect(@article.published?(:ru)).to eq(true)
+      expect(@article.published?(:en)).to eq(true)
+    end
+
+    it 'set_unpublished! mark article as unpublished for language' do
+      @article.published_ru = true
+      @article.published_en = true
+
+      @article.set_unpublished!(:ru)
+      @article.set_unpublished!('en')
+      expect(@article.published?(:ru)).to eq(false)
+      expect(@article.published?(:en)).to eq(false)
+    end
+
+
     it 'title which returns title in given languages' do
       @article.title_ru = 'Заголовок'
       @article.title_en = 'Title'

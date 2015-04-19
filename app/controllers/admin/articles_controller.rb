@@ -48,7 +48,7 @@ class Admin::ArticlesController < Admin::BaseController
 
     respond_to do |format|
       if @article_form.save
-        format.html { redirect_to admin_article_path(@article_form.article, lang: lang), notice: 'Статья изменена! Теперь она стала еще круче!!' }
+        format.html { redirect_to admin_article_path(@article_form.article, lang: lang), notice: 'Статья улучшена! Теперь она стала еще круче!!' }
         format.json { render :show, status: :ok, location: @article_form.article }
       else
         add_tasty_breadcrumb @article_form.article.title(lang), admin_article_path(1)
@@ -60,6 +60,20 @@ class Admin::ArticlesController < Admin::BaseController
     end
   end
 
+  def toggle_published_status
+    @article = Article.find(params[:id])
+    @article.toggle_published! lang
+
+    respond_to do |format|
+      notice =  if @article.published?(lang)
+                  'Супер статейка наконец-таки попала в свет!'
+                else
+                  'Ну вот.. А люди только начали ее читать...'
+                end
+      format.html { redirect_to to_back_url, notice: notice }
+      format.json { head :no_content }
+    end
+  end
 
   def destroy
     @article = Article.find(params[:id])
@@ -79,4 +93,9 @@ class Admin::ArticlesController < Admin::BaseController
                                       
     end
 
+    def to_back_url
+      uri = URI.parse(request.referer) 
+      uri.query = "lang=#{lang}"
+      uri.to_s
+    end
 end

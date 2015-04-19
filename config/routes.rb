@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/' => "main#index", as: 'root'
-    resources :articles
+    resources :articles do
+      get :toggle_published_status, on: :member
+    end
   end
 
 end

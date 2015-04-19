@@ -5,6 +5,8 @@ FactoryGirl.define do
     title_en { generate :random_title}
     content_en "MyText"
     content_ru "МойТекст"
+    published_ru true
+    published_en true
     
     after(:biuld) do |article|
       File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|

@@ -1,9 +1,24 @@
 .jumbotron
   .row
-    .col-sm-12
-      img.article-img.pull-right src="#{@article.send("image_#{language}").try(:thumb_242x200).to_s}"
-      h1
+    .col-sm-3
+      img.article-img.pull-left src="#{@article.image(language).try(:thumb_242x200).to_s}"
+    .col-sm-9
+      h1.text-center
         = @article.title(language)
+  .row
+    br
+    .col-sm-8
+      - if @article.published?(language)
+        .alert.alert-success
+          strong
+            'Статья опубликована и радует своих читателей.
+          = "Сделать статью еще лучше, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_article_path(@article, lang: language), class: 'text-danger'}".html_safe
+      - else
+        .alert.alert-warning
+          strong
+            'Статья неопубликованна!
+          = "Сделать людей счастливыми и #{link_to 'опубликовать статью?', toggle_published_status_admin_article_path(@article, lang: language), class: 'text-success'}".html_safe
+
   p
     = @article.content(language).html_safe
   p
