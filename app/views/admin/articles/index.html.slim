@@ -19,7 +19,7 @@
               'EN
         .tab-content
           .tab-pane.active role="tabpanel" id="#{article.id}_ru"
-            = render 'admin/articles/index/article_item', article: article, lang: 'ru'
+            = render 'admin/articles/index/article_item', article: article, language: 'ru'
 
           .tab-pane role="tabpanel" id="#{article.id}_en"
-            = render 'admin/articles/index/article_item', article: article, lang: 'en'
+            = render 'admin/articles/index/article_item', article: article, language: 'en'

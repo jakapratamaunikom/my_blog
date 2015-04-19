@@ -8,7 +8,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   def show
     @article = Article.find(params[:id])
-    add_tasty_breadcrumb @article, admin_article_path(1)
+    add_tasty_breadcrumb @article.title(lang), admin_article_path(1)
   end
 
   def new
@@ -38,7 +38,7 @@ class Admin::ArticlesController < Admin::BaseController
     @article = Article.find(params[:id])
     @article_form = VAlexL::MyBlog::FormObjects::Article.new @article
     
-    add_tasty_breadcrumb @article, admin_article_path(1)
+    add_tasty_breadcrumb @article.title(lang), admin_article_path(1)
     add_tasty_breadcrumb 'Редактирование', edit_admin_article_path(1)
   end
 
@@ -51,6 +51,7 @@ class Admin::ArticlesController < Admin::BaseController
         format.html { redirect_to [:admin, @article_form.article], notice: 'Статья изменена! Теперь она стала еще круче!!' }
         format.json { render :show, status: :ok, location: @article_form.article }
       else
+        add_tasty_breadcrumb @article_form.article.title(lang), admin_article_path(1)
         add_tasty_breadcrumb 'Редактирование', edit_admin_article_path(@article)
 
         format.html { render :edit }
@@ -77,4 +78,5 @@ class Admin::ArticlesController < Admin::BaseController
                                       :title_en, :content_en, :image_en)
                                       
     end
+
 end

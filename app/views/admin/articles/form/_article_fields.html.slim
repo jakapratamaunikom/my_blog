@@ -1,24 +1,24 @@
 .form-group
   .row
-    = f.label "title_#{lang}", class: 'col-sm-2 col-md-2 control-label'
+    = f.label "title_#{language}", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      = f.text_field "title_#{lang}", class: 'form-control'
+      = f.text_field "title_#{language}", class: 'form-control'
 
 .form-group
   .row
-    = f.label "image_#{lang}", class: 'col-sm-2 col-md-2 control-label'
+    = f.label "image_#{language}", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      = f.file_field "image_#{lang}", 'data-type' => "image_#{lang}", rel: 'avatar'
+      = f.file_field "image_#{language}", 'data-type' => "image_#{language}", rel: 'avatar'
       br
-      - if @article_form.article.send("image_#{lang}").to_s.present?
-        img height="100" width="100" data-source="image_#{lang}" src="#{@article_form.article.send("image_#{lang}").to_s}"
+      - if @article_form.article.send("image_#{language}").to_s.present?
+        img height="100" width="100" data-source="image_#{language}" src="#{@article_form.article.send("image_#{language}").to_s}"
       - else
-        img.hide height="100" width="100" data-source="image_#{lang}"
+        img.hide height="100" width="100" data-source="image_#{language}"
 hr
 .form-group
   .row
-    = f.label "content_#{lang}", class: 'col-sm-2 col-md-2 control-label'
+    = f.label "content_#{language}", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      = f.text_area "content_#{lang}", class: 'form-control', rows: 50
+      = f.text_area "content_#{language}", class: 'form-control', rows: 50
 
 

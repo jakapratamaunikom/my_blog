@@ -1,15 +1,15 @@
 .thumbnail role="tabpanel"
-  img.article-img src="#{article.send("image_#{lang}").try(:thumb_242x200).to_s}"
+  img.article-img src="#{article.send("image_#{language}").try(:thumb_242x200).to_s}"
 
   .caption
-    - if article.send("fully_filled_#{lang}?")
+    - if article.send("fully_filled_#{language}?")
       h3
-        = article.send("title_#{lang}")
+        = article.send("title_#{language}")
     - else
       .alert.alert-warning role="alert"
         strong
           'Братиш, заполнить нужно!
   hr
   p
-    = link_to 'Изменить', edit_admin_article_path(article, lang: lang), class: 'btn btn-primary'
-    = link_to 'Просмотр', admin_article_path(article, lang: lang), class: 'btn btn-default'
+    = link_to 'Изменить', edit_admin_article_path(article, lang: language), class: 'btn btn-primary'
+    = link_to 'Просмотр', admin_article_path(article, lang: language), class: 'btn btn-default'

@@ -1,0 +1,18 @@
+div role="tabpanel" 
+  - class_list = {:ru => '', :en => ''}
+  - class_list[lang] = 'active'
+  ul#myTab.nav.nav-tabs role="tablist" 
+    li role="presentation" class="#{class_list[:ru]}"
+      a#ru-tab aria-controls="ru" aria-expanded="true" data-toggle="tab" href="#ru" role="tab"
+        | RU
+    li role="presentation" class= "#{class_list[:en]}"
+      a#en-tab aria-controls="en" aria-expanded="false" data-toggle="tab" href="#en" role="tab"
+        | EN
+  #myTabContent.tab-content
+    br
+    - class_list[lang] += " in"
+    #ru.tab-pane.fade aria-labelledby="ru-tab" role="tabpanel" class="#{class_list[:ru]}"
+      = render 'admin/articles/show/article', lang: 'ru'
+    #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" class="#{class_list[:en]}"
+      = render 'admin/articles/show/article', lang: 'en'
+

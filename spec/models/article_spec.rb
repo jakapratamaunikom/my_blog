@@ -15,6 +15,15 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'has method' do
+    it 'title which returns title in given languages' do
+      @article.title_ru = 'Заголовок'
+      @article.title_en = 'Title'
+      expect(@article.title(:ru)).to eq('Заголовок')
+      expect(@article.title('ru')).to eq('Заголовок')
+      expect(@article.title(:en)).to eq('Title')
+      expect(@article.title('en')).to eq('Title')
+    end
+
     it 'fully_filled_ru? wich return true only if has title_ru content_ru and image_ru' do
        @article.title_ru  = nil
        @article.content_ru = nil

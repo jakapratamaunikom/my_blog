@@ -10,20 +10,22 @@
               = msg
 
   div role="tabpanel" 
+    - class_list = {:ru => '', :en => ''}
+    - class_list[lang] = 'active'
     ul#myTab.nav.nav-tabs role="tablist" 
-      li.active role="presentation" 
+      li role="presentation" class="#{class_list[:ru]}"
         a#ru-tab aria-controls="ru" aria-expanded="true" data-toggle="tab" href="#ru" role="tab"
           | RU
-      li role="presentation" 
+      li role="presentation" class= "#{class_list[:en]}"
         a#en-tab aria-controls="en" aria-expanded="false" data-toggle="tab" href="#en" role="tab"
           | EN
     #myTabContent.tab-content
       br
-
-      #ru.tab-pane.fade.active.in aria-labelledby="ru-tab" role="tabpanel" 
-        = render 'admin/articles/form/article_fields', f: f, lang: 'ru'
-      #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" 
-        = render 'admin/articles/form/article_fields', f: f, lang: 'en'
+      - class_list[lang] += " in"
+      #ru.tab-pane.fade aria-labelledby="ru-tab" role="tabpanel" class="#{class_list[:ru]}"
+        = render 'admin/articles/form/article_fields', f: f, language: 'ru'
+      #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" class="#{class_list[:en]}"
+        = render 'admin/articles/form/article_fields', f: f, language: 'en'
 
       .form-group
         .row
