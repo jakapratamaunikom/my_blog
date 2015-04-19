@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MainController, type: :controller do
+RSpec.describe ArticlesController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
@@ -8,5 +8,7 @@ RSpec.describe MainController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
+
+  pending 'GET #show'
 
 end

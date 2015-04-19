@@ -99,10 +99,16 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         expect(assigns(:article)).to eq(article)
       end
 
-      it "redirects to the article" do
+      it "redirects to the article with default language ru" do
         article = FactoryGirl.create(:article)
         put :update, {:id => article.to_param, :article => valid_attributes}, valid_session
-        expect(response).to redirect_to([:admin, article])
+        expect(response).to redirect_to(admin_article_path(article, lang: :ru))
+      end
+
+      it "redirects to the article with language en if lang = en" do
+        article = FactoryGirl.create(:article)
+        put :update, {:id => article.to_param, :article => valid_attributes, lang: :en}, valid_session
+        expect(response).to redirect_to(admin_article_path(article, lang: :en))
       end
     end
 
