@@ -48,7 +48,7 @@ class Admin::ArticlesController < Admin::BaseController
 
     respond_to do |format|
       if @article_form.save
-        format.html { redirect_to [:admin, @article_form.article], notice: 'Статья изменена! Теперь она стала еще круче!!' }
+        format.html { redirect_to admin_article_path(@article_form.article, lang: lang), notice: 'Статья изменена! Теперь она стала еще круче!!' }
         format.json { render :show, status: :ok, location: @article_form.article }
       else
         add_tasty_breadcrumb @article_form.article.title(lang), admin_article_path(1)

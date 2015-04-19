@@ -8,7 +8,7 @@
           - @article_form.errors.full_messages.each do |msg|
             li
               = msg
-
+  = hidden_field_tag :lang, lang
   div role="tabpanel" 
     - class_list = {:ru => '', :en => ''}
     - class_list[lang] = 'active'

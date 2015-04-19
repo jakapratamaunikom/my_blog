@@ -17,4 +17,9 @@ class Article < ActiveRecord::Base
     send("title_#{lang}")
   end
 
+  def content(lang)
+    raise "#{lang} - is incorrect language" unless LANGUAGES.include?(lang.to_s)
+    send("content_#{lang}")
+  end
+
 end

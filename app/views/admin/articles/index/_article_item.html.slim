@@ -4,7 +4,7 @@
   .caption
     - if article.send("fully_filled_#{language}?")
       h3
-        = article.send("title_#{language}")
+        = article.title(language)
     - else
       .alert.alert-warning role="alert"
         strong

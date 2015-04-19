@@ -24,6 +24,15 @@ RSpec.describe Article, type: :model do
       expect(@article.title('en')).to eq('Title')
     end
 
+    it 'content which returns content in given languages' do
+      @article.content_ru = 'Содержимое'
+      @article.content_en = 'Content'
+      expect(@article.content(:ru)).to eq('Содержимое')
+      expect(@article.content('ru')).to eq('Содержимое')
+      expect(@article.content(:en)).to eq('Content')
+      expect(@article.content('en')).to eq('Content')
+    end
+
     it 'fully_filled_ru? wich return true only if has title_ru content_ru and image_ru' do
        @article.title_ru  = nil
        @article.content_ru = nil
