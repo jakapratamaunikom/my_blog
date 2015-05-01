@@ -7,4 +7,11 @@ class Admin::BaseController < ApplicationController
     params[:lang].present? ? params[:lang].to_sym : :ru 
   end
 
+  def russian_language?
+    lank == :ru
+  end
+
+  def english_language?
+    lank == :en
+  end
 end

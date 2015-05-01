@@ -19,15 +19,16 @@
           = link_to 'Добавить', new_admin_article_path
 
   ul.nav.navbar-nav.navbar-right
-    li.dropdown role="presentation" class="#{'active' if current_controller?('admin/articles')}"
+
+    li.dropdown role="presentation" class="#{'active' if current_controller?('admin/settings') && params[:action] == 'portfolio'}"
       a.dropdown-toggle data-toggle="dropdown" href="#" 
-        | Настройка
+        | Портфолио
         span.caret
       ul.dropdown-menu role="menu" 
-        li class="#{'active' if current_page?(about_me_admin_setting_path)}"
-          = link_to 'О Себе', about_me_admin_setting_path
-        li class="#{'active' if current_page?(portfolio_admin_setting_path)}"
-          = link_to 'Портфолио', portfolio_admin_setting_path
+        li class="#{'active' if current_page?(portfolio_admin_setting_path(lang: :ru))}"
+          = link_to 'RU', portfolio_admin_setting_path(lang: :ru)
+        li class="#{'active' if current_page?(portfolio_admin_setting_path(lang: :en))}"
+          = link_to 'EN', portfolio_admin_setting_path(lang: :en)
     li
       = link_to '#', title: 'Обычный вид' do
         span.glyphicon.glyphicon-log-out

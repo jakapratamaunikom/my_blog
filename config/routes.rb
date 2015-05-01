@@ -12,8 +12,8 @@ Rails.application.routes.draw do
     end
 
     resource :setting, only: [''] do
-      get :about_me
-      get :portfolio
+      get  :portfolio
+      post :edit_portfolio
     end
   end
 

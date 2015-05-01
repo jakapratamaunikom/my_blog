@@ -2,7 +2,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
 Spork.prefork do
-  Rails.env ||= 'test'
+  Rails.env = 'test'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
