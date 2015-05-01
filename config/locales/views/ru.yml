@@ -5,3 +5,4 @@ ru:
       popular:   'Популярное'
       tags:      'Теги'
 
+      count_comments: 'Комментариев %{quantity}  '

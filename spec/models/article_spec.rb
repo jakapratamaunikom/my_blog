@@ -15,6 +15,12 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'has method' do
+    pending "count_comments" do
+      @article.save!
+      FactoryGirl.create(:comment, article: @article)
+      expect(@article.count_comments).to eq(1)
+    end
+    
     it 'published? wiche return published status for given language' do
       @article.published_ru = false
       @article.published_en = false

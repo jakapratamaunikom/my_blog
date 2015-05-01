@@ -50,6 +50,10 @@ class Article < ActiveRecord::Base
     send("image_#{lang}")
   end
 
+  def count_comments
+    23    
+  end
+
   private
     def check_given_lang!(lang)
       raise "#{lang} - is incorrect language" unless LANGUAGES.include?(lang.to_s)

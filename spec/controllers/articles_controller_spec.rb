@@ -9,6 +9,12 @@ RSpec.describe ArticlesController, type: :controller do
     end
   end
 
-  pending 'GET #show'
+  describe "GET #show" do
+    it "returns http success" do
+      @article = FactoryGirl.create(:article)
+      get :show, id: @article.id
+      expect(response).to have_http_status(:success)
+    end
+  end
 
 end
