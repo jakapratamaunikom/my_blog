@@ -19,6 +19,15 @@
           = link_to 'Добавить', new_admin_article_path
 
   ul.nav.navbar-nav.navbar-right
+    li.dropdown role="presentation" class="#{'active' if current_controller?('admin/articles')}"
+      a.dropdown-toggle data-toggle="dropdown" href="#" 
+        | Настройка
+        span.caret
+      ul.dropdown-menu role="menu" 
+        li class="#{'active' if current_page?(about_me_admin_setting_path)}"
+          = link_to 'О Себе', about_me_admin_setting_path
+        li class="#{'active' if current_page?(portfolio_admin_setting_path)}"
+          = link_to 'Портфолио', portfolio_admin_setting_path
     li
       = link_to '#', title: 'Обычный вид' do
         span.glyphicon.glyphicon-log-out

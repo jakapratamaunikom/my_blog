@@ -13,6 +13,7 @@ Spork.prefork do
     config.use_transactional_fixtures = true
     config.run_all_when_everything_filtered = true
     config.infer_spec_type_from_file_location!
+    config.render_views = true
   end
 end
 
