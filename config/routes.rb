@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'articles#index'
   
-  resources :articles, only: ['show', 'index']
+  resources :articles, only: ['show', 'index'] do
+    get :preview, on: :member  
+  end
   get "/about_me" => "pages#about_me", as: 'about_me'
 
 

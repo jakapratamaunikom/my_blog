@@ -15,6 +15,14 @@
         strong
           'Братиш, заполнить нужно!
   hr
-  p
-    = link_to 'Изменить', edit_admin_article_path(article, lang: language), class: 'btn btn-primary'
-    = link_to 'Просмотр', admin_article_path(article, lang: language), class: 'btn btn-default'
+
+
+  .text-center
+    .btn.btn-group
+      = link_to edit_admin_article_path(article, lang: language), class: 'btn btn-primary', title: 'Изменить' do
+        i.fa.fa-pencil-square-o
+      = link_to admin_article_path(article, lang: language), class: 'btn btn-default', title: 'Просмотр' do
+        i.fa.fa-search
+
+      = link_to preview_article_path(article, lang: language), class: 'btn btn-success', title: 'Демо' do
+        i.fa.fa-child
