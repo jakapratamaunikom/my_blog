@@ -13,7 +13,7 @@ RSpec.describe Admin::SettingsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #portfolio" do
-    it "assigns the requested article as @article" do
+    it "successfull page" do
       get :portfolio, {}, valid_session
     end
   end

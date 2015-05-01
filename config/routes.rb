@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'articles#index'
   
   resources :articles, only: ['show', 'index']
+  get "/about_me" => "pages#about_me", as: 'about_me'
 
 
   namespace :admin do

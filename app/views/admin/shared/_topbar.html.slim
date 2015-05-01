@@ -30,6 +30,6 @@
         li class="#{'active' if current_page?(portfolio_admin_setting_path(lang: :en))}"
           = link_to 'EN', portfolio_admin_setting_path(lang: :en)
     li
-      = link_to '#', title: 'Обычный вид' do
+      = link_to root_path, title: 'Обычный вид' do
         span.glyphicon.glyphicon-log-out
     

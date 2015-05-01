@@ -19,4 +19,10 @@ module ApplicationHelper
     controller_names = [controller_names] unless controller_names.instance_of?(Array)
     controller_names.any? {|controller_name| controller_name.to_s == params[:controller].to_s }
   end
+
+  def get_page_logo
+    content_tag :h2, class: 'page-logo' do
+      'Алексей В.'
+    end
+  end
 end

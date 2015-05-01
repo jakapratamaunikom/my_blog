@@ -1,23 +1,23 @@
 header
   .widewrapper.masthead
     .container
-      a#logo href="index.html" 
-        img alt=("Tales Blog") src="#{image_path 'tales/tales-logo.png'}"
+      = link_to root_path, id: 'logo' do
+        = get_page_logo
       #mobile-nav-toggle.pull-right
         a data-target=(".tales-nav .navbar-collapse") data-toggle="collapse" href="index.html#" 
           i.fa.fa-bars
       nav.pull-right.tales-nav
         .collapse.navbar-collapse
           ul.nav.nav-pills.navbar-nav
-            li.active
-              a href='#'
-                = I18n.t("views.header.blog")
-            li
+            - class_list = {}
+            - class_list = {params[:controller] => 'active'}
+            li class="#{class_list['articles']}"
+              = link_to I18n.t("views.header.blog"), articles_path
+            li class="#{class_list['portfolios']}"
               a href="#" 
                 = I18n.t("views.header.portfolio")
-            li
-              a href="#" 
-                = I18n.t("views.header.about_me")
+            li class="#{class_list['pages']}"
+              = link_to I18n.t("views.header.about_me"), about_me_path
   .widewrapper.subheader
     .container
       = display_tasty_breadcrumbs
