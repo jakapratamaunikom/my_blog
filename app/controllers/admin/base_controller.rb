@@ -3,6 +3,8 @@ class Admin::BaseController < ApplicationController
 
   helper_method :lang
 
+  add_tasty_breadcrumb 'Админка', :admin_root_path
+
   def lang
     params[:lang].present? ? params[:lang].to_sym : :ru 
   end

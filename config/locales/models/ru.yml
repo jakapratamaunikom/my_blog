@@ -8,3 +8,8 @@ ru:
         title_en:   'Заголовок (en)'
         content_en: 'Описание (en)'
         image_en:   'Аватар (en)'
+      
+      tag: 
+        title: 'Название'
+        lang:  'Язык'
+        article: 'Статья'

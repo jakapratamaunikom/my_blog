@@ -25,4 +25,31 @@ module ApplicationHelper
       'Алексей В.'
     end
   end
+
+
+   def display_actions_for(object)
+    resource_name = object.class.to_s.underscore
+    content_tag :div, class: 'btn-group btn-group-xs pull-right' do
+      content = content_tag :button, class: 'btn btn-default dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-expanded' => false do
+        button = 'Действия '.html_safe
+        button += "<span class='caret'> </span>".html_safe 
+      end
+      content += content_tag :ul, class: 'dropdown-menu', role: 'menu' do
+        ul  = content_tag :li do
+              link_to 'Просмотр', object
+            end
+        ul += content_tag :li do
+              link_to 'Изменить', send("edit_#{resource_name}_path", object)
+            end
+        
+        ul +=  content_tag(:li) { yield(object) } if block_given? #для дополнительных кнопок
+        
+        ul += content_tag :li do
+              link_to 'Удалить', object, method: :delete, data: { confirm: 'Вы уверены что хотите удалить?' }
+            end
+        ul
+      end
+
+    end
+  end
 end

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'articles#index'
   
-  resources :articles, only: ['show', 'index'] do
+  resources :articles, only: [:show, :index] do
     get :preview, on: :member  
   end
   get "/about_me" => "pages#about_me", as: 'about_me'
@@ -14,10 +14,9 @@ Rails.application.routes.draw do
       get :toggle_published_status, on: :member
     end
 
-    resource :setting, only: [''] do
-      get  :portfolio
-      post :edit_portfolio
-    end
+    resources :tags, only: [:index, :new, :create, :edit, :update, :destroy]
+
+    resources :portfolios
   end
 
 end

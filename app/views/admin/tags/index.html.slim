@@ -1,0 +1,26 @@
+= link_to 'Добавить тег', new_admin_tag_path, class: 'btn btn-default'
+br
+br
+.row
+  .col-sm-12.col-md-8
+
+    table.table.table-bordered#tags
+      thead
+        tr
+          th style='width: 60px;' № 
+          th = I18n.t('activerecord.attributes.tag.title')
+          th = I18n.t('activerecord.attributes.tag.lang')
+          th style='width: 95px;'
+            'Действия
+      tbody
+        - @tags.each_with_index do |tag, index|
+          tr
+            td
+              = index + 1
+            td
+              = tag.title
+            td
+              = tag.lang
+            td
+              = display_actions_for(tag)
+  
