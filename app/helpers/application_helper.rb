@@ -27,7 +27,7 @@ module ApplicationHelper
   end
 
 
-   def display_actions_for(object)
+   def display_actions_for(object, namespace='')
     resource_name = object.class.to_s.underscore
     content_tag :div, class: 'btn-group btn-group-xs pull-right' do
       content = content_tag :button, class: 'btn btn-default dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-expanded' => false do
@@ -36,16 +36,22 @@ module ApplicationHelper
       end
       content += content_tag :ul, class: 'dropdown-menu', role: 'menu' do
         ul  = content_tag :li do
-              link_to 'Просмотр', object
+              link_to 'Просмотр', [namespace, object]
             end
         ul += content_tag :li do
-              link_to 'Изменить', send("edit_#{resource_name}_path", object)
+              method =  if namespace.present?
+                          "edit_#{namespace}_#{resource_name}_path"
+                        else
+                          "edit_#{resource_name}_path"
+                        end
+              
+              link_to 'Изменить', send(method, object)
             end
         
         ul +=  content_tag(:li) { yield(object) } if block_given? #для дополнительных кнопок
         
         ul += content_tag :li do
-              link_to 'Удалить', object, method: :delete, data: { confirm: 'Вы уверены что хотите удалить?' }
+              link_to 'Удалить', [namespace, object], method: :delete, data: { confirm: 'Вы уверены что хотите удалить?' }
             end
         ul
       end

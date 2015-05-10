@@ -8,8 +8,8 @@ class VAlexL::MyBlog::FormObjects::Article
   attribute :image_en,   String
   attribute :content_ru, String
   attribute :content_en, String
-  attribute :ru_tags,    String
-  attribute :en_tags,    String
+  attribute :ru_tags,    Array
+  attribute :en_tags,    Array
     
   attr_reader :article
 
@@ -26,13 +26,19 @@ class VAlexL::MyBlog::FormObjects::Article
 
   def initialize(article, attributes={})
     @article = article
+    if attributes.blank?
+      attributes      = @article.attributes
+      attributes.merge! ru_tags: @article.tags.ru.map(&:id)
+      attributes.merge! en_tags: @article.tags.ru.map(&:id)
+    end
+
     super(attributes)
-    @ru_tags = @ru_tags.to_s
-    @en_tags = @en_tags.to_s
+    @ru_tags = @ru_tags
+    @en_tags = @en_tags
   end
 
   def is_tag_selected?(tag)
-    @ru_tags.split(" ").any? {|id| id.to_i == tag.id} || @en_tags.split(" ").any? {|id| id.to_i == tag.id}
+    @ru_tags.any? {|id| id.to_i == tag.id} || @en_tags.any? {|id| id.to_i == tag.id}
   end
 
   def save
@@ -54,6 +60,6 @@ class VAlexL::MyBlog::FormObjects::Article
     end
 
     def get_tag_ids
-      @ru_tags.split(" ").map(&:to_i) + @en_tags.split(" ").map(&:to_i)
+      @ru_tags + @en_tags
     end
 end

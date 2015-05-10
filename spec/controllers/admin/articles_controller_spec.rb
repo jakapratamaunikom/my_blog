@@ -66,6 +66,16 @@ RSpec.describe Admin::ArticlesController, type: :controller do
         post :create, {:article => valid_attributes}, valid_session
         expect(response).to redirect_to([:admin, Article.last])
       end
+
+      it 'create link on tag' do
+        ru_tag = FactoryGirl.create(:tag, lang: :ru)
+        en_tag = FactoryGirl.create(:tag, lang: :en)
+        attributes = valid_attributes.merge ru_tags: [ru_tag.id], en_tags: [en_tag.id]
+        post :create, {:article => attributes}, valid_session
+        article = assigns(:article)
+        expect(article.tag_ids).to eq([ru_tag.id, en_tag.id])
+
+      end
     end
 
     context "with invalid params" do

@@ -18,7 +18,7 @@
   .row
     = f.label "tag_#{language}", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      = select_tag "#{language}_tags", options_for_article_tags(@article_form, language), class: "form-control", multiple: "multiple", 'data-type' => 'tags', 'data-lang'=>"#{language}"
+      = select_tag "article_#{language}_tags", options_for_article_tags(@article_form, language), class: "form-control", multiple: "multiple", 'data-type' => 'tags', 'data-lang'=>"#{language}", name: "article[#{language}_tags][]"
         
 
 hr

@@ -88,7 +88,9 @@ class Admin::ArticlesController < Admin::BaseController
   private
     def article_params
       params.require(:article).permit(:title_ru, :content_ru, :image_ru,
-                                      :title_en, :content_en, :image_en)
+                                      :title_en, :content_en, :image_en,
+                                      :ru_tags => [], :en_tags => [],
+                                      )
                                       
     end
 

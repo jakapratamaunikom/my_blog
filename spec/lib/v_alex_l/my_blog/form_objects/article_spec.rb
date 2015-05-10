@@ -12,8 +12,8 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
   before(:each) do
     @params = FactoryGirl.build(:article).attributes
     @params.except!('id', 'created_at', 'updated_at')
-    @params.merge!('ru_tags' => "#{@ru_tag1.id} #{@ru_tag2.id}")
-    @params.merge!('en_tags' => "#{@en_tag1.id} #{@en_tag2.id}")
+    @params.merge!('ru_tags' => [@ru_tag1.id, @ru_tag2.id])
+    @params.merge!('en_tags' => [@en_tag1.id, @en_tag2.id])
     @invalid_params = @params.clone
 
     @article      = FactoryGirl.build(:article)

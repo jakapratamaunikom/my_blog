@@ -37,13 +37,25 @@ class ArticleForm
                                 return '<div class="create">Добавить <strong>' + escape(data.input) + '</strong>&hellip;</div>'
                             create: (search_query) ->
                               lang = @.$input.data('lang')
-                              addNewEntity(lang, search_query)
+                              $.ajax
+                                type: 'post'
+                                url:  '/admin/tags'
+                                data: tag: {lang: lang, title: search_query}
+                                dataType: 'json'
+                                success: addNewEntity
+                              {value: '', text: ''}
 
-  addNewEntity: (select, search_query) ->
-    value: search_query, text: search_query
+
+  addNewEntity: (data, status, request) =>
+    console.log data
+    select = @el.find("select[data-lang=#{data.lang}]")[0]
+    select.selectize.addOption value: data.id, text: data.title
+    values = select.selectize.getValue()
+    values.push(data.id)
+    select.selectize.setValue(values)
 
   submitForm: (e) ->
-    
+
 
 
 

@@ -21,9 +21,11 @@ class Admin::TagsController < Admin::BaseController
     respond_to do |format|
       if @tag.save
         format.html { redirect_to admin_tags_path }
+        format.json { render json: @tag}
       else
         add_tasty_breadcrumb "Создание", :edit_admin_tag_path
         format.html { render :new }
+        format.json { render json: @tag.errors, status: :unprocessable_entity }
       end
     end
   end
