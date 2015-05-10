@@ -25,6 +25,15 @@ RSpec.describe Admin::TagsController, type: :controller do
     end
   end
 
+  describe "GET #show" do
+    it "assigns the requested tag as @tag" do
+      tag = FactoryGirl.create(:tag)
+      get :show, {:id => tag.to_param}, valid_session
+      expect(assigns(:tag)).to eq(tag)
+    end
+  end
+
+
   describe "GET #new" do
     it "assigns a new tag as @tag" do
       get :new, {}, valid_session

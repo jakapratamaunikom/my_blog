@@ -1,0 +1,28 @@
+= form_for([:admin, @tag], html: { :class => 'form-horizontal' }) do |f| 
+  - if @tag.errors.any? 
+    - unless f.object.errors.full_messages.length.zero?
+      .alert.alert-danger
+        strong 
+          'Исправьте ошибки:
+        ul
+          - f.object.errors.full_messages.each do |msg|
+            li
+              = msg
+  .form-group
+    .row
+      = f.label :title, class: 'col-sm-2 col-md-4 control-label'
+      .col-md-4.col-sm-10
+        = f.text_field :title, class: 'form-control'
+
+  .form-group
+    .row
+      = f.label :lang, class: 'col-sm-2 col-md-4 control-label'
+      .col-md-4.col-sm-10
+        = f.select :lang, options_for_select(Tag::LANGS, @tag.lang), {prompt: 'Язык на котром тег шпрехает'}, class: 'form-control'
+      
+  .form-group
+    .row
+      .col-sm-10.col-sm-offset-2.col-md-4.col-md-offset-4
+        .btn-group.actions.pull-right
+          = f.submit "Сохранить", class: 'btn btn-primary'
+          = link_to 'Отмена', :back, class: 'btn btn-default' 

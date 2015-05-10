@@ -5,9 +5,16 @@ class Admin::TagsController < Admin::BaseController
     @tags = Tag.all    
   end
 
-  def edit
-    add_tasty_breadcrumb "Редактирование", :edit_admin_tag_path
+  def show
     @tag = Tag.find(params[:id])
+    add_tasty_breadcrumb @tag, admin_tag_path(@tag)
+    
+  end
+
+  def edit
+    @tag = Tag.find(params[:id])
+    add_tasty_breadcrumb @tag, admin_tag_path(@tag)
+    add_tasty_breadcrumb "Редактирование", :edit_admin_tag_path
   end
 
   def new
@@ -37,6 +44,7 @@ class Admin::TagsController < Admin::BaseController
       if @tag.update_attributes get_tag_params
         format.html { redirect_to admin_tags_path }
       else
+        add_tasty_breadcrumb @tag, admin_tag_path(@tag)
         add_tasty_breadcrumb "Редактирование", :edit_admin_tag_path
         format.html { render :edit }
       end
