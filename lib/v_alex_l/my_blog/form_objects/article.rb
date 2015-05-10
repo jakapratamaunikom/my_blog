@@ -31,14 +31,11 @@ class VAlexL::MyBlog::FormObjects::Article
       attributes.merge! ru_tags: @article.tags.ru.map(&:id)
       attributes.merge! en_tags: @article.tags.ru.map(&:id)
     end
-
     super(attributes)
-    @ru_tags = @ru_tags
-    @en_tags = @en_tags
   end
 
   def is_tag_selected?(tag)
-    @ru_tags.any? {|id| id.to_i == tag.id} || @en_tags.any? {|id| id.to_i == tag.id}
+    get_tag_ids.any? {|id| id.to_i == tag.id}
   end
 
   def save
