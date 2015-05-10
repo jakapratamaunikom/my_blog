@@ -6,6 +6,10 @@
       h1.text-center
         = @article.title(language)
   .row
+    .col-sm-12
+      br
+      = display_article_tags(@article, language)
+  .row
     br
     = link_to 'Изменить', edit_admin_article_path(@article, lang: language), class: 'btn btn-primary btn-lg pull-right'
     .col-sm-8

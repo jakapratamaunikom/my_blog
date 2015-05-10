@@ -57,6 +57,11 @@ class Article < ActiveRecord::Base
     send("image_#{lang}")
   end
 
+  def get_tags(lang)
+    check_given_lang!(lang)
+    send("#{lang}_tags")
+  end
+
   def count_comments
     23    
   end

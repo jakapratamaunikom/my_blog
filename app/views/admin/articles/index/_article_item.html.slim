@@ -1,10 +1,11 @@
 .thumbnail role="tabpanel"
-  img.article-img src="#{article.image(language).try(:thumb_242x200).to_s}"
+  = link_to admin_article_path(article, lang: language) do
+    img.article-img src="#{article.image(language).try(:thumb_242x200).to_s}"
 
   .caption
     - if article.send("fully_filled_#{language}?")
       h3
-        = article.title(language)
+        = link_to article.title(language), admin_article_path(article)
       p
         - if article.published?(language)
           = link_to 'Снять с публикации?', toggle_published_status_admin_article_path(article), class: 'text-danger'
@@ -14,8 +15,9 @@
       .alert.alert-warning role="alert"
         strong
           'Братиш, заполнить нужно!
-  hr
+  = display_article_tags(article, language)
 
+  hr
 
   .text-center
     .btn.btn-group
