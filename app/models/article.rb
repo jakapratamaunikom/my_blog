@@ -1,8 +1,15 @@
 class Article < ActiveRecord::Base
   LANGUAGES = %w(ru en)
   scope :published, -> {where("articles.published_ru = ? OR articles.published_en = ?", true, true)}
+  
   mount_uploader :image_ru, AvatarUploader
   mount_uploader :image_en, AvatarUploader
+
+  has_many :tags
+  has_many :ru_tags, -> { ru }, class_name: 'Tag'
+  has_many :en_tags, -> { en }, class_name: 'Tag'
+
+  accepts_nested_attributes_for :tags
 
   LANGUAGES.each do |lang|
     define_method "fully_filled_#{lang}?" do

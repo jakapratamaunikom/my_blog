@@ -1,5 +1,4 @@
 class Admin::ArticlesController < Admin::BaseController
-  add_tasty_breadcrumb 'Админка', :admin_root_path
   add_tasty_breadcrumb 'Статьи',  :admin_articles_path
 
   def index

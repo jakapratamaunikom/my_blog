@@ -16,6 +16,8 @@
 //= require 'bootstrap/bootstrap.min'
 //= require messenger
 //= require messenger-theme-future
+//= require selectize
+
 
 //= require_tree ./admin
 

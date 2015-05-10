@@ -25,5 +25,9 @@ RSpec.describe Tag, type: :model do
     it 'has blank article' do
       @tag.article  = nil
     end
+
+    it 'has incorrect_lang' do
+      @tag.lang = 'incorrect_lang'
+    end
   end
 end

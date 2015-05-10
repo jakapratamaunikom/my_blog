@@ -2,6 +2,12 @@ class ArticleForm
   constructor: (el) ->
     @el = el
     @setupPreview()
+    @setupSelectize()
+
+  setupSelectize: ->
+    for select in @el.find("select[data-type=tags]")
+      do (select) ->
+        $(select).selectize()
 
   setupPreview: ->
     for input in @el.find("[rel=avatar]")

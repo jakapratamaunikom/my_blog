@@ -7,6 +7,7 @@
         = @article.title(language)
   .row
     br
+    = link_to 'Изменить', edit_admin_article_path(@article, lang: language), class: 'btn btn-primary btn-lg pull-right'
     .col-sm-8
       - if @article.published?(language)
         .alert.alert-success
@@ -21,5 +22,3 @@
 
   p
     = @article.content(language).html_safe
-  p
-    = link_to 'Изменить', edit_admin_article_path(@article, lang: language), class: 'btn btn-primary btn-lg'
