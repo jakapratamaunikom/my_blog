@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get :toggle_published_status, on: :member
     end
 
-    resources :tags, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :tags
 
     resources :portfolios
   end

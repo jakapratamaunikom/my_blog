@@ -3,11 +3,13 @@ ru:
     attributes:
       article:
         title_ru:   'Заголовок (ru)'
-        content_ru: 'Описание (ru)'
-        image_ru:   'Аватар (ru)'
         title_en:   'Заголовок (en)'
+        content_ru: 'Описание (ru)'
         content_en: 'Описание (en)'
+        image_ru:   'Аватар (ru)'
         image_en:   'Аватар (en)'
+        tag_ru:     'Теги (ru)'
+        tag_en:     'Теги (en)'
       
       tag: 
         title: 'Название'

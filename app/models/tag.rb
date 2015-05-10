@@ -3,8 +3,10 @@ class Tag < ActiveRecord::Base
   scope :ru, -> {where(lang: :ru)}
   scope :en, -> {where(lang: :en)}
 
-  belongs_to :article
-
-  validates :title, :article, presence: true
+  validates :title, presence: true
   validates :lang, inclusion: LANGS
+
+  def to_s
+    title
+  end
 end

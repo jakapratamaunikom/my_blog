@@ -16,14 +16,10 @@
         img.hide height="100" width="100" data-source="image_#{language}"
 .form-group
   .row
-    label.col-sm-2.col-md-2.control-label
-      'Теги
+    = f.label "tag_#{language}", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      select class="form-control" multiple="multiple" data-type='tags' id="select_#{language}" name="select[#{language}]"
-        option selected="selected" orange
-        option white
-        option selected="selected" purple
-
+      = select_tag "#{language}_tags", options_for_article_tags(@article_form, language), class: "form-control", multiple: "multiple", 'data-type' => 'tags', 'data-lang'=>"#{language}"
+        
 
 hr
 .form-group

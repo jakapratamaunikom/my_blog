@@ -5,9 +5,9 @@ class Article < ActiveRecord::Base
   mount_uploader :image_ru, AvatarUploader
   mount_uploader :image_en, AvatarUploader
 
-  has_many :tags
-  has_many :ru_tags, -> { ru }, class_name: 'Tag'
-  has_many :en_tags, -> { en }, class_name: 'Tag'
+  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :ru_tags, -> { ru }, class_name: 'Tag'
+  has_and_belongs_to_many :en_tags, -> { en }, class_name: 'Tag'
 
   accepts_nested_attributes_for :tags
 

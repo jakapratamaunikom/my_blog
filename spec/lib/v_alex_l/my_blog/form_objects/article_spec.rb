@@ -2,9 +2,18 @@ require 'rails_helper'
 
 
 RSpec.describe VAlexL::MyBlog::FormObjects::Article do
+  before(:all) do
+    @ru_tag1 = FactoryGirl.create(:tag, lang: :ru)
+    @ru_tag2 = FactoryGirl.create(:tag, lang: :ru)
+    @en_tag1 = FactoryGirl.create(:tag, lang: :en)
+    @en_tag2 = FactoryGirl.create(:tag, lang: :en)
+  end
+  
   before(:each) do
     @params = FactoryGirl.build(:article).attributes
     @params.except!('id', 'created_at', 'updated_at')
+    @params.merge!('ru_tags' => "#{@ru_tag1.id} #{@ru_tag2.id}")
+    @params.merge!('en_tags' => "#{@en_tag1.id} #{@en_tag2.id}")
     @invalid_params = @params.clone
 
     @article      = FactoryGirl.build(:article)
@@ -85,6 +94,17 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
               @article_form.save
               }.to change(Article, :count).by(1)
         end
+
+        it 'save all attributes' do
+          @article_form.save
+          @article.reload
+          expect(@article.title_ru).to eq(@params['title_ru'])
+          expect(@article.title_en).to eq(@params['title_en'])
+          expect(@article.content_ru).to eq(@params['content_ru'])
+          expect(@article.content_en).to eq(@params['content_en'])
+          expect(@article.ru_tag_ids).to eq([@ru_tag1.id, @ru_tag2.id])
+          expect(@article.en_tag_ids).to eq([@en_tag1.id, @en_tag2.id])
+        end
       end
 
       describe "with invalid params" do
@@ -117,5 +137,31 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
   end
 
 
+  describe 'has method' do
+    it 'ru_tags wich return given params' do
+      expect(@article_form.ru_tags).to eq(@params['ru_tags'])
+    end
+
+    it 'en_tags wich return given params' do
+      expect(@article_form.en_tags).to eq(@params['en_tags'])
+    end
+
+    it 'is_tag_selected? will return true if tag includes in ru_tags or en_tags' do
+      expect(@article_form.is_tag_selected?(@ru_tag1)).to eq(true)
+      expect(@article_form.is_tag_selected?(@en_tag1)).to eq(true)
+    end
+
+    it 'is_tag_selected? will return false if tag excludes in ru_tags or en_tags' do
+      another_ru_tag = FactoryGirl.create(:tag, lang: :ru)
+      another_en_tag = FactoryGirl.create(:tag, lang: :en)
+      expect(@article_form.is_tag_selected?(another_ru_tag)).to eq(false)
+      expect(@article_form.is_tag_selected?(another_en_tag)).to eq(false)
+    end
+
+    it 'get_tag_ids which return ids all tags' do
+      expect(@article_form.send(:get_tag_ids)).to eq([@ru_tag1.id, @ru_tag2.id, @en_tag1.id, @en_tag2.id])
+    end
+  end
+  
 
 end

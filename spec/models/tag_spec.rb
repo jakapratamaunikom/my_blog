@@ -22,12 +22,13 @@ RSpec.describe Tag, type: :model do
       @tag.lang  = nil
     end
 
-    it 'has blank article' do
-      @tag.article  = nil
-    end
-
     it 'has incorrect_lang' do
       @tag.lang = 'incorrect_lang'
     end
+  end
+
+  it 'has method to_s wich return title' do
+    @tag.title = 'WoW'
+    expect(@tag.to_s).to eq('WoW')
   end
 end

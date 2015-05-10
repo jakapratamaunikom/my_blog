@@ -3,11 +3,13 @@ class VAlexL::MyBlog::FormObjects::Article
   include ActiveModel::Validations
 
   attribute :title_ru,   String
-  attribute :image_ru,   String
-  attribute :content_ru, String
   attribute :title_en,   String
+  attribute :image_ru,   String
   attribute :image_en,   String
+  attribute :content_ru, String
   attribute :content_en, String
+  attribute :ru_tags,    String
+  attribute :en_tags,    String
     
   attr_reader :article
 
@@ -22,10 +24,15 @@ class VAlexL::MyBlog::FormObjects::Article
     name
   end
 
-
   def initialize(article, attributes={})
     @article = article
     super(attributes)
+    @ru_tags = @ru_tags.to_s
+    @en_tags = @en_tags.to_s
+  end
+
+  def is_tag_selected?(tag)
+    @ru_tags.split(" ").any? {|id| id.to_i == tag.id} || @en_tags.split(" ").any? {|id| id.to_i == tag.id}
   end
 
   def save
@@ -35,8 +42,9 @@ class VAlexL::MyBlog::FormObjects::Article
     @article.title_en   = title_en
     @article.content_en = content_en
     @article.image_en   = image_en
-    return @article.save! if valid?
-    false
+    return false unless valid?
+    @article.save! and @article.tag_ids = get_tag_ids
+    true
   end
 
   private
@@ -45,5 +53,7 @@ class VAlexL::MyBlog::FormObjects::Article
       errors.add(:article, :should_have_title_least_one_languate)
     end
 
-
+    def get_tag_ids
+      @ru_tags.split(" ").map(&:to_i) + @en_tags.split(" ").map(&:to_i)
+    end
 end
