@@ -16,3 +16,8 @@ ru:
         lang:  'Язык'
         article: 'Статья'
         count_articles: 'Кол-во статей'
+
+      comment:
+        name:    'Имя'
+        email:   'E-mail'
+        content: 'Контент'

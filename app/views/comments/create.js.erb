@@ -1,4 +1,4 @@
-$('#comments').html("<%=j render('articles/show/comments', article: @comment.article) %>");
-$("#create-comment form")[0].reset();
-
+$('#comments-container').html("<%=j render('articles/show/comments', article: @comment.article) %>");
+$("[data-type=article-comments]").html("<%=I18n.t('views.articles.count_comments', quantity: @comment.article.count_comments)%>")
+$("[data-type=all-comments").html("<%= Comment.count %>")
 window.displayNotices("<%= I18n.t('views.comments.successful_create') %>")

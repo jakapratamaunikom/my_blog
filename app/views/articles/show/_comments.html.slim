@@ -1,19 +1,43 @@
-hr
-h2
-  i.fa.fa-comments
-  = I18n.t("views.articles.count_comments", quantity: article.count_comments)
-- article.comments.each do |comment|
+aside#comments.comments
+  hr
+  h2
+    i.fa.fa-comments
+    |  
+    = I18n.t("views.articles.count_comments", quantity: article.count_comments)
+  - article.comments.each do |comment|
 
-  article class="comment #{comment.kind}"
-    header.clearfix
-      .meta
-        h3
-          a href="#"  
-            = comment.name
-        span.date
-          = comment.created_at.to_date
-        span.separator
-          |  -
-        a.reply-link href="#"  Reply
-    .body
-      = comment.content
+    article class="comment #{comment.kind}"
+      header.clearfix
+        .meta
+          h3
+            a href="#"  
+              = comment.name
+          span.date
+            = comment.created_at.to_date
+          span.separator
+            |  -
+          a.reply-link href="#" 
+            |  
+            = I18n.t("views.comments.reply")
+      .body
+        = comment.content
+aside#create-comment.create-comment
+    hr
+    h2
+      i.fa.fa-heart
+      |  
+      = I18n.t("views.comments.add_comment")
+
+    = form_for Comment.new, remote: true do |f|
+      = f.hidden_field :article_id, value: article.id
+      .row
+        .col-md-6.js-field-container
+          = f.text_field :name, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.name'), required: true
+        .col-md-6.js-field-container
+          = f.email_field :email, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.email')
+      .row
+        .col-md-12.js-field-container
+          = f.text_area :content, class: 'form-control input-lg', rows: 5, placeholder: I18n.t('views.comments.placeholder.content'), required: true
+      .buttons.clearfix
+        button.btn.btn-xlarge.btn-tales-two Cancel
+        button.btn.btn-xlarge.btn-tales-one type="submit"  Submit

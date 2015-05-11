@@ -9,3 +9,9 @@ ru:
 
     comments:
       successful_create: 'Комментарий успешно добавлен'
+      reply:             'Ответить'
+      add_comment:       'Добавить комментарий'
+      placeholder:
+        name:            'Мое имя'
+        email:           'E-mail для уведомлений'
+        content:         'Хм.. Я думаю..'

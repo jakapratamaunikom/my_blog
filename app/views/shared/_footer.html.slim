@@ -15,7 +15,7 @@ footer
               span.caption 
                 = I18n.t('views.footer.articles')
             .line
-              span.counter 
+              span.counter data-type='all-comments' 
                 = Comment.count
               span.caption
                 = I18n.t('views.footer.comments')
