@@ -3,6 +3,9 @@ class Comment < ActiveRecord::Base
   ORIGIN = 'origin'
   REPLY  = 'reply'
 
+  scope :origin, -> { where(parent_id: nil) }
+  scope :reply,  -> { where.not(parent_id: nil) }
+
   belongs_to :article
   belongs_to :parent,   class_name: 'Comment', foreign_key: :parent_id
   has_many   :children, class_name: 'Comment', foreign_key: :parent_id

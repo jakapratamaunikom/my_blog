@@ -4,9 +4,9 @@ aside#comments.comments
     i.fa.fa-comments
     |  
     = I18n.t("views.articles.count_comments", quantity: article.count_comments)
-  - article.comments.each do |comment|
+  - article.comments.origin.each do |comment|
 
-    article class="comment #{comment.kind}"
+    article class="comment"
       header.clearfix
         .meta
           h3
@@ -16,11 +16,25 @@ aside#comments.comments
             = comment.created_at.to_date
           span.separator
             |  -
-          a.reply-link href="#" 
-            |  
-            = I18n.t("views.comments.reply")
+          = link_to " #{I18n.t("views.comments.reply")}", '#', class: 'reply-link', 'data-id' => comment.id, 'data-type' => 'reply_comment'
       .body
         = comment.content
+    
+    - comment.nested_comments.each do |child|
+      article class="comment reply"
+        header.clearfix
+          .meta
+            h3
+              a href="#"  
+                = child.name
+            span.date
+              = child.created_at.to_date
+            span.separator
+              |  -
+            = link_to " #{I18n.t("views.comments.reply")}", '#', class: 'reply-link', 'data-id' => child.id, 'data-type' => 'reply_comment'
+        .body
+          = child.content
+      
 aside#create-comment.create-comment
     hr
     h2
@@ -30,6 +44,7 @@ aside#create-comment.create-comment
 
     = form_for Comment.new, remote: true do |f|
       = f.hidden_field :article_id, value: article.id
+      = f.hidden_field :parent_id,  value: nil
       .row
         .col-md-6.js-field-container
           = f.text_field :name, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.name'), required: true
