@@ -6,3 +6,6 @@ ru:
       tags:      'Теги'
 
       count_comments: 'Комментариев %{quantity}  '
+
+    comments:
+      successful_create: 'Комментарий успешно добавлен'

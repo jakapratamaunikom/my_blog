@@ -1,0 +1,19 @@
+hr
+h2
+  i.fa.fa-comments
+  = I18n.t("views.articles.count_comments", quantity: article.count_comments)
+- article.comments.each do |comment|
+
+  article class="comment #{comment.kind}"
+    header.clearfix
+      .meta
+        h3
+          a href="#"  
+            = comment.name
+        span.date
+          = comment.created_at.to_date
+        span.separator
+          |  -
+        a.reply-link href="#"  Reply
+    .body
+      = comment.content

@@ -13,5 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
-//= require 'bootstrap/bootstrap.min'
-//= require 'modernizr/modernizr'
+//= require bootstrap/bootstrap.min
+//= require modernizr/modernizr
+
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require jquery.validate.localization/messages_ru
+
+//= require messagner
+//= require articles

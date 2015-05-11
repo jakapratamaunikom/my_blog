@@ -14,10 +14,9 @@
 //= require jquery_ujs
 //= require underscore
 //= require 'bootstrap/bootstrap.min'
-//= require messenger
-//= require messenger-theme-future
 //= require selectize
 
+//= require messagner
 
 //= require_tree ./admin
 

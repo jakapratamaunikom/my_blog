@@ -40,6 +40,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Bootstrap
 # gem 'bootstrap-sass', '~> 3.2.0' # use bootstrap from design. it's some modified
 
+# For form validate
+gem 'jquery-validation-rails'
+
 #For form objects
 gem 'virtus'
 

@@ -10,15 +10,17 @@ footer
             = I18n.t('views.footer.statistic_hint')
           .stats
             .line
-              span.counter 27
+              span.counter
+                = Article.published.count
               span.caption 
                 = I18n.t('views.footer.articles')
             .line
-              span.counter 208
+              span.counter 
+                = Comment.count
               span.caption
                 = I18n.t('views.footer.comments')
             .line
-              span.counter 2
+              span.counter 222
               span.caption
                 = I18n.t('views.footer.applications_in_portfolio')
         .col-md-4.footer-widget

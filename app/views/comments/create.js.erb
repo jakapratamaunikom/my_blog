@@ -1,0 +1,4 @@
+$('#comments').html("<%=j render('articles/show/comments', article: @comment.article) %>");
+$("#create-comment form")[0].reset();
+
+window.displayNotices("<%= I18n.t('views.comments.successful_create') %>")

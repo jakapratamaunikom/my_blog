@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   get "/about_me" => "pages#about_me", as: 'about_me'
 
+  resources :comments, only: [:create]
 
   namespace :admin do
     get '/' => "main#index", as: 'root'
