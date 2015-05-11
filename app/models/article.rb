@@ -5,6 +5,7 @@ class Article < ActiveRecord::Base
   mount_uploader :image_ru, AvatarUploader
   mount_uploader :image_en, AvatarUploader
 
+  has_many :comments
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :ru_tags, -> { ru }, class_name: 'Tag'
   has_and_belongs_to_many :en_tags, -> { en }, class_name: 'Tag'
@@ -63,7 +64,7 @@ class Article < ActiveRecord::Base
   end
 
   def count_comments
-    23    
+    comments.count
   end
 
   private

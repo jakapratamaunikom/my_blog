@@ -15,7 +15,7 @@ RSpec.describe Article, type: :model do
   end
 
   describe 'has method' do
-    pending "count_comments" do
+    it "count_comments" do
       @article.save!
       FactoryGirl.create(:comment, article: @article)
       expect(@article.count_comments).to eq(1)
