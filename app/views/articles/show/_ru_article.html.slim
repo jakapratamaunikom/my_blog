@@ -45,31 +45,20 @@ aside#comments.comments
     = I18n.t("views.articles.count_comments", quantity: @article.count_comments)
   - @article.comments.each do |comment|
 
-    article.comment
+    article class="comment #{comment.kind}"
       header.clearfix
         .meta
           h3
-            a href="blog-detail.html#"  Willy Wonka
+            a href="#"  
+              = comment.name
           span.date
-            | 27 July 2013
+            = comment.created_at.to_date
           span.separator
-            | \-
-          a.reply-link href="blog-detail.html#create-comment"  Reply
+            |  -
+          a.reply-link href="#"  Reply
       .body
-        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut  liquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+        = comment.content
     
-    article.comment.reply
-      header.clearfix
-        .meta
-          h3
-            a href="blog-detail.html#"  Willy Wonka
-          span.date
-            | 27 July 2013
-          span.separator
-            | \-
-          a.reply-link href="blog-detail.html#create-comment"  Reply
-      .body
-        | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut  liquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
 aside#create-comment.create-comment
   hr/
   h2
