@@ -93,6 +93,9 @@ group :development, :test do
   gem 'factory_girl_rails'
   # gem 'database_cleaner' #чистит тестувую базу
   # gem 'capybara'
+  #Generate humanize random data
+  gem 'forgery' 
+
   
   gem 'spork', git: 'git://github.com/manafire/spork.git', ref: '38c79dcedb246daacbadb9f18d09f50cc837de51'
   gem 'spork-rails', '~> 4.0.0'

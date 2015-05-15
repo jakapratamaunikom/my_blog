@@ -18,7 +18,7 @@
     .row
       = f.label :lang, class: 'col-sm-2 col-md-4 control-label'
       .col-md-4.col-sm-10
-        = f.select :lang, options_for_select(Tag::LANGS, @tag.lang), {prompt: 'Язык на котром тег шпрехает'}, class: 'form-control'
+        = f.select :lang, options_for_select(available_languages, @tag.lang), {prompt: 'Язык на котром тег шпрехает'}, class: 'form-control'
       
   .form-group
     .row

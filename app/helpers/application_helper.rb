@@ -1,4 +1,10 @@
 module ApplicationHelper
+
+  def available_languages
+    Article::LANGUAGES
+  end
+
+
   def get_page_title
     if current_controller?('admin/main')
       'Админка'
@@ -26,8 +32,7 @@ module ApplicationHelper
     end
   end
 
-
-   def display_actions_for(object, namespace='')
+  def display_actions_for(object, namespace='')
     resource_name = object.class.to_s.underscore
     content_tag :div, class: 'btn-group btn-group-xs pull-right' do
       content = content_tag :button, class: 'btn btn-default dropdown-toggle', 'data-toggle' => 'dropdown', 'aria-expanded' => false do
