@@ -66,6 +66,12 @@ class Article < ActiveRecord::Base
     send("#{lang}_tags")
   end
 
+  def get_content(lang)
+    check_given_lang!(lang)
+    return russian_content if lang.to_s == 'ru'
+    english_content
+  end
+
   def russian_content
     @russian_content   = article_contents.find {|article_content| article_content.russian?} 
     @russian_content ||= article_contents.build(lang: :ru, article: self)

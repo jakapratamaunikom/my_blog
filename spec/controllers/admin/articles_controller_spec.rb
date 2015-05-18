@@ -3,12 +3,23 @@ require 'rails_helper'
 RSpec.describe Admin::ArticlesController, type: :controller do
 
   let(:valid_attributes) {
-    valid_product_type = FactoryGirl.build(:article)
-    valid_product_type.attributes.except('id', 'created_at', 'updated_at')
+    ru_content = FactoryGirl.build(:article_content)
+    en_content = FactoryGirl.build(:article_content)
+
+    params = {
+      :ru_title     => ru_content.title,
+      :ru_content   => ru_content.content,
+      :ru_image     => ru_content.image,
+      :ru_published => ru_content.published,
+      :en_title     => en_content.title,
+      :en_content   => en_content.content,
+      :en_image     => en_content.image,
+      :en_published => en_content.published,
+    }
   }
 
   let(:invalid_attributes) {
-    {'title_ru' => nil, 'title_en' => nil}
+    {'ru_title' => nil, 'en_title' => nil}
   }
 
   let(:valid_session) { {} }
@@ -51,8 +62,9 @@ RSpec.describe Admin::ArticlesController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Article" do
+        article_attributes = valid_attributes
         expect {
-          post :create, {:article => valid_attributes}, valid_session
+          post :create, {:article => article_attributes}, valid_session
         }.to change(Article, :count).by(1)
       end
 

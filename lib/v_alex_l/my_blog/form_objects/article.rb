@@ -29,12 +29,13 @@ class VAlexL::MyBlog::FormObjects::Article
     @article = article
 
     if attributes.blank?
-      attributes      = @article.attributes.except('id', 'created_at', 'updated_at')
-      attributes.merge! ru_tags: @article.tags.ru.map(&:id)
-      attributes.merge! en_tags: @article.tags.ru.map(&:id)
+      attributes = {}
+      attributes.merge! ru_tags: russian_content.tags.map(&:id)
+      attributes.merge! en_tags: english_content.tags.map(&:id)
     end
-    @ru_tags = attributes.delete(:ru_tags)
-    @en_tags = attributes.delete(:en_tags)
+
+    @ru_tags = attributes.delete(:ru_tags).to_a
+    @en_tags = attributes.delete(:en_tags).to_a
 
     attributes.each do |method, value|
       self.send("#{method}=", value)

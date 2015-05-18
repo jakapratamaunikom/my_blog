@@ -119,6 +119,11 @@ RSpec.describe Article, type: :model do
        expect(@article.fully_filled_en?).to eq(true)
     end
 
+    it 'get_content wich return content for given lang' do
+      expect(@article.get_content(:ru)).to eq(@article.russian_content)
+      expect(@article.get_content(:en)).to eq(@article.english_content)
+    end
+
     it 'russian_content wich build new article_content' do
       @article.article_contents.destroy_all
       expect(@article.russian_content.class).to eq(ArticleContent)

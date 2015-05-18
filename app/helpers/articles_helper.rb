@@ -12,7 +12,7 @@ module ArticlesHelper
   end
 
   def display_article_tags(article, language)
-    article.get_tags(language).inject("".html_safe) do |res, tag|
+    article.get_content(language).tags.inject("".html_safe) do |res, tag|
       res += content_tag :label, tag.to_s, class: "label label-default"
       res += ' '
     end
