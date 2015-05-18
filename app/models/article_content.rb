@@ -4,7 +4,7 @@ class ArticleContent < ActiveRecord::Base
   belongs_to :article
   has_and_belongs_to_many :tags
 
-  validates :title, :content, :article, presence: true
+  validates :article, presence: true
   validates :lang, inclusion: Article::LANGUAGES
 
   def russian?

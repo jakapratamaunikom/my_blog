@@ -14,14 +14,6 @@ RSpec.describe ArticleContent, type: :model do
       expect(@article_content.save).to eq(false)
     end
 
-    it 'has blank title' do
-      @article_content.title = nil      
-    end
-
-    it 'has blank content' do
-      @article_content.content = nil      
-    end    
-
     it 'has blank article' do
       @article_content.article = nil
     end
