@@ -1,22 +1,22 @@
 .form-group
   .row
-    = f.label "title_#{language}", class: 'col-sm-2 col-md-2 control-label'
+    = f.label "#{language}_title", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      = f.text_field "title_#{language}", class: 'form-control'
+      = f.text_field "#{language}_title", class: 'form-control'
 
 .form-group
   .row
-    = f.label "image_#{language}", class: 'col-sm-2 col-md-2 control-label'
+    = f.label "#{language}_image", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      = f.file_field "image_#{language}", 'data-type' => "image_#{language}", rel: 'avatar'
+      = f.file_field "#{language}_image", 'data-type' => "image_#{language}", rel: 'avatar'
       br
-      - if @article_form.article.send("image_#{language}").to_s.present?
-        img height="100" width="100" data-source="image_#{language}" src="#{@article_form.article.send("image_#{language}").to_s}"
+      - if @article_form.send("#{language}_image").to_s.present?
+        img height="100" width="100" data-source="image_#{language}" src="#{@article_form.send("#{language}_image").to_s}"
       - else
         img.hide height="100" width="100" data-source="image_#{language}"
 .form-group
   .row
-    = f.label "tag_#{language}", class: 'col-sm-2 col-md-2 control-label'
+    = f.label "#{language}_tag", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
       = select_tag "article_#{language}_tags", options_for_article_tags(@article_form, language), class: "form-control", multiple: "multiple", 'data-type' => 'tags', 'data-lang'=>"#{language}", name: "article[#{language}_tags][]"
         
@@ -24,7 +24,7 @@
 hr
 .form-group
   .row
-    = f.label "content_#{language}", class: 'col-sm-2 col-md-2 control-label'
+    = f.label "#{language}_content", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      = f.text_area "content_#{language}", class: 'form-control', rows: 50
+      = f.text_area "#{language}_content", class: 'form-control', rows: 50
 

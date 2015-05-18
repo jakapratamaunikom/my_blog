@@ -3,6 +3,7 @@ class VAlexL::MyBlog::FormObjects::Article
   include ActiveModel::Validations
 
   delegate :russian_content, :english_content, to: :@article
+  delegate :to_key, :persisted?, :to_model, to: :@article
   delegate :title=, :content=, :image=, :published=, to: :russian_content, prefix: 'ru'
   delegate :title,  :content,  :image,  :published,  to: :russian_content, prefix: 'ru'
   delegate :title=, :content=, :image=, :published=, to: :english_content, prefix: 'en'

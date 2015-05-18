@@ -170,16 +170,18 @@ RSpec.describe Admin::ArticlesController, type: :controller do
     end
 
     it 'change published_status for language to opposite of current' do
-      article = FactoryGirl.create(:article, published_ru: true, published_en: false)
+      article = FactoryGirl.create(:article)
+      article.russian_content.update_column :published, true
+      article.english_content.update_column :published, false
       put :toggle_published_status, {id: article.id, lang: :ru}, valid_session
       article.reload
-      expect(article.published_ru?).to eq(false)
-      expect(article.published_en?).to eq(false)
+      expect(article.russian_content.published?).to eq(false)
+      expect(article.english_content.published?).to eq(false)
 
       put :toggle_published_status, {id: article.id, lang: :en}, valid_session
       article.reload
-      expect(article.published_ru?).to eq(false)
-      expect(article.published_en?).to eq(true)
+      expect(article.russian_content.published?).to eq(false)
+      expect(article.english_content.published?).to eq(true)
     end
   end
 
