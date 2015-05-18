@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515140359) do
+ActiveRecord::Schema.define(version: 20150518081518) do
 
   create_table "article_contents", force: :cascade do |t|
     t.text     "content"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 20150515140359) do
     t.datetime "updated_at", null: false
     t.boolean  "published"
     t.integer  "article_id"
+  end
+
+  create_table "article_contents_tags", force: :cascade do |t|
+    t.integer "article_content_id"
+    t.integer "tag_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -35,11 +40,6 @@ ActiveRecord::Schema.define(version: 20150515140359) do
     t.string   "image_en"
     t.boolean  "published_ru"
     t.boolean  "published_en"
-  end
-
-  create_table "articles_tags", force: :cascade do |t|
-    t.integer "article_id"
-    t.integer "tag_id"
   end
 
   create_table "comments", force: :cascade do |t|

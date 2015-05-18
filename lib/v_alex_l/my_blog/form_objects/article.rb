@@ -37,7 +37,7 @@ class VAlexL::MyBlog::FormObjects::Article
     @en_tags = attributes.delete(:en_tags)
 
     attributes.each do |method, value|
-      self.send("#{method}=", value) rescue puts method
+      self.send("#{method}=", value)
     end
 
     super(attributes)
@@ -49,7 +49,7 @@ class VAlexL::MyBlog::FormObjects::Article
 
   def save
     return false unless valid?
-    @article.save! and @article.tag_ids = get_tag_ids
+    @article.save! and mark_article_by_tags!
     true
   end
 
@@ -57,6 +57,12 @@ class VAlexL::MyBlog::FormObjects::Article
     def should_have_title_least_one_language
       return if ru_title.present? || en_title.present?
       errors.add(:article, :should_have_title_least_one_language)
+    end
+    
+    def mark_article_by_tags!
+      russian_content.tag_ids = @ru_tags
+      english_content.tag_ids = @en_tags
+      true
     end
 
     def get_tag_ids

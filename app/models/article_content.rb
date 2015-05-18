@@ -2,13 +2,10 @@ class ArticleContent < ActiveRecord::Base
   mount_uploader :image, AvatarUploader
 
   belongs_to :article
+  has_and_belongs_to_many :tags
 
   validates :title, :content, :article, presence: true
   validates :lang, inclusion: Article::LANGUAGES
-
-  def title=(value)
-    super
-  end
 
   def russian?
     lang.to_s == 'ru'

@@ -8,9 +8,9 @@ class Article < ActiveRecord::Base
   has_many :comments
   has_many :article_contents
 
-  has_and_belongs_to_many :tags
-  has_and_belongs_to_many :ru_tags, -> { ru }, class_name: 'Tag'
-  has_and_belongs_to_many :en_tags, -> { en }, class_name: 'Tag'
+  has_many :tags, through: :article_contents
+  has_many :ru_tags, -> { ru }, class_name: 'Tag'
+  has_many :en_tags, -> { en }, class_name: 'Tag'
 
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :article_contents
