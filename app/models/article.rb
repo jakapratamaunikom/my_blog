@@ -1,6 +1,6 @@
 class Article < ActiveRecord::Base
   LANGUAGES = %w(ru en)
-  scope :published, -> {where("articles.published_ru = ? OR articles.published_en = ?", true, true)}
+  scope :published, -> {joins(:article_contents).where(article_contents: {published: true})}
   
   has_many :comments
   has_many :article_contents

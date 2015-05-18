@@ -6,14 +6,14 @@
             .col-md-6.col-sm-6
               article.blog-teaser
                 header
-                  = image_tag article.image_ru.try(:thumb_183x183), alt: article.title_ru
+                  = image_tag article.image(:ru).try(:thumb_183x183), alt: article.title(:ru)
                   h3
-                    = link_to article.title_ru, article
+                    = link_to article.title(:ru), article
                   span.meta 
                     = article.created_at
                   hr/
                 .body
-                  = truncate_html(article.content_ru, length: 200, separator: ' ', omission: '...')
+                  = truncate_html(article.content(:ru), length: 200, separator: ' ', omission: '...')
                 .clearfix
                   = link_to "'Подробнее", article, class: 'btn btn-tales-one'
         
