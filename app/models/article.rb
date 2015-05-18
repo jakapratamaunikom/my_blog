@@ -2,9 +2,6 @@ class Article < ActiveRecord::Base
   LANGUAGES = %w(ru en)
   scope :published, -> {where("articles.published_ru = ? OR articles.published_en = ?", true, true)}
   
-  mount_uploader :image_ru, AvatarUploader
-  mount_uploader :image_en, AvatarUploader
-
   has_many :comments
   has_many :article_contents
 
@@ -22,14 +19,12 @@ class Article < ActiveRecord::Base
   end
 
   def published?(lang)
-    check_given_lang!(lang)
-    send("published_#{lang}?")    
+    get_content(lang).published?
   end
 
   def set_published!(lang)
-    check_given_lang!(lang)
-    send("published_#{lang}=", true)
-    save!
+    article_content = get_content(lang)
+    article_content.published = true and article_content.save!
   end
 
   def toggle_published!(lang)
@@ -41,29 +36,25 @@ class Article < ActiveRecord::Base
   end
 
   def set_unpublished!(lang)
-    check_given_lang!(lang)
-    send("published_#{lang}=", false)
-    save!
+    article_content = get_content(lang)
+    article_content.published = false 
+    article_content.save!
   end
   
   def title(lang)
-    check_given_lang!(lang)
-    send("title_#{lang}")
+    get_content(lang).title
   end
 
   def content(lang)
-    check_given_lang!(lang)
-    send("content_#{lang}")
+    get_content(lang).content
   end
 
   def image(lang)
-    check_given_lang!(lang)
-    send("image_#{lang}")
+    get_content(lang).image
   end
 
   def get_tags(lang)
-    check_given_lang!(lang)
-    send("#{lang}_tags")
+    get_content(lang).tags
   end
 
   def get_content(lang)

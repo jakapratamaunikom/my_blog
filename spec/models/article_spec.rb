@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Article, type: :model do
   before(:each) do
-    @article = FactoryGirl.create(:article)
+    @article = FactoryGirl.build(:article)
   end
 
   describe "will successfully save if" do
@@ -14,6 +14,12 @@ RSpec.describe Article, type: :model do
     end
   end
 
+  it 'create 2 ArticleContent' do
+    expect{
+      @article.save!
+    }.to change(ArticleContent, :count).by(2)
+  end
+
   describe 'has method' do
     it "count_comments" do
       @article.save!
@@ -22,22 +28,22 @@ RSpec.describe Article, type: :model do
     end
     
     it 'published? wiche return published status for given language' do
-      @article.published_ru = false
-      @article.published_en = false
+      @article.russian_content.published = false
+      @article.english_content.published = false
 
       expect(@article.published?(:ru)).to eq(false)
       expect(@article.published?(:en)).to eq(false)
      
-      @article.published_ru = true
-      @article.published_en = true
-    
-      expect(@article.published?('ru')).to eq(true)
+      @article.russian_content.published = true
+      @article.english_content.published = true
+      
       expect(@article.published?('en')).to eq(true)
+      expect(@article.published?('ru')).to eq(true)
     end
 
     it 'toggle_published! change article as published for language to opposite of current' do
-      @article.published_ru = false
-      @article.published_en = true
+      @article.russian_content.published = false
+      @article.english_content.published = true
 
       @article.toggle_published!(:ru)
       @article.toggle_published!('en')
@@ -47,8 +53,8 @@ RSpec.describe Article, type: :model do
 
 
     it 'set_published! mark article as published for language' do
-      @article.published_ru = false
-      @article.published_en = false
+      @article.russian_content.published = false
+      @article.english_content.published = false
 
       @article.set_published!(:ru)
       @article.set_published!('en')
@@ -57,8 +63,8 @@ RSpec.describe Article, type: :model do
     end
 
     it 'set_unpublished! mark article as unpublished for language' do
-      @article.published_ru = true
-      @article.published_en = true
+      @article.russian_content.published = true
+      @article.english_content.published = true
 
       @article.set_unpublished!(:ru)
       @article.set_unpublished!('en')
@@ -68,8 +74,8 @@ RSpec.describe Article, type: :model do
 
 
     it 'title which returns title in given languages' do
-      @article.title_ru = 'Заголовок'
-      @article.title_en = 'Title'
+      @article.russian_content.title = 'Заголовок'
+      @article.english_content.title = 'Title'
       expect(@article.title(:ru)).to eq('Заголовок')
       expect(@article.title('ru')).to eq('Заголовок')
       expect(@article.title(:en)).to eq('Title')
@@ -77,45 +83,45 @@ RSpec.describe Article, type: :model do
     end
 
     it 'content which returns content in given languages' do
-      @article.content_ru = 'Содержимое'
-      @article.content_en = 'Content'
+      @article.russian_content.content = 'Содержимое'
+      @article.english_content.content = 'Content'
       expect(@article.content(:ru)).to eq('Содержимое')
       expect(@article.content('ru')).to eq('Содержимое')
       expect(@article.content(:en)).to eq('Content')
       expect(@article.content('en')).to eq('Content')
     end
 
-    it 'fully_filled_ru? wich return true only if has title_ru content_ru and image_ru' do
-       @article.title_ru  = nil
-       @article.content_ru = nil
-       @article.image_ru  = nil
+    it 'fully_filled_ru? wich russian_content.return true only if has title russian_content.content and image_ru' do
+       @article.russian_content.title  = nil
+       @article.russian_content.content = nil
+       @article.russian_content.image  = nil
 
        expect(@article.fully_filled_ru?).to eq(false)
-       @article.title_ru  = 'Заголовок'
+       @article.russian_content.title  = 'Заголовок'
        expect(@article.fully_filled_ru?).to eq(false)
-       @article.content_ru  = 'Описание'
+       @article.russian_content.content  = 'Описание'
        expect(@article.fully_filled_ru?).to eq(false)
        File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
-          @article.image_ru  = f
+          @article.russian_content.image  = f
         end
-       expect(@article.image_ru.present?).to eq(true)
+       expect(@article.russian_content.image.present?).to eq(true)
        expect(@article.fully_filled_ru?).to eq(true)
     end
 
-    it 'fully_filled_en? wich return true only if has title_en content_en and image_en' do
-       @article.title_en  = nil
-       @article.content_en = nil
-       @article.image_en  = nil
+    it 'fully_filled_en? wich return true only if has english_content.title english_content.content and english_content.image' do
+       @article.english_content.title  = nil
+       @article.english_content.content = nil
+       @article.english_content.image  = nil
 
        expect(@article.fully_filled_en?).to eq(false)
-       @article.title_en  = 'Заголовок'
+       @article.english_content.title  = 'Заголовок'
        expect(@article.fully_filled_en?).to eq(false)
-       @article.content_en  = 'Описание'
+       @article.english_content.content  = 'Описание'
        expect(@article.fully_filled_en?).to eq(false)
        File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
-          @article.image_en  = f
+          @article.english_content.image  = f
         end
-       expect(@article.image_en.present?).to eq(true)
+       expect(@article.english_content.image.present?).to eq(true)
        expect(@article.fully_filled_en?).to eq(true)
     end
 
@@ -131,6 +137,7 @@ RSpec.describe Article, type: :model do
     end
 
     it 'russian_content wich given exist article_content' do
+      @article.article_contents.destroy_all
       @article.save!
       ru_article_content = FactoryGirl.create(:article_content, lang: :ru, article: @article)
       en_article_content = FactoryGirl.create(:article_content, lang: :en, article: @article)
@@ -146,6 +153,7 @@ RSpec.describe Article, type: :model do
     end
 
     it 'russian_content wich given exist article_content' do
+      @article.article_contents.destroy_all 
       @article.save!
       ru_article_content = FactoryGirl.create(:article_content, lang: :ru, article: @article)
       en_article_content = FactoryGirl.create(:article_content, lang: :en, article: @article)

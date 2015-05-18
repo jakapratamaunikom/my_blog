@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150518081518) do
+ActiveRecord::Schema.define(version: 20150518085235) do
 
   create_table "article_contents", force: :cascade do |t|
     t.text     "content"
@@ -30,16 +30,8 @@ ActiveRecord::Schema.define(version: 20150518081518) do
   end
 
   create_table "articles", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "title_ru"
-    t.string   "title_en"
-    t.text     "content_ru"
-    t.text     "content_en"
-    t.string   "image_ru"
-    t.string   "image_en"
-    t.boolean  "published_ru"
-    t.boolean  "published_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
