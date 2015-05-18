@@ -2,21 +2,22 @@ class VAlexL::MyBlog::FormObjects::Article
   include Virtus.model
   include ActiveModel::Validations
 
-  attribute :title_ru,   String
-  attribute :title_en,   String
-  attribute :image_ru,   String
-  attribute :image_en,   String
-  attribute :content_ru, String
-  attribute :content_en, String
+  delegate :russian_content, :english_content, to: :@article
+  delegate :title=, :content=, :image=, :published=, to: :russian_content, prefix: 'ru'
+  delegate :title,  :content,  :image,  :published,  to: :russian_content, prefix: 'ru'
+  delegate :title=, :content=, :image=, :published=, to: :english_content, prefix: 'en'
+  delegate :title,  :content,  :image,  :published,  to: :english_content, prefix: 'en'
+
   attribute :ru_tags,    Array
   attribute :en_tags,    Array
     
-  attr_reader :article
+  attr_reader   :article
+  attr_accessor :ru_tags, :en_tags
 
-  validates :content_ru, presence: true, if: Proc.new {|a| a.title_ru.present?}
-  validates :content_en, presence: true, if: Proc.new {|a| a.title_en.present?}
+  validates :ru_content, presence: true, if: Proc.new {|af| af.ru_title.present?}
+  validates :en_content, presence: true, if: Proc.new {|af| af.en_title.present?}
 
-  validate :should_have_title_least_one_languate
+  validate :should_have_title_least_one_language
 
   def self.human_attribute_name(attr, options = {}) #для отображения сообщений валидации
     name   = I18n.t('form_objects.article')[attr]
@@ -26,11 +27,19 @@ class VAlexL::MyBlog::FormObjects::Article
 
   def initialize(article, attributes={})
     @article = article
+
     if attributes.blank?
-      attributes      = @article.attributes
+      attributes      = @article.attributes.except('id', 'created_at', 'updated_at')
       attributes.merge! ru_tags: @article.tags.ru.map(&:id)
       attributes.merge! en_tags: @article.tags.ru.map(&:id)
     end
+    @ru_tags = attributes.delete(:ru_tags)
+    @en_tags = attributes.delete(:en_tags)
+
+    attributes.each do |method, value|
+      self.send("#{method}=", value) rescue puts method
+    end
+
     super(attributes)
   end
 
@@ -39,21 +48,15 @@ class VAlexL::MyBlog::FormObjects::Article
   end
 
   def save
-    @article.title_ru   = title_ru
-    @article.content_ru = content_ru
-    @article.image_ru   = image_ru
-    @article.title_en   = title_en
-    @article.content_en = content_en
-    @article.image_en   = image_en
     return false unless valid?
     @article.save! and @article.tag_ids = get_tag_ids
     true
   end
 
   private
-    def should_have_title_least_one_languate
-      return if title_ru.present? || title_en.present?
-      errors.add(:article, :should_have_title_least_one_languate)
+    def should_have_title_least_one_language
+      return if ru_title.present? || en_title.present?
+      errors.add(:article, :should_have_title_least_one_language)
     end
 
     def get_tag_ids

@@ -32,4 +32,20 @@ RSpec.describe ArticleContent, type: :model do
 
   end
 
+  describe 'has method' do
+    it 'russian? return true if lang=:ru' do
+      @article_content.lang = nil
+      expect(@article_content.russian?).to eq(false)
+      @article_content.lang = :ru
+      expect(@article_content.russian?).to eq(true)
+    end
+
+    it 'english? return true if lang=:en' do
+      @article_content.lang = nil
+      expect(@article_content.english?).to eq(false)
+      @article_content.lang = :en
+      expect(@article_content.english?).to eq(true)
+    end
+  end
+
 end

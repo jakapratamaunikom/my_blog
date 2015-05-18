@@ -118,5 +118,36 @@ RSpec.describe Article, type: :model do
        expect(@article.image_en.present?).to eq(true)
        expect(@article.fully_filled_en?).to eq(true)
     end
+
+    it 'russian_content wich build new article_content' do
+      @article.article_contents.destroy_all
+      expect(@article.russian_content.class).to eq(ArticleContent)
+      expect(@article.russian_content.lang).to eq('ru')
+    end
+
+    it 'russian_content wich given exist article_content' do
+      @article.save!
+      ru_article_content = FactoryGirl.create(:article_content, lang: :ru, article: @article)
+      en_article_content = FactoryGirl.create(:article_content, lang: :en, article: @article)
+      @article.reload
+      expect(@article.article_contents.count).to eq(2)
+      expect(@article.russian_content).to eq(ru_article_content)
+    end
+
+    it 'english_content wich build new article_content' do
+      @article.article_contents.destroy_all
+      expect(@article.english_content.class).to eq(ArticleContent)
+      expect(@article.english_content.lang).to eq('en')
+    end
+
+    it 'russian_content wich given exist article_content' do
+      @article.save!
+      ru_article_content = FactoryGirl.create(:article_content, lang: :ru, article: @article)
+      en_article_content = FactoryGirl.create(:article_content, lang: :en, article: @article)
+      @article.reload
+      expect(@article.article_contents.count).to eq(2)
+      expect(@article.english_content).to eq(en_article_content)
+    end
+
   end
 end

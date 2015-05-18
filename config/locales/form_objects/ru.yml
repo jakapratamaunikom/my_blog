@@ -2,10 +2,10 @@ ru:
   form_objects:
     article:
       article:    'Статья'
-      title_ru:   'Заголовок (ru)'
-      content_ru: 'Описание (ru)'
-      title_en:   'Заголовок (en)'
-      content_en: 'Описание (en)'
+      ru_title:   'Заголовок (ru)'
+      ru_content: 'Описание (ru)'
+      en_title:   'Заголовок (en)'
+      en_content: 'Описание (en)'
 
   activemodel:
     errors:
@@ -13,4 +13,4 @@ ru:
         v_alex_l/my_blog/form_objects/article:
           attributes:
             article:
-              should_have_title_least_one_languate: 'должна содержать заголовок хотя бы на одном языке'
+              should_have_title_least_one_language: 'должна содержать заголовок хотя бы на одном языке'

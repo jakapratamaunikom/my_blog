@@ -10,8 +10,18 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
   end
   
   before(:each) do
-    @params = FactoryGirl.build(:article).attributes
-    @params.except!('id', 'created_at', 'updated_at')
+    @ru_content = FactoryGirl.build(:article_content)
+    @en_content = FactoryGirl.build(:article_content)
+    @params = {
+      :ru_title     => @ru_content.title,
+      :ru_content   => @ru_content.content,
+      :ru_image     => @ru_content.image,
+      :ru_published => @ru_content.published,
+      :en_title     => @en_content.title,
+      :en_content   => @en_content.content,
+      :en_image     => @en_content.image,
+      :en_published => @en_content.published,
+    }
     @params.merge!('ru_tags' => [@ru_tag1.id, @ru_tag2.id])
     @params.merge!('en_tags' => [@en_tag1.id, @en_tag2.id])
     @invalid_params = @params.clone
@@ -32,23 +42,28 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
         @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @params
       end  
 
-      it 'has title_ru and content_ru and but title_en, content_en and is blank' do
-        @invalid_params[:title_en]   = nil
-        @invalid_params[:content_en] = nil
+      it 'has ru_title and ru_content but en_title, en_content are blank' do
+        @invalid_params[:en_title]   = nil
+        @invalid_params[:en_content] = nil
         @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
+
+        expect(@invalid_params[:ru_title].present?).to eq(true)
+        expect(@invalid_params[:en_title].present?).to eq(false)
+        expect(@article_form.en_title.present?).to eq(false)
+        expect(@article_form.ru_title.present?).to eq(true)
       end
 
-      it 'has title_en and content_en and but title_ru, content_ru and is blank' do
-        @invalid_params[:title_ru]   = nil
-        @invalid_params[:content_ru] = nil
+      it 'has en_title and en_content and but ru_title, ru_content are blank' do
+        @invalid_params[:ru_title]   = nil
+        @invalid_params[:ru_content] = nil
         @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
       end
 
     end
     
-    it 'will return false and errors.full_messages will have information about blank title if title_en and title_ru are blank' do
-      @invalid_params[:title_en] = nil
-      @invalid_params[:title_ru] = nil
+    it 'will return false and errors.full_messages will have information about blank title if en_title and ru_title are blank' do
+      @invalid_params[:en_title] = nil
+      @invalid_params[:ru_title] = nil
       @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
       expect(@article_form.valid?).to eq(false)
       expect(@article_form.errors.full_messages.length).to eq(1)
@@ -56,11 +71,11 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
     end
 
 
-    it 'will return false and errors.full_messages will have information about blank content if title_ru present but content_ru, title_en and content_en blank' do
-      @invalid_params[:title_ru]   = 'Title'
-      @invalid_params[:content_ru] = ''
-      @invalid_params[:title_en]   = ''
-      @invalid_params[:content_en] = ''
+    it 'will return false and errors.full_messages will have information about blank content if ru_title present but ru_content, en_title and en_content blank' do
+      @invalid_params[:ru_title]   = 'Title'
+      @invalid_params[:ru_content] = ''
+      @invalid_params[:en_title]   = ''
+      @invalid_params[:en_content] = ''
       @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
 
       expect(@article_form.valid?).to eq(false)
@@ -68,11 +83,11 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
       expect(@article_form.errors.full_messages.first.strip).to eq('Описание (ru) не может быть пустым')
     end
 
-    it 'will return false and errors.full_messages will have information about blank content if title_en present but content_en, title_ru and content_ru blank' do
-      @invalid_params[:title_en]   = 'Title'
-      @invalid_params[:content_en] = ''
-      @invalid_params[:title_ru]   = ''
-      @invalid_params[:content_ru] = ''
+    it 'will return false and errors.full_messages will have information about blank content if en_title present but en_content, ru_title and ru_content blank' do
+      @invalid_params[:en_title]   = 'Title'
+      @invalid_params[:en_content] = ''
+      @invalid_params[:ru_title]   = ''
+      @invalid_params[:ru_content] = ''
       @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
 
       expect(@article_form.valid?).to eq(false)
@@ -95,24 +110,30 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
               }.to change(Article, :count).by(1)
         end
 
+        it 'create new two ArticleConten records' do
+          expect {
+              @article_form.save
+              }.to change(ArticleContent, :count).by(2)
+        end
+
         it 'save all attributes' do
           @article_form.save
           @article.reload
-          expect(@article.title_ru).to eq(@params['title_ru'])
-          expect(@article.title_en).to eq(@params['title_en'])
-          expect(@article.content_ru).to eq(@params['content_ru'])
-          expect(@article.content_en).to eq(@params['content_en'])
-          expect(@article.ru_tag_ids).to eq([@ru_tag1.id, @ru_tag2.id])
-          expect(@article.en_tag_ids).to eq([@en_tag1.id, @en_tag2.id])
+          expect(@article.russian_content.title).to eq(@params[:ru_title])
+          expect(@article.english_content.title).to eq(@params[:en_title])
+          expect(@article.russian_content.content).to eq(@params[:ru_content])
+          expect(@article.english_content.content).to eq(@params[:en_content])
+          expect(@article.russian_content.tag_ids).to eq([@ru_tag1.id, @ru_tag2.id])
+          expect(@article.english_content.tag_ids).to eq([@en_tag1.id, @en_tag2.id])
         end
       end
 
       describe "with invalid params" do
         before(:each) do
-          @invalid_params[:title_ru]   = ''
-          @invalid_params[:content_ru] = ''
-          @invalid_params[:title_en]   = ''
-          @invalid_params[:content_en] = ''
+          @invalid_params[:ru_title]   = ''
+          @invalid_params[:ru_content] = ''
+          @invalid_params[:en_title]   = ''
+          @invalid_params[:en_content] = ''
           @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
         end
 
@@ -127,10 +148,10 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
         end
 
         it 'return arcticle with new attributes' do
-          @invalid_params[:title_ru] = 'Invalid params'
+          @invalid_params[:ru_title] = 'Invalid params'
           @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
           expect(@article_form.save).to eq(false)
-          expect(@article_form.article.title_ru).to eq(@invalid_params[:title_ru])
+          expect(@article_form.ru_title).to eq(@invalid_params[:ru_title])
         end
       end
     end
@@ -152,16 +173,66 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
     end
 
     it 'is_tag_selected? will return false if tag excludes in ru_tags or en_tags' do
-      another_ru_tag = FactoryGirl.create(:tag, lang: :ru)
-      another_en_tag = FactoryGirl.create(:tag, lang: :en)
-      expect(@article_form.is_tag_selected?(another_ru_tag)).to eq(false)
-      expect(@article_form.is_tag_selected?(another_en_tag)).to eq(false)
+      en_another_tag = FactoryGirl.create(:tag, lang: :ru)
+      en_another_tag = FactoryGirl.create(:tag, lang: :en)
+      expect(@article_form.is_tag_selected?(en_another_tag)).to eq(false)
+      expect(@article_form.is_tag_selected?(en_another_tag)).to eq(false)
     end
 
     it 'get_tag_ids which return ids all tags' do
       expect(@article_form.send(:get_tag_ids)).to eq([@ru_tag1.id, @ru_tag2.id, @en_tag1.id, @en_tag2.id])
     end
+
+    it 'ru_title= wich save title for article_content with russian language' do
+      @article_form.ru_title= 'Русский заголовок'
+      expect(@article_form.article.russian_content.title).to eq('Русский заголовок')
+    end
+
+    it 'en_title= wich save title for article_content with english language' do
+      @article_form.en_title = 'English title'
+      expect(@article_form.article.english_content.title).to eq('English title')
+    end
+
+    it 'ru_content= wich save image for article_content with russian language' do
+      @article_form.ru_content= 'Что-то умное на русском языке'
+      expect(@article_form.article.russian_content.content).to eq('Что-то умное на русском языке')
+    end
+
+    it 'en_content= wich save image for article_content with english language' do
+      @article_form.en_content = 'Что-то умное на русском языке'
+      expect(@article_form.article.english_content.content).to eq('Что-то умное на русском языке')
+    end
+
+    it 'ru_image= wich save image for article_content with russian language' do
+      File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
+        @article_form.ru_image= f
+      end
+      filename = File.basename(@article_form.article.english_content.image.file.file)
+      expect(filename).to eq("img.jpeg")
+    end
+    
+    it 'en_image= wich save image for article_content with english language' do
+      File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
+        @article_form.en_image = f
+      end
+      filename = File.basename(@article_form.article.english_content.image.file.file)
+      expect(filename).to eq("img.jpeg")
+    end
+
+    it 'ru_published= wich save published for article_content with russian language' do
+      @article_form.ru_published= true
+      expect(@article_form.article.russian_content.published).to eq(true)
+      @article_form.ru_published = false
+      expect(@article_form.article.russian_content.published).to eq(false)
+    end
+    
+    it 'en_published= wich save published for article_content with english language' do
+      @article_form.en_published = true
+      expect(@article_form.article.english_content.published).to eq(true)
+      @article_form.en_published = false
+      expect(@article_form.article.english_content.published).to eq(false)
+    end
+
   end
-  
 
 end

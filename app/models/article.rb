@@ -6,11 +6,14 @@ class Article < ActiveRecord::Base
   mount_uploader :image_en, AvatarUploader
 
   has_many :comments
+  has_many :article_contents
+
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :ru_tags, -> { ru }, class_name: 'Tag'
   has_and_belongs_to_many :en_tags, -> { en }, class_name: 'Tag'
 
   accepts_nested_attributes_for :tags
+  accepts_nested_attributes_for :article_contents
 
   LANGUAGES.each do |lang|
     define_method "fully_filled_#{lang}?" do
@@ -42,7 +45,7 @@ class Article < ActiveRecord::Base
     send("published_#{lang}=", false)
     save!
   end
-    
+  
   def title(lang)
     check_given_lang!(lang)
     send("title_#{lang}")
@@ -61,6 +64,16 @@ class Article < ActiveRecord::Base
   def get_tags(lang)
     check_given_lang!(lang)
     send("#{lang}_tags")
+  end
+
+  def russian_content
+    @russian_content   = article_contents.find {|article_content| article_content.russian?} 
+    @russian_content ||= article_contents.build(lang: :ru, article: self)
+  end
+
+  def english_content
+    @english_content   = article_contents.find {|article_content| article_content.english?} 
+    @english_content ||= article_contents.build(lang: :en, article: self)
   end
 
   def count_comments
