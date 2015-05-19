@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :tag do
-    title "MyString"
-    lang  :ru
+    title Forgery('name').company_name
     after(:build) do |tag|
     end
 

@@ -17,14 +17,6 @@ RSpec.describe Tag, type: :model do
     it 'has blank title' do
       @tag.title = nil
     end
-
-    it 'has blank lang' do
-      @tag.lang  = nil
-    end
-
-    it 'has incorrect_lang' do
-      @tag.lang = 'incorrect_lang'
-    end
   end
 
   it 'has method to_s wich return title' do

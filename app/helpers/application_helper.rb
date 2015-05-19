@@ -1,10 +1,5 @@
 module ApplicationHelper
 
-  def available_languages
-    Article::LANGUAGES
-  end
-
-
   def get_page_title
     if current_controller?('admin/main')
       'Админка'

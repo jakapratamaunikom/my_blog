@@ -9,7 +9,6 @@ br
         tr
           th style='width: 60px;' № 
           th = I18n.t('activerecord.attributes.tag.title')
-          th = I18n.t('activerecord.attributes.tag.lang')
           th = I18n.t('activerecord.attributes.tag.count_articles')
           th style='width: 95px;'
             'Действия
@@ -20,8 +19,6 @@ br
               = index + 1
             td
               = link_to tag, [:admin, tag]
-            td
-              = tag.lang
             td 
               = tag.articles.count
             td

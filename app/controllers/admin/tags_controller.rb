@@ -53,6 +53,6 @@ class Admin::TagsController < Admin::BaseController
 
   private
     def get_tag_params
-      params.require(:tag).permit(:title, :lang, :article_id)
+      params.require(:tag).permit(:title, :article_id)
     end
 end

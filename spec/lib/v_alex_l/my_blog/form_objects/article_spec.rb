@@ -3,10 +3,10 @@ require 'rails_helper'
 
 RSpec.describe VAlexL::MyBlog::FormObjects::Article do
   before(:all) do
-    @ru_tag1 = FactoryGirl.create(:tag, lang: :ru)
-    @ru_tag2 = FactoryGirl.create(:tag, lang: :ru)
-    @en_tag1 = FactoryGirl.create(:tag, lang: :en)
-    @en_tag2 = FactoryGirl.create(:tag, lang: :en)
+    @ru_tag1 = FactoryGirl.create(:tag)
+    @ru_tag2 = FactoryGirl.create(:tag)
+    @en_tag1 = FactoryGirl.create(:tag)
+    @en_tag2 = FactoryGirl.create(:tag)
   end
   
   before(:each) do
@@ -173,8 +173,8 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
     end
 
     it 'is_tag_selected? will return false if tag excludes in ru_tags or en_tags' do
-      en_another_tag = FactoryGirl.create(:tag, lang: :ru)
-      en_another_tag = FactoryGirl.create(:tag, lang: :en)
+      en_another_tag = FactoryGirl.create(:tag)
+      en_another_tag = FactoryGirl.create(:tag)
       expect(@article_form.is_tag_selected?(en_another_tag)).to eq(false)
       expect(@article_form.is_tag_selected?(en_another_tag)).to eq(false)
     end

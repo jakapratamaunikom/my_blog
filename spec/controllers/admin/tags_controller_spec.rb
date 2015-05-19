@@ -8,7 +8,7 @@ RSpec.describe Admin::TagsController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    {'title' => nil, 'lang' => nil}
+    {'title' => nil}
   }
 
   let(:valid_session) { {} }

@@ -80,8 +80,8 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       end
 
       it 'create link on tag' do
-        ru_tag = FactoryGirl.create(:tag, lang: :ru)
-        en_tag = FactoryGirl.create(:tag, lang: :en)
+        ru_tag = FactoryGirl.create(:tag)
+        en_tag = FactoryGirl.create(:tag)
         attributes = valid_attributes.merge ru_tags: [ru_tag.id], en_tags: [en_tag.id]
         post :create, {:article => attributes}, valid_session
         article = assigns(:article)
