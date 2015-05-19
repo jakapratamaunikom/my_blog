@@ -37,20 +37,4 @@ aside.col-md-4.blog-aside
         = I18n.t("views.articles.tags")
 
     .body.clearfix
-      ul.tags
-        li
-          a href="index.html#"  OpenPGP
-        li
-          a href="index.html#"  Django
-        li
-          a href="index.html#"  Bitcoin
-        li
-          a href="index.html#"  Security
-        li
-          a href="index.html#"  GNU/Linux
-        li
-          a href="index.html#"  Git
-        li
-          a href="index.html#"  Homebrew
-        li
-          a href="index.html#"  Debian
+      = display_tags_cloud_for(current_lang)
