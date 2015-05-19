@@ -38,6 +38,24 @@ RSpec.describe ArticleContent, type: :model do
       @article_content.lang = :en
       expect(@article_content.english?).to eq(true)
     end
+
+    it 'fully_filled? wich will return true only if has title content and image_ru' do
+       @article_content.title   = nil
+       @article_content.content = nil
+       allow(@article_content.image).to receive(:file).and_return(nil)
+
+       expect(@article_content.fully_filled?).to eq(false)
+       @article_content.title  = 'Заголовок'
+       expect(@article_content.fully_filled?).to eq(false)
+       @article_content.content  = 'Описание'
+       expect(@article_content.fully_filled?).to eq(false)
+       File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
+          allow(@article_content.image).to receive(:file).and_return(f)
+        end
+       expect(@article_content.image.present?).to eq(true)
+       expect(@article_content.fully_filled?).to eq(true)
+    end
+
   end
 
 end

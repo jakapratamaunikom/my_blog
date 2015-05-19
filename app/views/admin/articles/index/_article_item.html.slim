@@ -1,30 +1,30 @@
 .thumbnail role="tabpanel"
-  = link_to admin_article_path(article, lang: language) do
-    img.article-img src="#{article.image(language).try(:thumb_242x200).to_s}"
+  = link_to admin_article_path(article_content.article, lang: article_content.lang) do
+    img.article-img src="#{article_content.image.try(:thumb_242x200).to_s}"
 
   .caption
-    - if article.send("fully_filled_#{language}?")
+    - if article_content.fully_filled?
       h3
-        = link_to article.title(language), admin_article_path(article)
+        = link_to article_content.title, admin_article_path(article_content.article)
       p
-        - if article.published?(language)
-          = link_to 'Снять с публикации?', toggle_published_status_admin_article_path(article), class: 'text-danger'
+        - if article_content.published?
+          = link_to 'Снять с публикации?', toggle_published_status_admin_article_path(article_content.article), class: 'text-danger'
         - else
-          = link_to 'Опубликовать?', toggle_published_status_admin_article_path(article), class: 'text-success'
+          = link_to 'Опубликовать?', toggle_published_status_admin_article_path(article_content.article), class: 'text-success'
     - else
       .alert.alert-warning role="alert"
         strong
           'Братиш, заполнить нужно!
-  = display_article_tags(article, language)
+  = display_article_content_tags(article_content)
 
   hr
 
   .text-center
     .btn.btn-group
-      = link_to edit_admin_article_path(article, lang: language), class: 'btn btn-primary', title: 'Изменить' do
+      = link_to edit_admin_article_path(article_content.article, lang: article_content.lang), class: 'btn btn-primary', title: 'Изменить' do
         i.fa.fa-pencil-square-o
-      = link_to admin_article_path(article, lang: language), class: 'btn btn-default', title: 'Просмотр' do
+      = link_to admin_article_path(article_content.article, lang: article_content.lang), class: 'btn btn-default', title: 'Просмотр' do
         i.fa.fa-search
 
-      = link_to preview_article_path(article, lang: language), class: 'btn btn-success', title: 'Демо' do
+      = link_to preview_article_path(article_content.article, lang: article_content.lang), class: 'btn btn-success', title: 'Демо' do
         i.fa.fa-child

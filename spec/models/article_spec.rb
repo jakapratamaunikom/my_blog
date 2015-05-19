@@ -72,59 +72,6 @@ RSpec.describe Article, type: :model do
       expect(@article.published?(:en)).to eq(false)
     end
 
-
-    it 'title which returns title in given languages' do
-      @article.russian_content.title = 'Заголовок'
-      @article.english_content.title = 'Title'
-      expect(@article.title(:ru)).to eq('Заголовок')
-      expect(@article.title('ru')).to eq('Заголовок')
-      expect(@article.title(:en)).to eq('Title')
-      expect(@article.title('en')).to eq('Title')
-    end
-
-    it 'content which returns content in given languages' do
-      @article.russian_content.content = 'Содержимое'
-      @article.english_content.content = 'Content'
-      expect(@article.content(:ru)).to eq('Содержимое')
-      expect(@article.content('ru')).to eq('Содержимое')
-      expect(@article.content(:en)).to eq('Content')
-      expect(@article.content('en')).to eq('Content')
-    end
-
-    it 'fully_filled_ru? wich russian_content.return true only if has title russian_content.content and image_ru' do
-       @article.russian_content.title  = nil
-       @article.russian_content.content = nil
-       @article.russian_content.image  = nil
-
-       expect(@article.fully_filled_ru?).to eq(false)
-       @article.russian_content.title  = 'Заголовок'
-       expect(@article.fully_filled_ru?).to eq(false)
-       @article.russian_content.content  = 'Описание'
-       expect(@article.fully_filled_ru?).to eq(false)
-       File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
-          @article.russian_content.image  = f
-        end
-       expect(@article.russian_content.image.present?).to eq(true)
-       expect(@article.fully_filled_ru?).to eq(true)
-    end
-
-    it 'fully_filled_en? wich return true only if has english_content.title english_content.content and english_content.image' do
-       @article.english_content.title  = nil
-       @article.english_content.content = nil
-       @article.english_content.image  = nil
-
-       expect(@article.fully_filled_en?).to eq(false)
-       @article.english_content.title  = 'Заголовок'
-       expect(@article.fully_filled_en?).to eq(false)
-       @article.english_content.content  = 'Описание'
-       expect(@article.fully_filled_en?).to eq(false)
-       File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
-          @article.english_content.image  = f
-        end
-       expect(@article.english_content.image.present?).to eq(true)
-       expect(@article.fully_filled_en?).to eq(true)
-    end
-
     it 'get_content wich return content for given lang' do
       expect(@article.get_content(:ru)).to eq(@article.russian_content)
       expect(@article.get_content(:en)).to eq(@article.english_content)

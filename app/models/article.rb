@@ -41,22 +41,7 @@ class Article < ActiveRecord::Base
     article_content.save!
   end
   
-  def title(lang)
-    get_content(lang).title
-  end
-
-  def content(lang)
-    get_content(lang).content
-  end
-
-  def image(lang)
-    get_content(lang).image
-  end
-
-  def get_tags(lang)
-    get_content(lang).tags
-  end
-
+  
   def get_content(lang)
     check_given_lang!(lang)
     return russian_content if lang.to_s == 'ru'

@@ -7,7 +7,7 @@ br
     .col-sm-6.col-md-3.article
         ul.nav.nav-tabs role="tablist"
           li.active role="presentation"
-            - unless article.fully_filled_ru?
+            - unless article.get_content('ru').fully_filled?
               - class_list = 'text-danger'
             - else
               - class_list = ''
@@ -15,7 +15,7 @@ br
             a href="##{article.id}_ru" aria-controls="ru" role="tab" data-toggle="tab" class="#{class_list}"
               'RU
           li role="presentation"
-            - unless article.fully_filled_en?
+            - unless article.get_content('en').fully_filled?
               - class_list = 'text-danger'
             - else
               - class_list = ''
@@ -23,7 +23,7 @@ br
               'EN
         .tab-content
           .tab-pane.active role="tabpanel" id="#{article.id}_ru"
-            = render 'admin/articles/index/article_item', article: article, language: 'ru'
+            = render 'admin/articles/index/article_item', article_content: article.get_content('ru')
 
           .tab-pane role="tabpanel" id="#{article.id}_en"
-            = render 'admin/articles/index/article_item', article: article, language: 'en'
+            = render 'admin/articles/index/article_item', article_content: article.get_content('en')

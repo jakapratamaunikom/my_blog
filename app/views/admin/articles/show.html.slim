@@ -12,7 +12,7 @@
     br
     - class_list[current_lang] += " in"
     #ru.tab-pane.fade aria-labelledby="ru-tab" role="tabpanel" class="#{class_list[:ru]}"
-      = render 'admin/articles/show/article', language: 'ru'
+      = render 'admin/articles/show/article', article_content: @article.get_content('ru')
     #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" class="#{class_list[:en]}"
-      = render 'admin/articles/show/article', language: 'en'
+      = render 'admin/articles/show/article', article_content: @article.get_content('en')
 

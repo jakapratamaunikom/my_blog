@@ -1,9 +1,9 @@
 article.blog-post
   header
     h1 
-      = @article.title(:ru)
+      = @article.get_content(:ru).title
     .lead-image
-      = image_tag @article.image(:ru).try(:thumb_740x280), class: 'img-responsive'
+      = image_tag @article.get_content(:ru).image.try(:thumb_740x280), class: 'img-responsive'
 
       .meta.clearfix
         .author
@@ -21,7 +21,7 @@ article.blog-post
           span.data data-type='article-comments'
             = I18n.t("views.articles.count_comments", quantity: @article.count_comments)
   .body
-    = @article.content(:ru).html_safe
+    = @article.get_content(:ru).content.html_safe
          
 
 aside class="social-icons clearfix"

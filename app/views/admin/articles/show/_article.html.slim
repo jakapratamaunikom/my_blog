@@ -1,31 +1,31 @@
 .jumbotron
   .row
     .col-sm-3
-      img.article-img.pull-left src="#{@article.image(language).try(:thumb_242x200).to_s}"
+      img.article-img.pull-left src="#{article_content.image.try(:thumb_242x200).to_s}"
     .col-sm-9
       h1.text-center
-        = @article.title(language)
+        = article_content.title
   .row
     .col-sm-12
       br
-      = display_article_tags(@article, language)
+      = display_article_content_tags(article_content)
   .row
     .btn-group.btn-group-lg.pull-right
-      = link_to preview_article_path(@article, lang: language), class: 'btn btn-success', title: 'Демо' do
+      = link_to preview_article_path(@article, lang: article_content.lang), class: 'btn btn-success', title: 'Демо' do
           = "Демо "
-      = link_to 'Изменить', edit_admin_article_path(@article, lang: language), class: 'btn btn-primary'
+      = link_to 'Изменить', edit_admin_article_path(@article, lang: article_content.lang), class: 'btn btn-primary'
 
     .col-sm-8
-      - if @article.published?(language)
+      - if article_content.published?
         .alert.alert-success
           strong
             'Статья опубликована и радует своих читателей.
-          = "Сделать статью еще лучше, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_article_path(@article, lang: language), class: 'text-danger'}".html_safe
+          = "Сделать статью еще лучше, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_article_path(@article, lang: article_content.lang), class: 'text-danger'}".html_safe
       - else
         .alert.alert-warning
           strong
             'Статья неопубликованна!
-          = "Сделать людей счастливыми и #{link_to 'опубликовать статью?', toggle_published_status_admin_article_path(@article, lang: language), class: 'text-success'}".html_safe
+          = "Сделать людей счастливыми и #{link_to 'опубликовать статью?', toggle_published_status_admin_article_path(@article, lang: article_content.lang), class: 'text-success'}".html_safe
 
   p
-    = @article.content(language).html_safe
+    = article_content.content.html_safe
