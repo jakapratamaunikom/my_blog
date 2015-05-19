@@ -26,51 +26,6 @@ RSpec.describe Article, type: :model do
       FactoryGirl.create(:comment, article: @article)
       expect(@article.count_comments).to eq(1)
     end
-    
-    it 'published? wiche return published status for given language' do
-      @article.russian_content.published = false
-      @article.english_content.published = false
-
-      expect(@article.published?(:ru)).to eq(false)
-      expect(@article.published?(:en)).to eq(false)
-     
-      @article.russian_content.published = true
-      @article.english_content.published = true
-      
-      expect(@article.published?('en')).to eq(true)
-      expect(@article.published?('ru')).to eq(true)
-    end
-
-    it 'toggle_published! change article as published for language to opposite of current' do
-      @article.russian_content.published = false
-      @article.english_content.published = true
-
-      @article.toggle_published!(:ru)
-      @article.toggle_published!('en')
-      expect(@article.published?(:ru)).to eq(true)
-      expect(@article.published?(:en)).to eq(false)
-    end
-
-
-    it 'set_published! mark article as published for language' do
-      @article.russian_content.published = false
-      @article.english_content.published = false
-
-      @article.set_published!(:ru)
-      @article.set_published!('en')
-      expect(@article.published?(:ru)).to eq(true)
-      expect(@article.published?(:en)).to eq(true)
-    end
-
-    it 'set_unpublished! mark article as unpublished for language' do
-      @article.russian_content.published = true
-      @article.english_content.published = true
-
-      @article.set_unpublished!(:ru)
-      @article.set_unpublished!('en')
-      expect(@article.published?(:ru)).to eq(false)
-      expect(@article.published?(:en)).to eq(false)
-    end
 
     it 'get_content wich return content for given lang' do
       expect(@article.get_content(:ru)).to eq(@article.russian_content)

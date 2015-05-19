@@ -56,6 +56,34 @@ RSpec.describe ArticleContent, type: :model do
        expect(@article_content.fully_filled?).to eq(true)
     end
 
+    it 'toggle_published! change article_content as published if it was unpublished' do
+      @article_content.published = false
+
+      @article_content.toggle_published!
+      expect(@article_content.published?).to eq(true)
+    end
+
+    it 'toggle_published! change article_content as unpublished if it was published' do
+      @article_content.published = true
+
+      @article_content.toggle_published!
+      expect(@article_content.published?).to eq(false)
+    end
+
+    it 'set_published! mark article_content as published' do
+      @article_content.published = false
+
+      @article_content.set_published!
+      expect(@article_content.published?).to eq(true)
+    end
+
+    it 'set_unpublished! mark article_content as unpublished' do
+      @article_content.published = true
+
+      @article_content.set_unpublished!
+      expect(@article_content.published?).to eq(false)
+    end
+
   end
 
 end

@@ -11,36 +11,6 @@ class Article < ActiveRecord::Base
 
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :article_contents
-
-  LANGUAGES.each do |lang|
-    define_method "fully_filled_#{lang}?" do
-      title(lang).present? && content(lang).present? && image(lang).present?
-    end
-  end
-
-  def published?(lang)
-    get_content(lang).published?
-  end
-
-  def set_published!(lang)
-    article_content = get_content(lang)
-    article_content.published = true and article_content.save!
-  end
-
-  def toggle_published!(lang)
-    if published?(lang)
-      set_unpublished!(lang)
-    else
-      set_published!(lang)
-    end
-  end
-
-  def set_unpublished!(lang)
-    article_content = get_content(lang)
-    article_content.published = false 
-    article_content.save!
-  end
-  
   
   def get_content(lang)
     check_given_lang!(lang)

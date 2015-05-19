@@ -19,4 +19,20 @@ class ArticleContent < ActiveRecord::Base
     lang.to_s == 'en'
   end
 
+  def toggle_published!
+    if published?
+      set_unpublished!
+    else
+      set_published!
+    end
+  end
+  
+  def set_unpublished!
+    self.published = false 
+    save!
+  end
+  
+  def set_published!
+    self.published = true and save!
+  end
 end

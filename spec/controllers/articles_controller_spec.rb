@@ -12,16 +12,16 @@ RSpec.describe ArticlesController, type: :controller do
   describe "GET #show" do
     it "returns http success for published_ru" do
       @article = FactoryGirl.create(:article)
-      @article.set_published!(:ru)
-      @article.set_unpublished!(:en)
+      @article.get_content(:ru).set_published!
+      @article.get_content(:en).set_unpublished!
       get :show, id: @article.id
       expect(response).to have_http_status(:success)
     end
 
     it "returns http success for published_en" do
       @article = FactoryGirl.create(:article)
-      @article.set_published!(:en)
-      @article.set_unpublished!(:ru)
+      @article.get_content(:en).set_published!
+      @article.get_content(:ru).set_unpublished!
 
       get :show, id: @article.id
       expect(response).to have_http_status(:success)
@@ -29,8 +29,8 @@ RSpec.describe ArticlesController, type: :controller do
 
     it "returns not found for unplished article" do
       @article = FactoryGirl.create(:article)
-      @article.set_unpublished!(:ru)
-      @article.set_unpublished!(:en)
+      @article.get_content(:ru).set_unpublished!
+      @article.get_content(:en).set_unpublished!
       expect do
         get :show, id: @article.id
       end.to raise_error ActiveRecord::RecordNotFound
@@ -41,24 +41,24 @@ RSpec.describe ArticlesController, type: :controller do
   describe "GET #preview" do
     it "returns http success for published_ru" do
       @article = FactoryGirl.create(:article)
-      @article.set_published!(:ru)
-      @article.set_unpublished!(:en)
+      @article.get_content(:ru).set_published!
+      @article.get_content(:en).set_unpublished!
       get :preview, id: @article.id
       expect(response).to have_http_status(:success)
     end
 
     it "returns http success for published_en" do
       @article = FactoryGirl.create(:article)
-      @article.set_published!(:en)
-      @article.set_unpublished!(:ru)
+      @article.get_content(:en).set_published!
+      @article.get_content(:ru).set_unpublished!
       get :preview, id: @article.id
       expect(response).to have_http_status(:success)
 
     end
     it "returns http success for unplished" do
       @article = FactoryGirl.create(:article)
-      @article.set_unpublished!(:ru)
-      @article.set_unpublished!(:en)
+      @article.get_content(:ru).set_unpublished!
+      @article.get_content(:en).set_unpublished!
       get :preview, id: @article.id
       expect(response).to have_http_status(:success)
     end

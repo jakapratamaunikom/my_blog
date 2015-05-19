@@ -61,10 +61,10 @@ class Admin::ArticlesController < Admin::BaseController
 
   def toggle_published_status
     @article = Article.find(params[:id])
-    @article.toggle_published! current_lang
+    @article.get_content(current_lang).toggle_published!
 
     respond_to do |format|
-      notice =  if @article.published?(current_lang)
+      notice =  if @article.get_content(current_lang).published?
                   'Супер статейка наконец-таки попала в свет!'
                 else
                   'Ну вот.. А люди только начали ее читать...'
