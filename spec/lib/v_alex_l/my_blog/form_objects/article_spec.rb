@@ -167,16 +167,18 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
       expect(@article_form.en_tags).to eq(@params['en_tags'])
     end
 
-    it 'is_tag_selected? will return true if tag includes in ru_tags or en_tags' do
-      expect(@article_form.is_tag_selected?(@ru_tag1)).to eq(true)
-      expect(@article_form.is_tag_selected?(@en_tag1)).to eq(true)
+    it 'is_tag_selected? will return true if tag exclude in en_tags but includes in ru_tags and given ru lang' do
+      expect(@article_form.is_tag_selected?(@ru_tag1, :ru)).to eq(true)
+    end
+
+    it 'is_tag_selected? will return true if tag includes in en_tags but exclude in ru_tags and given ru lang' do
+      expect(@article_form.is_tag_selected?(@en_tag1, :ru)).to eq(false)
     end
 
     it 'is_tag_selected? will return false if tag excludes in ru_tags or en_tags' do
-      en_another_tag = FactoryGirl.create(:tag)
-      en_another_tag = FactoryGirl.create(:tag)
-      expect(@article_form.is_tag_selected?(en_another_tag)).to eq(false)
-      expect(@article_form.is_tag_selected?(en_another_tag)).to eq(false)
+      ru_another_tag = FactoryGirl.create(:tag)
+      expect(@article_form.is_tag_selected?(ru_another_tag, :ru)).to eq(false)
+      expect(@article_form.is_tag_selected?(ru_another_tag, :en)).to eq(false)
     end
 
     it 'get_tag_ids which return ids all tags' do

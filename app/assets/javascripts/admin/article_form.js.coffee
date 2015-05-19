@@ -29,7 +29,7 @@ class ArticleForm
   setupSelectize: ->
     createTag = @createTag
     for select in @el.find("select[data-type=tags]")
-      do (select) ->
+      do (select) =>
         $(select).selectize
                             render: 
                               option_create: (data, escape) ->
@@ -43,11 +43,13 @@ class ArticleForm
     $.ajax
       type: 'post'
       url:  '/admin/tags'
-      data: tag: {lang: lang, title: title}
+      data: tag: {title: title}
       dataType: 'json'
       success: (data) =>
-        select = @el.find("select[data-lang=#{data.lang}]")[0]
-        select.selectize.addOption value: data.id, text: data.title
+        for select in @el.find("select[data-type=tags]")
+          do (select) ->
+            select.selectize.addOption value: data.id, text: data.title
+        select = @el.find("select[data-lang=#{lang}]")[0]
         values = select.selectize.getValue()
         values.push(data.id)
         select.selectize.setValue(values)

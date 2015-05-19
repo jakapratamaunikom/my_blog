@@ -1,6 +1,6 @@
 .article role="tabpanel" 
   - class_list = {:ru => '', :en => ''}
-  - class_list[lang] = 'active'
+  - class_list[current_lang] = 'active'
   ul#myTab.nav.nav-tabs role="tablist" 
     li role="presentation" class="#{class_list[:ru]}"
       a#ru-tab aria-controls="ru" aria-expanded="true" data-toggle="tab" href="#ru" role="tab"
@@ -10,7 +10,7 @@
         | EN
   #myTabContent.tab-content
     br
-    - class_list[lang] += " in"
+    - class_list[current_lang] += " in"
     #ru.tab-pane.fade aria-labelledby="ru-tab" role="tabpanel" class="#{class_list[:ru]}"
       = render 'admin/articles/show/article', language: 'ru'
     #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" class="#{class_list[:en]}"

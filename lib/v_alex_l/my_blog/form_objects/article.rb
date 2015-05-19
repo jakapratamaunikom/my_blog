@@ -45,8 +45,8 @@ class VAlexL::MyBlog::FormObjects::Article
     super(attributes)
   end
 
-  def is_tag_selected?(tag)
-    get_tag_ids.any? {|id| id.to_i == tag.id}
+  def is_tag_selected?(tag, lang)
+    eval("@#{lang}_tags").any? {|id| id.to_i == tag.id}
   end
 
   def save

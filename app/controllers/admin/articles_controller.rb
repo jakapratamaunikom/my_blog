@@ -7,7 +7,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   def show
     @article = Article.find(params[:id])
-    add_tasty_breadcrumb @article.title(lang), admin_article_path(1)
+    add_tasty_breadcrumb @article.title(current_lang), admin_article_path(1)
   end
 
   def new
@@ -37,7 +37,7 @@ class Admin::ArticlesController < Admin::BaseController
     @article = Article.find(params[:id])
     @article_form = VAlexL::MyBlog::FormObjects::Article.new @article
     
-    add_tasty_breadcrumb @article.title(lang), admin_article_path(1)
+    add_tasty_breadcrumb @article.title(current_lang), admin_article_path(1)
     add_tasty_breadcrumb 'Редактирование', edit_admin_article_path(1)
   end
 
@@ -47,10 +47,10 @@ class Admin::ArticlesController < Admin::BaseController
 
     respond_to do |format|
       if @article_form.save
-        format.html { redirect_to admin_article_path(@article_form.article, lang: lang), notice: 'Статья улучшена! Теперь она стала еще круче!!' }
+        format.html { redirect_to admin_article_path(@article_form.article, lang: current_lang), notice: 'Статья улучшена! Теперь она стала еще круче!!' }
         format.json { render :show, status: :ok, location: @article_form.article }
       else
-        add_tasty_breadcrumb @article_form.article.title(lang), admin_article_path(1)
+        add_tasty_breadcrumb @article_form.article.title(current_lang), admin_article_path(1)
         add_tasty_breadcrumb 'Редактирование', edit_admin_article_path(@article)
 
         format.html { render :edit }
@@ -61,10 +61,10 @@ class Admin::ArticlesController < Admin::BaseController
 
   def toggle_published_status
     @article = Article.find(params[:id])
-    @article.toggle_published! lang
+    @article.toggle_published! current_lang
 
     respond_to do |format|
-      notice =  if @article.published?(lang)
+      notice =  if @article.published?(current_lang)
                   'Супер статейка наконец-таки попала в свет!'
                 else
                   'Ну вот.. А люди только начали ее читать...'
@@ -96,7 +96,7 @@ class Admin::ArticlesController < Admin::BaseController
 
     def to_back_url
       uri = URI.parse(request.referer) 
-      uri.query = "lang=#{lang}"
+      uri.query = "lang=#{current_lang}"
       uri.to_s
     end
 end

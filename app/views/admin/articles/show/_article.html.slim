@@ -10,8 +10,11 @@
       br
       = display_article_tags(@article, language)
   .row
-    br
-    = link_to 'Изменить', edit_admin_article_path(@article, lang: language), class: 'btn btn-primary btn-lg pull-right'
+    .btn-group.btn-group-lg.pull-right
+      = link_to preview_article_path(@article, lang: language), class: 'btn btn-success', title: 'Демо' do
+          = "Демо "
+      = link_to 'Изменить', edit_admin_article_path(@article, lang: language), class: 'btn btn-primary'
+
     .col-sm-8
       - if @article.published?(language)
         .alert.alert-success
