@@ -4,7 +4,7 @@ ru:
       blog:      'Блог'
       about_me:  'О себе'
       search:    'Поиск'
-      portfolio: 'Портфолио'
+      my_works:  'Портфолио'
 
     footer:
       statistic: 'Статистика'

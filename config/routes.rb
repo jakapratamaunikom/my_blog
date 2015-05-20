@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  root 'articles#index'
   
+  root 'articles#index'
+  get "/about_me" => "pages#about_me", as: 'about_me'
+  
+  resources :comments, only: [:create]
   resources :articles, only: [:show, :index] do
     get :preview, on: :member  
   end
-  get "/about_me" => "pages#about_me", as: 'about_me'
 
-  resources :comments, only: [:create]
+  resources :my_works, only: [:show, :index] do
+    get :preview, on: :member  
+  end
+  
 
   namespace :admin do
     get '/' => "main#index", as: 'root'
