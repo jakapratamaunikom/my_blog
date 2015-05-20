@@ -1,7 +1,8 @@
 class ArticlesController < BaseController
 
   def index
-    @articles = Article.published
+    @filter   = VAlexL::MyBlog::Filters::Article.new  session[:tag_ids]
+    @articles = @filter.get_records
   end
 
   def show

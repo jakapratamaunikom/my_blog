@@ -5,7 +5,7 @@ class VAlexL::MyBlog::Filters::Article
   end
 
   def get_records
-    @get_records = Article.published
+    @get_records = ::Article.published
     @get_records.joins(:tags).where(tags: {id: @tag_ids}).uniq
   end
 end

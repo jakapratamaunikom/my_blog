@@ -3,6 +3,7 @@ require 'rails_helper'
 
 RSpec.describe VAlexL::MyBlog::Filters::Article do
   before(:each) do
+
     @tag1 = FactoryGirl.create(:tag)
     @tag2 = FactoryGirl.create(:tag)
     @tag3 = FactoryGirl.create(:tag)
@@ -38,6 +39,16 @@ RSpec.describe VAlexL::MyBlog::Filters::Article do
   end
 
   describe 'has method get_records' do
+    it 'return all Articles if give blank array' do
+      @filter = VAlexL::MyBlog::Filters::Article.new []
+      @filter.get_records.count).to eq(Tag.count)
+    end
+
+    it 'return all Articles if give nil' do
+      @filter = VAlexL::MyBlog::Filters::Article.new nil
+      @filter.get_records.count).to eq(Tag.count)
+    end
+      
     it 'return instance of Article::ActiveRecord_Relation ' do
       @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id]
       expect(@filter.get_records.class).to eq(Article::ActiveRecord_Relation)
