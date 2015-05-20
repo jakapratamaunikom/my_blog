@@ -1,6 +1,6 @@
 class TagsController < BaseController
 
-  def tagging
+  def mark
     session[:tag_ids] = [] if session[:tag_ids].nil?
     tag_id            = params[:id].to_i
     

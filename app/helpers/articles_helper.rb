@@ -18,4 +18,18 @@ module ArticlesHelper
     end
   end
 
+  def display_tags_cloud_for(lang)
+
+    content_tag :ul, class: 'tags' do
+      Tag.send(lang).inject("".html_safe) do |cloud, tag|
+        cloud += content_tag :li do
+          class_list = ''
+          class_list += 'active ' if session[:tag_ids].include?(tag.id) 
+          link_to tag.to_s, mark_tag_path(tag), method: :put, class: class_list
+        end
+      end
+    end
+  end
+
+
 end

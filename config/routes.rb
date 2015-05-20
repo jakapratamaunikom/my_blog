@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get :preview, on: :member  
   end
   resources :tags, only: [] do
-    put :tagging, on: :member
+    put :mark, on: :member
   end
 
   resources :my_works, only: [:show, :index] do
