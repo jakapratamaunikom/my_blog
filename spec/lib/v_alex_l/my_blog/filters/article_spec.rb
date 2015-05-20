@@ -41,12 +41,12 @@ RSpec.describe VAlexL::MyBlog::Filters::Article do
   describe 'has method get_records' do
     it 'return all Articles if give blank array' do
       @filter = VAlexL::MyBlog::Filters::Article.new []
-      @filter.get_records.count).to eq(Tag.count)
+      expect(@filter.get_records.count).to eq(Article.published.uniq.count)
     end
 
     it 'return all Articles if give nil' do
       @filter = VAlexL::MyBlog::Filters::Article.new nil
-      @filter.get_records.count).to eq(Tag.count)
+      expect(@filter.get_records.count).to eq(Article.published.uniq.count)
     end
       
     it 'return instance of Article::ActiveRecord_Relation ' do

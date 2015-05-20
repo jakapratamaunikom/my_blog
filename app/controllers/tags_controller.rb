@@ -1,5 +1,6 @@
 class TagsController < BaseController
-
+  skip_before_action :reset_tag_ids
+  
   def mark
     session[:tag_ids] = [] if session[:tag_ids].nil?
     tag_id            = params[:id].to_i
