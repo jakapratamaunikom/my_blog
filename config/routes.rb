@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   resources :articles, only: [:show, :index] do
     get :preview, on: :member  
   end
+  resources :tags, only: [] do
+    put :tagging, on: :member
+  end
 
   resources :my_works, only: [:show, :index] do
     get :preview, on: :member  

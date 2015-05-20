@@ -2,6 +2,14 @@ aside.col-md-4.blog-aside
   .aside-widget
     header
       h3 
+        = I18n.t("views.articles.tags")
+
+    .body.clearfix
+      = display_tags_cloud_for(current_lang)
+
+  .aside-widget
+    header
+      h3 
         = I18n.t("views.articles.read_next")
     .body
       ul.tales-list
@@ -15,6 +23,7 @@ aside.col-md-4.blog-aside
           a href="index.html#"  Why the Internet is Full of Cats
         li
           a href="index.html#"  Last Made-Up Headline, I Swear!
+          
   .aside-widget
     header
       h3 
@@ -31,10 +40,3 @@ aside.col-md-4.blog-aside
           a href="index.html#"  Why the Internet is Full of Cats
         li
           a href="index.html#"  Last Made-Up Headline, I Swear!
-  .aside-widget
-    header
-      h3 
-        = I18n.t("views.articles.tags")
-
-    .body.clearfix
-      = display_tags_cloud_for(current_lang)
