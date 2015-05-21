@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :article_content do
-    title   Forgery('lorem_ipsum').title 
-    content Forgery('lorem_ipsum').lorem_ipsum_characters 
+    title   { generate :random_title }
+    content { generate :random_content }
     lang :ru
 
     after(:build) do |article_content|

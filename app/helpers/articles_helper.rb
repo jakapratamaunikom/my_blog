@@ -22,7 +22,8 @@ module ArticlesHelper
   def get_tags_for_cloud(lang)
     return Tag.send(lang) if session[:tag_ids].blank?
 
-    suitable_article_contents = ArticleContent.published.send(lang).joins(:tags).where(tags: {id: session[:tag_ids]})
+    suitable_article_contents = ArticleContent.published.send(lang)
+    suitable_article_contents = suitable_article_contents.select {|ac| session[:tag_ids].all?{|t_id| ac.tag_ids.include?(t_id) }}
     tag_ids = suitable_article_contents.inject([]) {|res, ac| res += ac.tag_ids}
     Tag.where(id: tag_ids)
   end

@@ -62,5 +62,15 @@ RSpec.describe ArticlesHelper, :type => :helper do
       expect(helper.get_tags_for_cloud(:ru).to_a).to eq([@tag1, @tag2]) #without @tag3
     end
 
+     it 'will return tag1 and tag2 even if another article tagging tag1 and tag3' do
+      @article_with_tag_1_and_tag_3 = FactoryGirl.create(:article)
+      @article_with_tag_1_and_tag_3.russian_content.tag_ids = [@tag1.id, @tag3.id]
+      @article_with_tag_1_and_tag_3.russian_content.set_published!
+      session[:tag_ids] = [@tag1.id, @tag2.id]
+
+      expect(helper.get_tags_for_cloud(:ru).to_a).to eq([@tag1, @tag2]) #without @tag3
+    end
+
+
   end
 end
