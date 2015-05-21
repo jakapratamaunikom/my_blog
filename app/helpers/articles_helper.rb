@@ -18,10 +18,20 @@ module ArticlesHelper
     end
   end
 
+    
+  def get_tags_for_cloud(lang)
+    return Tag.send(lang) if session[:tag_ids].blank?
+
+    suitable_article_contents = ArticleContent.published.send(lang).joins(:tags).where(tags: {id: session[:tag_ids]})
+    tag_ids = suitable_article_contents.inject([]) {|res, ac| res += ac.tag_ids}
+    Tag.where(id: tag_ids)
+  end
+
   def display_tags_cloud_for(lang)
+    tags =  get_tags_for_cloud(lang)
 
     content_tag :ul, class: 'tags' do
-      Tag.send(lang).inject("".html_safe) do |cloud, tag|
+      tags.inject("".html_safe) do |cloud, tag|
         cloud += content_tag :li do
           class_list = ''
           class_list += 'active ' if session[:tag_ids].include?(tag.id) 
