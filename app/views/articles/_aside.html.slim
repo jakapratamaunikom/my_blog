@@ -5,7 +5,7 @@ aside.col-md-4.blog-aside
         = I18n.t("views.articles.tags")
 
     .body.clearfix
-      = display_tags_cloud_for(current_lang)
+      = display_tags_cloud_for params[:action], current_lang
 
   .aside-widget
     header

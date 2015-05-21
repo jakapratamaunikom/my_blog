@@ -28,8 +28,8 @@ module ArticlesHelper
     Tag.where(id: tag_ids)
   end
 
-  def display_tags_cloud_for(lang)
-    tags =  get_tags_for_cloud(lang)
+  def display_tags_cloud_for(action, lang)
+    tags = action.eql?('index') ? get_tags_for_cloud(lang) : Article.find(params[:id]).get_content(lang).tags
 
     content_tag :ul, class: 'tags' do
       tags.inject("".html_safe) do |cloud, tag|
@@ -41,6 +41,5 @@ module ArticlesHelper
       end
     end
   end
-
 
 end
