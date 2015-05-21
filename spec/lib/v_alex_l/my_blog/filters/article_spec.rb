@@ -38,29 +38,40 @@ RSpec.describe VAlexL::MyBlog::Filters::Article do
 
   end
 
-  describe 'has method get_records' do
-    it 'return all Articles if give blank array' do
+  describe 'has method get_records which' do
+    it 'will    return all Articles if give blank array' do
       @filter = VAlexL::MyBlog::Filters::Article.new []
       expect(@filter.get_records.count).to eq(Article.published.uniq.count)
     end
 
-    it 'return all Articles if give nil' do
+    it 'will return all Articles if give nil' do
       @filter = VAlexL::MyBlog::Filters::Article.new nil
       expect(@filter.get_records.count).to eq(Article.published.uniq.count)
     end
       
-    it 'return instance of Article::ActiveRecord_Relation ' do
+    it 'will return instance of Article::ActiveRecord_Relation ' do
       @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id]
       expect(@filter.get_records.class).to eq(Article::ActiveRecord_Relation)
     end
 
-    it 'return articles which market tag1 for filter by tag1' do
+    it 'will return articles which market tag1 for filter by tag1' do
       @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id]
       expect(@filter.get_records.count).to eq(2)
       expect(@filter.get_records.to_a).to eq([@article_with_tag_1_and_tag_2, @article_with_tag_1])
     end
 
-    it 'return only published article' do
+    it 'will return articles which market tag1 and tag2 for filter by tag1 and tag2' do
+      @article_with_tag_1_and_tag_3 = FactoryGirl.create(:article)
+      @article_with_tag_1_and_tag_3.russian_content.tag_ids = [@tag1.id, @tag3.id]
+      @article_with_tag_1_and_tag_3.russian_content.set_published!
+      @article_with_tag_1_and_tag_2.russian_content.tag_ids = [@tag1.id, @tag2.id]
+
+      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id, @tag2.id]
+      expect(@filter.get_records.count).to eq(1)
+      expect(@filter.get_records.to_a).to eq([@article_with_tag_1_and_tag_2])
+    end
+
+    it 'will return only published article' do
       @unpublished_article = FactoryGirl.create(:article)
       @unpublished_article.russian_content.set_unpublished!
       @unpublished_article.english_content.set_unpublished!

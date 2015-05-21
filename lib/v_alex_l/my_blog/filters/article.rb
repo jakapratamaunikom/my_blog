@@ -5,9 +5,13 @@ class VAlexL::MyBlog::Filters::Article
   end
 
   def get_records
-    @get_records = ::Article.published
-    @get_records = @get_records.joins(:tags).where(tags: {id: @tag_ids}) if @tag_ids.present?
-    @get_records.uniq
+    @articles = ::Article.published
+    if @tag_ids.present?
+      @articles = @articles.select do |article| 
+        article.article_contents.published.any?{|ac| @tag_ids.all?{|t_id| ac.tag_ids.include?(t_id)}}
+      end
+    end
+    ::Article.where(id: @articles.map(&:id))
   end
 end
 
