@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   
+  #############################
+  # для мультиязычности нужно такой вот формат юзать
+  # site.com/en/article
+  #############################
+  
   root 'articles#index'
   get "/about_me" => "pages#about_me", as: 'about_me'
   
@@ -15,7 +20,6 @@ Rails.application.routes.draw do
     get :preview, on: :member  
   end
   
-
   namespace :admin do
     get '/' => "main#index", as: 'root'
     

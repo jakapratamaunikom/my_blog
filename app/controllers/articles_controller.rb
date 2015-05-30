@@ -3,7 +3,7 @@ class ArticlesController < BaseController
   skip_before_action :reset_tag_ids, :only => [:index]
 
   def index
-    @filter   = VAlexL::MyBlog::Filters::Article.new  session[:tag_ids]
+    @filter   = VAlexL::MyBlog::Filters::Article.new session[:tag_ids]
     @articles = @filter.get_records
   end
 

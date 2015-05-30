@@ -1,43 +1,8 @@
 .container.content
   .row.credits
-    .col-md-6.col-sm-12
-      .image style='margin-top: 0px; text-align: center;'
-        img.img-responsive style='width: 220px; height: 220px; display: inline-block;' alt="Imo-Imo" src="http://ichef.bbci.co.uk/news/660/media/images/71600000/png/_71600780_ruby.png" /
-        h3 
-          a href='#' Imo-Imo
-    .col-md-6.col-sm-12
-      .image style='margin-top: 0px; text-align: center;'
-        img.img-responsive style='width: 220px; height: 220px; display: inline-block;'  alt="Dealerpoint" src="http://i.dailymail.co.uk/i/pix/2009/03/21/article-1163681-0405F973000005DC-693_233x285.jpg" /
-        h3 
-          a href='#' Dealerpoint
-
-  hr
-  .row.credits
-    .col-md-6.col-sm-12
-      .image style='margin-top: 0px; text-align: center;'
-        img.img-responsive style='width: 220px; height: 220px; display: inline-block;' alt="Dealnet" src="https://go.rcntec.com/company/personal/user/1226/files/element/historyget/1707082/2015-03-19_2048.png" /
-        h3 
-          a href='#' Dealnet
-      
-    .col-md-6.col-sm-12
-      .image style='margin-top: 0px; text-align: center;'
-        img.img-responsive style='width: 220px; height: 220px; display: inline-block;' alt="Asterix integration" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTdNOFb8CldYMaB308vi1u7PW6LE8vKnYXXgrj_3S2GzzpUbK2xAw" /
-        h3 
-          a href='#' Asterix integration
-  hr
-  .row.credits
-
-    .col-md-6.col-sm-12
-      .image style='margin-top: 0px; text-align: center;'
-        img.img-responsive style='width: 220px; height: 220px; display: inline-block;' alt="Survey" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQzi0Sjy8nPkAtHmpEW9o9jXc4_8KpnPPwvfSNmotsrEXfOBOaQGQ" /
-        h3 
-          a href='#' Survey
-      
-
-    .col-md-6.col-sm-12
-      .image style='margin-top: 0px; text-align: center;'
-        img.img-responsive style='width: 220px; height: 220px; display: inline-block;' alt="AMS" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTN3Z-ypbqtpn8SRPQmAVfAgbFYRaP63yKz8YWehzX84xYxWun1Ew" /
-        
-        h3 
-        a href='#' AMS
-      
+    - @works.each_with_index do |work, index|
+      .col-md-4.col-sm-6.col-xs-12
+        .image style='margin-top: 0px; text-align: center;'
+          = image_tag work.get_content(current_lang).image.try(:thumb_740x280), class: 'img-responsive', style: 'width: 220px; height: 220px; display: inline-block;'
+          h3 
+            = link_to work.get_content(current_lang).title, my_work_path(work)

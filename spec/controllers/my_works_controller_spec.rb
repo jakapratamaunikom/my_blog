@@ -12,6 +12,7 @@ RSpec.describe MyWorksController, type: :controller do
   describe "GET #show" do
     it "returns http success for published_ru" do
       @work = FactoryGirl.create(:work)
+      allow(controller).to receive(:current_lang).and_return(:ru)
       @work.get_content(:ru).set_published!
       @work.get_content(:en).set_unpublished!
       
@@ -21,6 +22,7 @@ RSpec.describe MyWorksController, type: :controller do
 
     it "returns http success for published_en" do
       @work = FactoryGirl.create(:work)
+      allow(controller).to receive(:current_lang).and_return(:en)
       @work.get_content(:en).set_published!
       @work.get_content(:ru).set_unpublished!
 

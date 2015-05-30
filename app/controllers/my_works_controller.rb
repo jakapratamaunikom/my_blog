@@ -2,11 +2,11 @@ class MyWorksController < BaseController
   add_tasty_breadcrumb I18n.t("views.header.my_works"), :my_works_path
 
   def index
-    @works = Work.published
+    @works = Work.joins(:work_contents).merge(WorkContent.send(current_lang).published)
   end
 
   def show
-    @work = Work.published.find(params[:id])
+    @work = Work.joins(:work_contents).merge(WorkContent.send(current_lang).published).find(params[:id])
     add_tasty_breadcrumb @work.get_content(current_lang).title, my_work_path(@work)
   end
 
