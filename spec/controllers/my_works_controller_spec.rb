@@ -16,6 +16,7 @@ RSpec.describe MyWorksController, type: :controller do
       @work.get_content(:en).set_unpublished!
       get :show, id: @work.id
       expect(response).to have_http_status(:success)
+      expect(assigns(:works).last).to be_a(@work)
     end
 
     pending "returns http success for published_en" do
@@ -25,6 +26,7 @@ RSpec.describe MyWorksController, type: :controller do
 
       get :show, id: @work.id
       expect(response).to have_http_status(:success)
+      expect(assigns(:works).last).to be_a(@work)
     end
 
     pending "returns not found for unplished work" do

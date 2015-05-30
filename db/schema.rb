@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519063058) do
+ActiveRecord::Schema.define(version: 20150530104543) do
 
   create_table "article_contents", force: :cascade do |t|
     t.text     "content"
@@ -46,6 +46,22 @@ ActiveRecord::Schema.define(version: 20150519063058) do
 
   create_table "tags", force: :cascade do |t|
     t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "work_contents", force: :cascade do |t|
+    t.string   "title"
+    t.string   "lang"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "work_id"
+    t.boolean  "published"
+    t.string   "image"
+  end
+
+  create_table "works", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

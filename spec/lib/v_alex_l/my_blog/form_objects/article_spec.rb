@@ -209,7 +209,7 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
       File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
         @article_form.ru_image= f
       end
-      filename = File.basename(@article_form.article.english_content.image.file.file)
+      filename = File.basename(@article_form.article.russian_content.image.file.file)
       expect(filename).to eq("img.jpeg")
     end
     
