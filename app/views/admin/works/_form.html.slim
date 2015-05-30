@@ -1,0 +1,41 @@
+= form_for([:admin, @work_form], html: { :class => 'form-horizontal', :multipart => true }) do |f|
+  - if @work_form.errors.any? 
+    - unless @work_form.errors.full_messages.length.zero?
+      .alert.alert-danger
+        strong 
+          'Исправьте ошибки:
+        ul
+          - @work_form.errors.full_messages.each do |msg|
+            li
+              = msg
+  = hidden_field_tag :lang, current_lang
+  div role="tabpanel" 
+    - class_list = {:ru => '', :en => ''}
+    - class_list[current_lang] = 'active'
+    ul#myTab.nav.nav-tabs role="tablist" 
+      li role="presentation" class="#{class_list[:ru]}"
+        a#ru-tab aria-controls="ru" aria-expanded="true" data-toggle="tab" href="#ru" role="tab"
+          | RU
+      li role="presentation" class= "#{class_list[:en]}"
+        a#en-tab aria-controls="en" aria-expanded="false" data-toggle="tab" href="#en" role="tab"
+          | EN
+    #myTabContent.tab-content
+      br
+      - class_list[current_lang] += " in"
+      #ru.tab-pane.fade aria-labelledby="ru-tab" role="tabpanel" class="#{class_list[:ru]}"
+        = render 'admin/works/form/work_fields', f: f, language: 'ru'
+      #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" class="#{class_list[:en]}"
+        = render 'admin/works/form/work_fields', f: f, language: 'en'
+
+      .form-group
+        .row
+          .col-md-8.col-sm-10.col-sm-offset-2.col-md-offset-2
+            .btn-group.pull-right
+              = f.submit 'Сохранить', class: 'btn btn-primary'
+              = link_to 'Отмена', :back, class: 'btn btn-default'
+
+
+javascript:
+  $("textarea").editable({inlineMode: false})
+  $("a[href='http://editor.froala.com']").parent().hide()
+  new workForm($("form"))

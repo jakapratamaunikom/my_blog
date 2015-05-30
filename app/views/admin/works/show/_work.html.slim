@@ -1,0 +1,27 @@
+.jumbotron
+  .row
+    .col-sm-3
+      img.work-img.pull-left src="#{work_content.image.try(:thumb_242x200).to_s}"
+    .col-sm-9
+      h1.text-center
+        = work_content.title
+  .row
+    .btn-group.btn-group-lg.pull-right
+      = link_to preview_my_work_path(@work, lang: work_content.lang), class: 'btn btn-success', title: 'Демо' do
+          = "Демо "
+      = link_to 'Изменить', edit_admin_work_path(@work, lang: work_content.lang), class: 'btn btn-primary'
+
+    .col-sm-8
+      - if work_content.published?
+        .alert.alert-success
+          strong
+            'Статья опубликована и радует своих читателей.
+          = "Сделать статью еще лучше, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-danger'}".html_safe
+      - else
+        .alert.alert-warning
+          strong
+            'Статья неопубликованна!
+          = "Сделать людей счастливыми и #{link_to 'опубликовать статью?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-success'}".html_safe
+
+  p
+    = work_content.content.html_safe

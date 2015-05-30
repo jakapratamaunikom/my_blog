@@ -22,10 +22,12 @@ Rails.application.routes.draw do
     resources :articles do
       get :toggle_published_status, on: :member
     end
+    
+    resources :works do
+      get :toggle_published_status, on: :member
+    end
 
     resources :tags
-
-    resources :portfolios
   end
 
 end

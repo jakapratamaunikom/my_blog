@@ -1,0 +1,29 @@
+.thumbnail role="tabpanel"
+  = link_to admin_work_path(work_content.work, lang: work_content.lang) do
+    img.work-img src="#{work_content.image.try(:thumb_242x200).to_s}"
+
+  .caption
+    - if work_content.fully_filled?
+      h3
+        = link_to work_content.title, admin_work_path(work_content.work)
+      p
+        - if work_content.published?
+          = link_to 'Снять с публикации?', toggle_published_status_admin_work_path(work_content.work), class: 'text-danger'
+        - else
+          = link_to 'Опубликовать?', toggle_published_status_admin_work_path(work_content.work), class: 'text-success'
+    - else
+      .alert.alert-warning role="alert"
+        strong
+          'Братиш, заполнить нужно!
+
+  hr
+
+  .text-center
+    .btn.btn-group
+      = link_to edit_admin_work_path(work_content.work, lang: work_content.lang), class: 'btn btn-primary', title: 'Изменить' do
+        i.fa.fa-pencil-square-o
+      = link_to admin_work_path(work_content.work, lang: work_content.lang), class: 'btn btn-default', title: 'Просмотр' do
+        i.fa.fa-search
+
+      = link_to preview_my_work_path(work_content.work, lang: work_content.lang), class: 'btn btn-success', title: 'Демо' do
+        i.fa.fa-child

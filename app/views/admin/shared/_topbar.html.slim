@@ -19,13 +19,13 @@
           = link_to 'Добавить', new_admin_article_path
     li.dropdown role="presentation" class="#{'active' if current_controller?('admin/portfolios') && params[:action] == 'portfolio'}"
       a.dropdown-toggle data-toggle="dropdown" href="#" 
-        | Портфолио
+        | Мои работы
         span.caret
       ul.dropdown-menu role="menu" 
-        li class="#{'active' if current_page?(admin_portfolios_path)}"
-          = link_to 'Список', admin_portfolios_path
-        li class="#{'active' if current_page?(new_admin_portfolio_path)}"
-          = link_to 'Добавить',  new_admin_portfolio_path
+        li class="#{'active' if current_page?(admin_works_path)}"
+          = link_to 'Список', admin_works_path
+        li class="#{'active' if current_page?(new_admin_work_path)}"
+          = link_to 'Добавить',  new_admin_work_path
 
 
   ul.nav.navbar-nav.navbar-right

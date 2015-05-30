@@ -1,0 +1,29 @@
+= link_to 'Добавить статью', new_admin_work_path, class: 'btn btn-default btn-sm'
+br
+br
+
+.row.works
+  - @works.each do |work|
+    .col-sm-6.col-md-3.work
+        ul.nav.nav-tabs role="tablist"
+          li.active role="presentation"
+            - unless work.get_content('ru').fully_filled?
+              - class_list = 'text-danger'
+            - else
+              - class_list = ''
+
+            a href="##{work.id}_ru" aria-controls="ru" role="tab" data-toggle="tab" class="#{class_list}"
+              'RU
+          li role="presentation"
+            - unless work.get_content('en').fully_filled?
+              - class_list = 'text-danger'
+            - else
+              - class_list = ''
+            a href="##{work.id}_en" aria-controls="en" role="tab" data-toggle="tab" class="#{class_list}"
+              'EN
+        .tab-content
+          .tab-pane.active role="tabpanel" id="#{work.id}_ru"
+            = render 'admin/works/index/work_item', work_content: work.get_content('ru')
+
+          .tab-pane role="tabpanel" id="#{work.id}_en"
+            = render 'admin/works/index/work_item', work_content: work.get_content('en')
