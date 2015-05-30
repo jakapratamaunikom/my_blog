@@ -14,6 +14,7 @@ RSpec.describe MyWorksController, type: :controller do
       @work = FactoryGirl.create(:work)
       @work.get_content(:ru).set_published!
       @work.get_content(:en).set_unpublished!
+      
       get :show, id: @work.id
       expect(response).to have_http_status(:success)
     end
@@ -31,6 +32,7 @@ RSpec.describe MyWorksController, type: :controller do
       @work = FactoryGirl.create(:work)
       @work.get_content(:ru).set_unpublished!
       @work.get_content(:en).set_unpublished!
+      
       expect do
         get :show, id: @work.id
       end.to raise_error ActiveRecord::RecordNotFound
@@ -43,6 +45,7 @@ RSpec.describe MyWorksController, type: :controller do
       @work = FactoryGirl.create(:work)
       @work.get_content(:ru).set_published!
       @work.get_content(:en).set_unpublished!
+      
       get :preview, id: @work.id
       expect(response).to have_http_status(:success)
     end
@@ -51,6 +54,7 @@ RSpec.describe MyWorksController, type: :controller do
       @work = FactoryGirl.create(:work)
       @work.get_content(:en).set_published!
       @work.get_content(:ru).set_unpublished!
+      
       get :preview, id: @work.id
       expect(response).to have_http_status(:success)
 
@@ -59,6 +63,7 @@ RSpec.describe MyWorksController, type: :controller do
       @work = FactoryGirl.create(:work)
       @work.get_content(:ru).set_unpublished!
       @work.get_content(:en).set_unpublished!
+      
       get :preview, id: @work.id
       expect(response).to have_http_status(:success)
     end
