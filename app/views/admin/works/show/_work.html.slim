@@ -15,13 +15,13 @@
       - if work_content.published?
         .alert.alert-success
           strong
-            'Статья опубликована и радует своих читателей.
-          = "Сделать статью еще лучше, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-danger'}".html_safe
+            'Работа опубликована и люди начинают офигивать от твоей пиздатости!
+          = "Сделать описание датальней, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-danger'}".html_safe
       - else
         .alert.alert-warning
           strong
-            'Статья неопубликованна!
-          = "Сделать людей счастливыми и #{link_to 'опубликовать статью?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-success'}".html_safe
+            'Работа неопубликованна! Никто еще даже и не подозревают, что такое можно сделать
+          = "Заставить людей вострагаться твоей крутостью, #{link_to 'опубликовав статью?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-success'}".html_safe
 
   p
     = work_content.content.html_safe

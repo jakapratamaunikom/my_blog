@@ -1,5 +1,5 @@
 class Admin::WorksController < Admin::BaseController
-  add_tasty_breadcrumb 'Статьи',  :admin_works_path
+  add_tasty_breadcrumb 'Мои работы',  :admin_works_path
 
   def index
     @works = Work.all
@@ -11,7 +11,7 @@ class Admin::WorksController < Admin::BaseController
   end
 
   def new
-    add_tasty_breadcrumb 'Создание новой статьи', :new_admin_work_path
+    add_tasty_breadcrumb 'Создание новой работы', :new_admin_work_path
     @work = Work.new
     @work_form = VAlexL::MyBlog::FormObjects::Work.new @work
   end

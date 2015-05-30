@@ -10,26 +10,24 @@ RSpec.describe MyWorksController, type: :controller do
   end
 
   describe "GET #show" do
-    pending "returns http success for published_ru" do
+    it "returns http success for published_ru" do
       @work = FactoryGirl.create(:work)
       @work.get_content(:ru).set_published!
       @work.get_content(:en).set_unpublished!
       get :show, id: @work.id
       expect(response).to have_http_status(:success)
-      expect(assigns(:works).last).to be_a(@work)
     end
 
-    pending "returns http success for published_en" do
+    it "returns http success for published_en" do
       @work = FactoryGirl.create(:work)
       @work.get_content(:en).set_published!
       @work.get_content(:ru).set_unpublished!
 
       get :show, id: @work.id
       expect(response).to have_http_status(:success)
-      expect(assigns(:works).last).to be_a(@work)
     end
 
-    pending "returns not found for unplished work" do
+    it "returns not found for unplished work" do
       @work = FactoryGirl.create(:work)
       @work.get_content(:ru).set_unpublished!
       @work.get_content(:en).set_unpublished!
@@ -41,7 +39,7 @@ RSpec.describe MyWorksController, type: :controller do
 
 
   describe "GET #preview" do
-    pending "returns http success for published_ru" do
+    it "returns http success for published_ru" do
       @work = FactoryGirl.create(:work)
       @work.get_content(:ru).set_published!
       @work.get_content(:en).set_unpublished!
@@ -49,7 +47,7 @@ RSpec.describe MyWorksController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    pending "returns http success for published_en" do
+    it "returns http success for published_en" do
       @work = FactoryGirl.create(:work)
       @work.get_content(:en).set_published!
       @work.get_content(:ru).set_unpublished!
@@ -57,7 +55,7 @@ RSpec.describe MyWorksController, type: :controller do
       expect(response).to have_http_status(:success)
 
     end
-    pending "returns http success for unplished" do
+    it "returns http success for unplished" do
       @work = FactoryGirl.create(:work)
       @work.get_content(:ru).set_unpublished!
       @work.get_content(:en).set_unpublished!

@@ -1,29 +1,7 @@
-class FileUploaser 
-  constructor: (el) ->
-    @el = el
-    @setupPreview()
-
-  setupPreview: ->
-    for input in @el.find("[rel=avatar]")
-      do (input) =>
-        preview = @el.find("[data-source=#{$(input).data('type')}]")
-        $(input).change (event) -> 
-          file = input.files[0]
-          reader = new FileReader()
-          
-          reader.onload = (e) ->
-            image_base64 = e.target.result
-            preview.attr("src", image_base64)
-            preview.removeClass('hide')
-          reader.readAsDataURL(file)
-
-##########################
-##########################
-    
 class ArticleForm
   constructor: (el) ->
     @el = el
-    new FileUploaser @el
+    new App.FileUploader @el
     @setupSelectize()
 
   setupSelectize: ->
@@ -56,4 +34,4 @@ class ArticleForm
 
 
 
-window.ArticleForm = ArticleForm
+App.ArticleForm = ArticleForm
