@@ -26,6 +26,8 @@ gem 'underscore-rails'
 gem "messengerjs-rails", "~> 1.4.1" 
 # JS select
 gem "selectize-rails"
+#For js-upload images
+gem "jquery-fileupload-rails"
 
 # Localization
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master' # For 4.x

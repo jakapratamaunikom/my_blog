@@ -15,6 +15,7 @@
 //= require underscore
 //= require 'bootstrap/bootstrap.min'
 //= require selectize
+//= require jquery-fileupload/basic
 
 //= require messagner
 

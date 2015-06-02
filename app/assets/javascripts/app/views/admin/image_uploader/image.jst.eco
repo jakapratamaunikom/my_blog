@@ -1,0 +1,10 @@
+<span href='#' class='thumbnail'>
+  <img src="<%= @file%>"></img>
+  <span class='text-danger notice-about-deleted'>Удалено</span>
+  <a href='#' class='action-img text-success restore'>
+    Вернуть
+  </a>
+  <a href='#' class='action-img text-danger remove'>
+    Удалить
+  </a>
+</span>

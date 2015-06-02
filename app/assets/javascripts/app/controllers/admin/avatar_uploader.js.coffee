@@ -1,4 +1,4 @@
-class App.Admin.FileUploader extends Spine.Controller
+class App.Admin.AvatarUploader extends Spine.Controller
   constructor: (el) ->
     super
     @setupPreview()

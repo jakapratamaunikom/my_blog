@@ -1,7 +1,7 @@
 class App.Admin.ArticleForm extends Spine.Controller
   constructor: ->
     super
-    new App.Admin.FileUploader el: @el
+    new App.Admin.AvatarUploader el: @el
     @setupSelectize()
 
   setupSelectize: ->

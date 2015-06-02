@@ -1,41 +1,69 @@
-= form_for([:admin, @work_form], html: { :class => 'form-horizontal', :multipart => true }) do |f|
-  - if @work_form.errors.any? 
-    - unless @work_form.errors.full_messages.length.zero?
-      .alert.alert-danger
-        strong 
-          'Исправьте ошибки:
-        ul
-          - @work_form.errors.full_messages.each do |msg|
-            li
-              = msg
-  = hidden_field_tag :lang, current_lang
-  div role="tabpanel" 
-    - class_list = {:ru => '', :en => ''}
-    - class_list[current_lang] = 'active'
-    ul#myTab.nav.nav-tabs role="tablist" 
-      li role="presentation" class="#{class_list[:ru]}"
-        a#ru-tab aria-controls="ru" aria-expanded="true" data-toggle="tab" href="#ru" role="tab"
-          | RU
-      li role="presentation" class= "#{class_list[:en]}"
-        a#en-tab aria-controls="en" aria-expanded="false" data-toggle="tab" href="#en" role="tab"
-          | EN
-    #myTabContent.tab-content
-      br
-      - class_list[current_lang] += " in"
-      #ru.tab-pane.fade aria-labelledby="ru-tab" role="tabpanel" class="#{class_list[:ru]}"
-        = render 'admin/works/form/work_fields', f: f, language: 'ru'
-      #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" class="#{class_list[:en]}"
-        = render 'admin/works/form/work_fields', f: f, language: 'en'
+.work_form-js
+  = form_for([:admin, @work_form], html: { :class => 'form-horizontal', :multipart => true, 'data-type' => 'work' }) do |f|
+    - if @work_form.errors.any? 
+      - unless @work_form.errors.full_messages.length.zero?
+        .alert.alert-danger
+          strong 
+            'Исправьте ошибки:
+          ul
+            - @work_form.errors.full_messages.each do |msg|
+              li
+                = msg
+    = hidden_field_tag :lang, current_lang
+    div role="tabpanel" 
+      - class_list = {:ru => '', :en => ''}
+      - class_list[current_lang] = 'active'
+      ul#myTab.nav.nav-tabs role="tablist" 
+        li role="presentation" class="#{class_list[:ru]}"
+          a#ru-tab aria-controls="ru" aria-expanded="true" data-toggle="tab" href="#ru" role="tab"
+            | RU
+        li role="presentation" class= "#{class_list[:en]}"
+          a#en-tab aria-controls="en" aria-expanded="false" data-toggle="tab" href="#en" role="tab"
+            | EN
+      #myTabContent.tab-content
+        br
+        - class_list[current_lang] += " in"
+        #ru.tab-pane.fade aria-labelledby="ru-tab" role="tabpanel" class="#{class_list[:ru]}"
+          = render 'admin/works/form/work_fields', f: f, language: 'ru'
+        #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" class="#{class_list[:en]}"
+          = render 'admin/works/form/work_fields', f: f, language: 'en'
 
-      .form-group
-        .row
-          .col-md-8.col-sm-10.col-sm-offset-2.col-md-offset-2
-            .btn-group.pull-right
-              = f.submit 'Сохранить', class: 'btn btn-primary'
-              = link_to 'Отмена', :back, class: 'btn btn-default'
+
+
+  = form_for([:admin, Image.new], html: {:multipart => true, class: 'form-horizontal', 'data-type' => 'images'}) do |f|
+    .form-group
+      .hide data-type='existing-images'
+        / - @work_form.images.each do |image|
+        /   div data-id="#{image.id}" data-type='image' data-url="#{image.file.try(:thumb).to_s}"
+      .row
+        label.col-sm-2.col-md-2.control-label
+          'Иллюстрации работы
+        .col-md-8.col-sm-10
+          .file-uploader 
+            = f.file_field :file, multiple: true, name: 'images[file]', 'data-url' => admin_works_path, class: 'file', accept: "image/*"
+            .images-dropzone
+              span
+                'Тащи сюда фоточки, твоих крутых работ
+          #preview.row
+          #progress_bar.row.hide
+            .col-sm-12
+              h5
+                'Загрузка файлов ...
+              .progress
+                .progress-bar role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"
+                  '0%
+
+  .form-group
+    .row
+      .col-md-8.col-sm-10.col-sm-offset-2.col-md-offset-2
+        .btn-group.actions.pull-right
+          = link_to "Сохранить", '#', class: 'btn btn-primary', 'data-type' => 'submit'
+          = link_to 'Отмена', :back, class: 'btn btn-default' 
+
+
 
 
 javascript:
   $("textarea").editable({inlineMode: false})
   $("a[href='http://editor.froala.com']").parent().hide()
-  new App.Admin.WorkForm({el: $("form")})
+  new App.Admin.WorkForm({el: $(".work_form-js")})
