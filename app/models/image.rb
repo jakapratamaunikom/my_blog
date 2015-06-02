@@ -1,3 +1,5 @@
 class Image < ActiveRecord::Base
-  belongs_to :work_content
+  mount_uploader :image, ImageUploader
+  
+  belongs_to :work
 end
