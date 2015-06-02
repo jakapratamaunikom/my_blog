@@ -1,6 +1,6 @@
-class FileUploader 
+class App.Admin.FileUploader extends Spine.Controller
   constructor: (el) ->
-    @el = el
+    super
     @setupPreview()
 
   setupPreview: ->
@@ -17,4 +17,3 @@ class FileUploader
             preview.removeClass('hide')
           reader.readAsDataURL(file)
 
-App.FileUploader = FileUploader

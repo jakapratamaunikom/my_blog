@@ -38,4 +38,4 @@
 javascript:
   $("textarea").editable({inlineMode: false})
   $("a[href='http://editor.froala.com']").parent().hide()
-  new App.ArticleForm($("form"))
+  new App.Admin.ArticleForm({el: $("form")})

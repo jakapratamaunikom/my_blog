@@ -1,7 +1,7 @@
-class ArticleForm
-  constructor: (el) ->
-    @el = el
-    new App.FileUploader @el
+class App.Admin.ArticleForm extends Spine.Controller
+  constructor: ->
+    super
+    new App.Admin.FileUploader el: @el
     @setupSelectize()
 
   setupSelectize: ->
@@ -31,7 +31,3 @@ class ArticleForm
         values = select.selectize.getValue()
         values.push(data.id)
         select.selectize.setValue(values)
-
-
-
-App.ArticleForm = ArticleForm

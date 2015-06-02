@@ -18,4 +18,5 @@
 
 //= require messagner
 
+//= require app
 //= require_tree ./admin
