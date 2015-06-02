@@ -6,8 +6,6 @@ class WorkContent < ActiveRecord::Base
   scope :published, -> { where(published: true) }
   
   belongs_to :work
-  has_many   :images
-  
   validates  :work, presence: true
 
 end

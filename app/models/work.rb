@@ -3,7 +3,8 @@ class Work < ActiveRecord::Base
   scope :published, -> {joins(:work_contents).where(work_contents: {published: true})}
   
   has_many :work_contents
-
+  has_many :images
+  
   accepts_nested_attributes_for :work_contents
   
   def get_content(lang)
