@@ -16,12 +16,12 @@
         .alert.alert-success
           strong
             'Работа опубликована и люди начинают офигивать от твоей пиздатости!
-          = "Сделать описание датальней, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-danger'}".html_safe
+          = "Сделать описание датальней, но перед этим #{link_to 'убрать работу из портфолио?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-danger'}".html_safe
       - else
         .alert.alert-warning
           strong
             'Работа неопубликованна! Никто еще даже и не подозревают, что такое можно сделать
-          = "Заставить людей вострагаться твоей крутостью, #{link_to 'опубликовав статью?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-success'}".html_safe
+          = "Заставить людей вострагаться твоей крутостью, #{link_to 'добавив работу в портфолио?', toggle_published_status_admin_work_path(@work, lang: work_content.lang), class: 'text-success'}".html_safe
 
   p
     = work_content.content.html_safe

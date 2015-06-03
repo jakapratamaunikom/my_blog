@@ -1,29 +1,19 @@
 h1 style="margin: 0px; padding-top: 20px; padding-left: 15px;" Dealnet
 .container.content
   .row.row-centered
-    .col-xs-12.col-sm-6.col-md-3.col-centered
-      img.img-responsive style='width: 300px; height: 200px; display: inline-block;' alt="Dealnet" src="https://go.rcntec.com/company/personal/user/1226/files/element/historyget/1707082/2015-03-19_2048.png"
-      br
-      br
-    .col-xs-12.col-sm-6.col-md-3.col-centered
-      img.img-responsive style='width: 300px; height: 200px; display: inline-block;' alt="Dealnet" src="https://go.rcntec.com/company/personal/user/1226/files/element/historyget/1707078/2015-03-19_2054.png"
-      br
-      br
-    .col-xs-12.col-sm-6.col-md-3.col-centered
-      img.img-responsive style='width: 300px; height: 200px; display: inline-block;' alt="Dealnet" src="https://go.rcntec.com/company/personal/user/1226/files/element/historyget/1707079/2015-03-19_2053.png"
-      br
-      br
-    .col-xs-12.col-sm-6.col-md-3.col-centered
-      img.img-responsive style='width: 300px; height: 200px; display: inline-block;' alt="Dealnet" src="https://go.rcntec.com/company/personal/user/1226/files/element/historyget/1707080/2015-03-19_2051.png"
-      br
-      br
-    .col-xs-12.col-sm-6.col-md-3.col-centered
-      img.img-responsive style='width: 300px; height: 200px; display: inline-block;' alt="Dealnet" src="https://go.rcntec.com/company/personal/user/1226/files/element/historyget/1707081/2015-03-19_2050.png"
-      br
-      br
+    - if @work.images.count.zero?
+      .col-xs-12.col-sm-6.col-md-3.col-centered
+        = image_tag @work.get_content(current_lang).image, class: 'img-responsive', style: 'width: 300px; height: 200px; display: inline-block;'
+  
+    - else
+      - @work.images.each do |image|
+        .col-xs-12.col-sm-6.col-md-3.col-centered
+          = image_tag image.file.thumb, class: 'img-responsive', style: 'width: 300px; height: 200px; display: inline-block;'
+          br
+          br
   hr
   .row
     .col-xs-12
       strong
-        'Хобби CRM-ка.
-      'Пишу в свое удовольствие. Пробую реализовать разные удобные и прикольные решения. В конечном итоге должна получится single-page real-time CRM, которую легко можно интегрировать с любым другим приложением и можно настроить под любой бизнесс процесс. При этом должна быть легкой и универсальной.
+        = @work.get_content(current_lang).title
+      = @work.get_content(current_lang).content.html_safe
