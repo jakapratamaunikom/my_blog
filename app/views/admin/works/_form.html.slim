@@ -28,13 +28,14 @@
         #en.tab-pane.fade aria-labelledby="en-tab" role="tabpanel" class="#{class_list[:en]}"
           = render 'admin/works/form/work_fields', f: f, language: 'en'
 
+    .hide data-type='set_image_ids'
 
 
   = form_for([:admin, Image.new], html: {:multipart => true, class: 'form-horizontal', 'data-type' => 'images'}) do |f|
     .form-group
       .hide data-type='existing-images'
-        / - @work_form.images.each do |image|
-        /   div data-id="#{image.id}" data-type='image' data-url="#{image.file.try(:thumb).to_s}"
+        - @work_form.images.each do |image|
+          div data-id="#{image.id}" data-type='image' data-url="#{image.file.try(:thumb).to_s}"
       .row
         label.col-sm-2.col-md-2.control-label
           'Иллюстрации работы

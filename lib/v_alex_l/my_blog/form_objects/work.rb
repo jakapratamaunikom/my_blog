@@ -26,7 +26,7 @@ class VAlexL::MyBlog::FormObjects::Work
   def initialize(work, attributes={})
     @work = work
 
-    attributes = {} if attributes.blank?
+    attributes = {image_ids: @work.image_ids} if attributes.blank?
 
     attributes.each do |method, value|
       self.send("#{method}=", value)
@@ -59,6 +59,7 @@ class VAlexL::MyBlog::FormObjects::Work
     end
 
     def append_images
+      Image.where(work_id: @work.id).where.not(id: image_ids).destroy_all
       Image.where(id: image_ids).update_all work_id: @work.id
       true
     end

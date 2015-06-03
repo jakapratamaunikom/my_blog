@@ -8,7 +8,13 @@ class WorkFieldsForm extends Spine.Controller
     @el.valid()
 
   submit: =>
+    image_ids = _.map(App.Image.getImagesForAdding(), 'id')
+    for image_id in image_ids
+      do (image_id) =>
+        input = $("<input type='hidden' value=#{image_id} name='work[image_ids][]'>")
+        @el.find("[data-type=set_image_ids]").append input
     @el.submit()
+
 
 ###################
 ###################
@@ -30,9 +36,9 @@ class App.Admin.WorkForm extends Spine.Controller
     if @work_form.valid()
       $(e.currentTarget).addClass('disabled')
       $(e.currentTarget).next().addClass("disabled")
-      @beginUploadsPicturesAndThenSaveSupplyDocument()
+      @beginUploadsImagesAndThenSaveSupplyDocument()
 
-  beginUploadsPicturesAndThenSaveSupplyDocument: ->
+  beginUploadsImagesAndThenSaveSupplyDocument: ->
     @images_form.submit()
 
 

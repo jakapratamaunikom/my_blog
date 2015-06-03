@@ -4,10 +4,11 @@ require 'rails_helper'
 RSpec.describe VAlexL::MyBlog::FormObjects::Work do
 
   before(:each) do
-    @ru_content = FactoryGirl.build(:work_content)
-    @en_content = FactoryGirl.build(:work_content)
+    @ru_content   = FactoryGirl.build(:work_content)
+    @en_content   = FactoryGirl.build(:work_content)
     @first_image  = FactoryGirl.create(:image)
     @second_image = FactoryGirl.create(:image)
+
     @params = {
       :ru_title     => @ru_content.title,
       :ru_content   => @ru_content.content,
@@ -17,7 +18,7 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
       :en_content   => @en_content.content,
       :en_image     => @en_content.image,
       :en_published => @en_content.published,
-      :image_ids    => [@first_image.id, @second_image.id]
+      :image_ids    => [@first_image.id, @second_image.id],
     }
     @invalid_params = @params.clone
 
@@ -207,6 +208,13 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
       expect(@work_form.work.english_content.published).to eq(true)
       @work_form.en_published = false
       expect(@work_form.work.english_content.published).to eq(false)
+    end
+
+    it 'image_ids wich will return image_ids from work if attributes are blank' do
+      @work.save!
+      @work.image_ids = [@first_image.id]
+      @work_form = VAlexL::MyBlog::FormObjects::Work.new @work, {}
+      expect(@work_form.image_ids).to eq([@first_image.id])
     end
 
   end
