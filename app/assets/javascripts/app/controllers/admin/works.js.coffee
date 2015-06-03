@@ -7,6 +7,9 @@ class WorkFieldsForm extends Spine.Controller
   valid: ->
     @el.valid()
 
+  submit: =>
+    @el.submit()
+
 ###################
 ###################
 ###################

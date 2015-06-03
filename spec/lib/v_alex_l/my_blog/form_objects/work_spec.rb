@@ -6,6 +6,8 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
   before(:each) do
     @ru_content = FactoryGirl.build(:work_content)
     @en_content = FactoryGirl.build(:work_content)
+    @first_image  = FactoryGirl.create(:image)
+    @second_image = FactoryGirl.create(:image)
     @params = {
       :ru_title     => @ru_content.title,
       :ru_content   => @ru_content.content,
@@ -15,6 +17,7 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
       :en_content   => @en_content.content,
       :en_image     => @en_content.image,
       :en_published => @en_content.published,
+      :image_ids    => [@first_image.id, @second_image.id]
     }
     @invalid_params = @params.clone
 
@@ -115,6 +118,7 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
           expect(@work.english_content.title).to eq(@params[:en_title])
           expect(@work.russian_content.content).to eq(@params[:ru_content])
           expect(@work.english_content.content).to eq(@params[:en_content])
+          expect(@work.images.to_a).to eq([@first_image, @second_image])
         end
       end
 
@@ -137,11 +141,17 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
               }.to change(Work, :count).by(0)
         end
 
-        it 'return arcticle with new attributes' do
+        it 'return work with new attributes' do
           @invalid_params[:ru_title] = 'Invalid params'
           @work_form = VAlexL::MyBlog::FormObjects::Work.new @work, @invalid_params
           expect(@work_form.save).to eq(false)
           expect(@work_form.ru_title).to eq(@invalid_params[:ru_title])
+        end
+
+        it 'has access to images' do
+          @work_form = VAlexL::MyBlog::FormObjects::Work.new @work, @invalid_params
+          expect(@work_form.save).to eq(false)
+          expect(@work_form.images.to_a).to eq([@first_image, @second_image])
         end
       end
     end

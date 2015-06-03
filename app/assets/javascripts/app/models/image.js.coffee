@@ -3,6 +3,9 @@ class App.Image extends Spine.Model
   #используется для сохранение коллекции картинок в работе
   @configure 'Image', 'id', 'kind', 'url', 'data', '_destroy'
 
+  @url: 'admin/images'
+
+
   @getImagesForDestroy: ->
     @select (image) ->
       image._destroy == true and image.kind == 'uploaded'

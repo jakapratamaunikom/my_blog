@@ -18,6 +18,10 @@
 //= require jquery-fileupload/basic
 
 //= require messagner
+//= require jquery.validate
+//= require jquery.validate.additional-methods
+//= require jquery.validate.localization/messages_ru
+
 
 //= require app
 //= require_tree ./admin

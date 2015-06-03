@@ -88,8 +88,9 @@ class Admin::WorksController < Admin::BaseController
   private
     def work_params
       params.require(:work).permit(:ru_title, :ru_content, :ru_image,
-                                      :en_title, :en_content, :en_image,
-                                      )
+                                   :en_title, :en_content, :en_image,
+                                   :image_ids => [],
+                                  )
                                       
     end
 

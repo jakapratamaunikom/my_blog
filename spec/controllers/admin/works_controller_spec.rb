@@ -5,6 +5,9 @@ RSpec.describe Admin::WorksController, type: :controller do
   let(:valid_attributes) {
     ru_content = FactoryGirl.build(:work_content)
     en_content = FactoryGirl.build(:work_content)
+    first_image  = FactoryGirl.create(:image)
+    second_image = FactoryGirl.create(:image)
+
 
     params = {
       :ru_title     => ru_content.title,
@@ -15,6 +18,7 @@ RSpec.describe Admin::WorksController, type: :controller do
       :en_content   => en_content.content,
       :en_image     => en_content.image,
       :en_published => en_content.published,
+      :image_ids    => [first_image.id, second_image.id],
     }
   }
 
@@ -77,6 +81,11 @@ RSpec.describe Admin::WorksController, type: :controller do
       it "redirects to the created work" do
         post :create, {:work => valid_attributes}, valid_session
         expect(response).to redirect_to([:admin, Work.last])
+      end
+
+      it 'create references between images' do
+        post :create, {:work => valid_attributes}, valid_session
+        expect(Work.last.images.count).to eq(2)
       end
     end
 

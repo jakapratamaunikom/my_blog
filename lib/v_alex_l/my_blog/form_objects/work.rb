@@ -35,15 +35,32 @@ class VAlexL::MyBlog::FormObjects::Work
     super(attributes)
   end
 
+  def image_ids=(ids)
+    @image_ids = ids
+  end
+
+  def image_ids
+    @image_ids
+  end
+
+  def images
+    Image.where(id: image_ids)
+  end
+
   def save
     return false unless valid?
-    @work.save!
+    @work.save! and append_images
   end
 
   private
     def should_have_title_least_one_language
       return if ru_title.present? || en_title.present?
       errors.add(:work, :should_have_title_least_one_language)
+    end
+
+    def append_images
+      Image.where(id: image_ids).update_all work_id: @work.id
+      true
     end
     
 end

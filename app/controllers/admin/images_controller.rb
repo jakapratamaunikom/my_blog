@@ -1,14 +1,14 @@
-class ImagesController < Admin::BaseController
+class Admin::ImagesController < Admin::BaseController
   before_action :set_image, only: [:destroy]
 
   # POST /images
   # POST /images.json
   def create
-    @image = image.new(image_params)
+    @image = Image.new(image_params)
 
     respond_to do |format|
       if @image.save
-        format.json { render json: @image, status: :created, location: @image }
+        format.json { render json: @image, status: :created, location: [:admin, @image] }
       else
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end
@@ -28,7 +28,7 @@ class ImagesController < Admin::BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_image
-      @image = image.find(params[:id])
+      @image = Image.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
