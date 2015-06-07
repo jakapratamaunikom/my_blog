@@ -1,5 +1,8 @@
 ru:
   views:
+    lightbox:
+      from: 'из'
+      
     articles:
       read_next: 'Читать еще...'
       popular:   'Популярное'

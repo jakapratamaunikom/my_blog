@@ -31,6 +31,9 @@ gem "jquery-fileupload-rails"
 
 # Localization
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master' # For 4.x
+# For javascript locaes
+gem "i18n-js"
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

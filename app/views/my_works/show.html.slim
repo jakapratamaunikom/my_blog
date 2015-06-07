@@ -3,12 +3,14 @@ h1 style="margin: 0px; padding-top: 20px; padding-left: 15px;" Dealnet
   .row.row-centered
     - if @work.images.count.zero?
       .col-xs-12.col-sm-6.col-md-3.col-centered
-        = image_tag @work.get_content(current_lang).image, class: 'img-responsive', style: 'width: 300px; height: 200px; display: inline-block;'
+        = link_to image.file.to_s, 'data-lightbox' => "roadtrip" do
+          = image_tag @work.get_content(current_lang).image, class: 'img-responsive', style: 'width: 300px; height: 200px; display: inline-block;'
   
     - else
       - @work.images.each do |image|
         .col-xs-12.col-sm-6.col-md-3.col-centered
-          = image_tag image.file.thumb, class: 'img-responsive', style: 'width: 300px; height: 200px; display: inline-block;'
+          = link_to image.file.to_s, 'data-lightbox' => "roadtrip" do
+            = image_tag image.file.thumb, class: 'img-responsive', style: 'width: 300px; height: 200px; display: inline-block;'
           br
           br
   hr

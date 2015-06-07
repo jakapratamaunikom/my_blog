@@ -1,9 +1,16 @@
 doctype html
 html
   head
+
     title 
       = get_page_title
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+
+    = javascript_include_tag "i18n", "translations"
+    javascript:
+      I18n.defaultLocale = "#{I18n.default_locale}";
+      I18n.locale = "#{current_lang}";
+
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body

@@ -19,6 +19,8 @@
 //= require jquery.validate
 //= require jquery.validate.additional-methods
 //= require jquery.validate.localization/messages_ru
+//= require lightbox2/lightbox.js
+
 
 //= require messagner
 //= require articles
