@@ -6,23 +6,24 @@
             .col-md-6.col-sm-6
               article.blog-teaser
                 header
-                  = image_tag article.get_content(:ru).image.try(:thumb_183x183), alt: article.get_content(:ru).title
+                  = image_tag article.get_content(current_lang).image.try(:thumb_183x183), alt: article.get_content(current_lang).title
                   h3
-                    = link_to article.get_content(:ru).title, article
+                    = link_to article.get_content(current_lang).title, article
                   span.meta 
                     = article.created_at
                   hr/
                 .body
-                  = truncate_html(article.get_content(:ru).content, length: 200, separator: ' ', omission: '...')
+                  / = truncate_html(article.get_content(current_lang).content, length: 200, separator: ' ', omission: '...')
+                  = article.get_content(current_lang).short_description
                 .clearfix
-                  = link_to "'Подробнее", article, class: 'btn btn-tales-one'
-      .paging
-        a.newer href="index.html#" 
-          i.fa.fa-long-arrow-left
-          | Newer
-        span &bull;
-        a.older href="index.html#" 
-          | Older
-          i.fa.fa-long-arrow-right
+                  = link_to I18n.t("views.articles.details"), article, class: 'btn btn-tales-one'
+      / .paging
+      /   a.newer href="index.html#" 
+      /     i.fa.fa-long-arrow-left
+      /     | Newer
+      /   span &bull;
+      /   a.older href="index.html#" 
+      /     | Older
+      /     i.fa.fa-long-arrow-right
     = render 'aside'
     

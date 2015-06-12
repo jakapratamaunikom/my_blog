@@ -13,14 +13,5 @@ class BaseController < ApplicationController
   helper_method :current_lang
 
   private
-
-    def init_tag_ids
-      session[:tag_ids] = [] if session[:tag_ids].nil?
-    end
-      
-    def reset_tag_ids
-      session[:tag_ids] = []
-    end
-
-  
+    
 end

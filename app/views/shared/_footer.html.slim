@@ -20,7 +20,8 @@ footer
               span.caption
                 = I18n.t('views.footer.comments')
             .line
-              span.counter 222
+              span.counter 
+                = Work.published(current_lang).count
               span.caption
                 = I18n.t('views.footer.applications_in_portfolio')
         .col-md-4.footer-widget

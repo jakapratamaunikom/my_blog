@@ -12,5 +12,16 @@ class ApplicationController < ActionController::Base
   private
     def set_language(value)
       session[:current_lang] = value
+      reset_tag_ids
     end
+
+    def init_tag_ids
+      session[:tag_ids] = [] if session[:tag_ids].nil?
+    end
+      
+    def reset_tag_ids
+      session[:tag_ids] = []
+    end
+
+
 end

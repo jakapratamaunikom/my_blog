@@ -13,30 +13,25 @@ aside.col-md-4.blog-aside
         = I18n.t("views.articles.read_next")
     .body
       ul.tales-list
-        li
-          a href="index.html"  Email Encryption Explained
-        li
-          a href="index.html#"  Selling is a Function of Design.
-        li
-          a href="index.html#"  It’s Hard To Come Up With Dummy Titles
-        li
-          a href="index.html#"  Why the Internet is Full of Cats
-        li
-          a href="index.html#"  Last Made-Up Headline, I Swear!
+        - articles = Article.published(current_lang).limit(5)
+        - articles = articles.where.not(id: @article.id) if @article
+        - articles.each do |article|
+          li
+            = link_to article.get_content(current_lang).title, article
           
-  .aside-widget
-    header
-      h3 
-        = I18n.t("views.articles.popular")
-    .body
-      ul.tales-list
-        li
-          a href="index.html"  Email Encryption Explained
-        li
-          a href="index.html#"  Selling is a Function of Design.
-        li
-          a href="index.html#"  It’s Hard To Come Up With Dummy Titles
-        li
-          a href="index.html#"  Why the Internet is Full of Cats
-        li
-          a href="index.html#"  Last Made-Up Headline, I Swear!
+  / .aside-widget
+  /   header
+  /     h3 
+  /       = I18n.t("views.articles.popular")
+  /   .body
+  /     ul.tales-list
+  /       li
+  /         a href="index.html"  Email Encryption Explained
+  /       li
+  /         a href="index.html#"  Selling is a Function of Design.
+  /       li
+  /         a href="index.html#"  It’s Hard To Come Up With Dummy Titles
+  /       li
+  /         a href="index.html#"  Why the Internet is Full of Cats
+  /       li
+  /         a href="index.html#"  Last Made-Up Headline, I Swear!

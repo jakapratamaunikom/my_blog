@@ -8,7 +8,12 @@
   .row
     .col-sm-12
       br
+      = article_content.short_description
+      br
       = display_article_content_tags(article_content)
+      br
+      br
+
   .row
     .btn-group.btn-group-lg.pull-right
       = link_to preview_article_path(@article, lang: article_content.lang), class: 'btn btn-success', title: 'Демо' do

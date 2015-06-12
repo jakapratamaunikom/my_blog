@@ -1,14 +1,16 @@
 ru:
   form_objects:
     article:
-      article:    'Статья'
-      ru_title:   'Заголовок (ru)'
-      ru_content: 'Описание (ru)'
-      en_title:   'Заголовок (en)'
-      en_content: 'Описание (en)'
+      article:              'Статья'
+      ru_title:             'Заголовок (ru)'
+      ru_content:           'Описание (ru)'
+      ru_short_description: 'Краткое описание (ru)'
+      en_title:             'Заголовок (en)'
+      en_content:           'Описание (en)'
+      en_short_description: 'Краткое описание (en)'
 
     work:
-      work:    'Работа'
+      work:       'Работа'
       ru_title:   'Заголовок (ru)'
       ru_content: 'Описание (ru)'
       en_title:   'Заголовок (en)'

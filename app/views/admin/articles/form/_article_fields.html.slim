@@ -24,7 +24,14 @@
 hr
 .form-group
   .row
+    = f.label "#{language}_short_description", class: 'col-sm-2 col-md-2 control-label'
+    .col-md-8.col-sm-10
+      = f.text_area "#{language}_short_description", class: 'form-control', rows: 2
+
+hr
+.form-group
+  .row
     = f.label "#{language}_content", class: 'col-sm-2 col-md-2 control-label'
     .col-md-8.col-sm-10
-      = f.text_area "#{language}_content", class: 'form-control', rows: 50
+      = f.text_area "#{language}_content", 'data-type' => 'editable', class: 'form-control', rows: 50
 

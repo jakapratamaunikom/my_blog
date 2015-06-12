@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602183134) do
+ActiveRecord::Schema.define(version: 20150612091610) do
 
   create_table "article_contents", force: :cascade do |t|
     t.text     "content"
     t.string   "title"
     t.string   "image"
     t.string   "lang"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.boolean  "published"
     t.integer  "article_id"
+    t.text     "short_description"
   end
 
   create_table "article_contents_tags", force: :cascade do |t|

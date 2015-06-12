@@ -7,4 +7,5 @@ FactoryGirl.define do
   sequence(:random_name) { Forgery('name').company_name }
   sequence(:random_title) { Forgery('lorem_ipsum').title  }
   sequence(:random_content) { Forgery('lorem_ipsum').lorem_ipsum_characters  }
+  sequence(:random_short_description) { Forgery('lorem_ipsum').lorem_ipsum_characters[0..100] }
 end

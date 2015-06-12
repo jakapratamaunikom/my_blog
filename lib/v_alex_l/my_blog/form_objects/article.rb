@@ -4,10 +4,10 @@ class VAlexL::MyBlog::FormObjects::Article
 
   delegate :russian_content, :english_content, to: :@article
   delegate :to_key, :persisted?, :to_model, to: :@article
-  delegate :title=, :content=, :image=, :published=, to: :russian_content, prefix: 'ru'
-  delegate :title,  :content,  :image,  :published,  to: :russian_content, prefix: 'ru'
-  delegate :title=, :content=, :image=, :published=, to: :english_content, prefix: 'en'
-  delegate :title,  :content,  :image,  :published,  to: :english_content, prefix: 'en'
+  delegate :title=, :content=, :image=, :published=, :short_description=, to: :russian_content, prefix: 'ru'
+  delegate :title,  :content,  :image,  :published,  :short_description,  to: :russian_content, prefix: 'ru'
+  delegate :title=, :content=, :image=, :published=, :short_description=, to: :english_content, prefix: 'en'
+  delegate :title,  :content,  :image,  :published,  :short_description,  to: :english_content, prefix: 'en'
 
   attribute :ru_tags,    Array
   attribute :en_tags,    Array
@@ -15,8 +15,8 @@ class VAlexL::MyBlog::FormObjects::Article
   attr_reader   :article
   attr_accessor :ru_tags, :en_tags
 
-  validates :ru_content, presence: true, if: Proc.new {|af| af.ru_title.present?}
-  validates :en_content, presence: true, if: Proc.new {|af| af.en_title.present?}
+  validates :ru_content, :ru_short_description, presence: true, if: Proc.new {|af| af.ru_title.present?}
+  validates :en_content, :en_short_description, presence: true, if: Proc.new {|af| af.en_title.present?}
 
   validate :should_have_title_least_one_language
 

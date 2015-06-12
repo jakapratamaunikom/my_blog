@@ -7,6 +7,7 @@ ru:
       read_next: 'Читать еще...'
       popular:   'Популярное'
       tags:      'Теги'
+      details:   'Подробнее'
 
       count_comments: 'Комментариев %{quantity}  '
 
