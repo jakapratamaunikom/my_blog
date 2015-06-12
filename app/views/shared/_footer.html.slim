@@ -11,7 +11,7 @@ footer
           .stats
             .line
               span.counter
-                = Article.published.count
+                = Article.published(current_lang).count
               span.caption 
                 = I18n.t('views.footer.articles')
             .line

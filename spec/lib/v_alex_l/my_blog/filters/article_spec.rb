@@ -40,22 +40,22 @@ RSpec.describe VAlexL::MyBlog::Filters::Article do
 
   describe 'has method get_records which' do
     it 'will    return all Articles if give blank array' do
-      @filter = VAlexL::MyBlog::Filters::Article.new []
-      expect(@filter.get_records.count).to eq(Article.published.uniq.count)
+      @filter = VAlexL::MyBlog::Filters::Article.new [], :ru
+      expect(@filter.get_records.count).to eq(Article.published(:ru).uniq.count)
     end
 
     it 'will return all Articles if give nil' do
-      @filter = VAlexL::MyBlog::Filters::Article.new nil
-      expect(@filter.get_records.count).to eq(Article.published.uniq.count)
+      @filter = VAlexL::MyBlog::Filters::Article.new nil, :ru
+      expect(@filter.get_records.count).to eq(Article.published(:ru).uniq.count)
     end
       
     it 'will return instance of Article::ActiveRecord_Relation ' do
-      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id]
+      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id], :ru
       expect(@filter.get_records.class).to eq(Article::ActiveRecord_Relation)
     end
 
     it 'will return articles which market tag1 for filter by tag1' do
-      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id]
+      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id], :ru
       expect(@filter.get_records.count).to eq(2)
       expect(@filter.get_records.to_a).to eq([@article_with_tag_1_and_tag_2, @article_with_tag_1])
     end
@@ -66,7 +66,7 @@ RSpec.describe VAlexL::MyBlog::Filters::Article do
       @article_with_tag_1_and_tag_3.russian_content.set_published!
       @article_with_tag_1_and_tag_2.russian_content.tag_ids = [@tag1.id, @tag2.id]
 
-      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id, @tag2.id]
+      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id, @tag2.id], :ru
       expect(@filter.get_records.count).to eq(1)
       expect(@filter.get_records.to_a).to eq([@article_with_tag_1_and_tag_2])
     end
@@ -77,7 +77,7 @@ RSpec.describe VAlexL::MyBlog::Filters::Article do
       @unpublished_article.english_content.set_unpublished!
       @unpublished_article.russian_content.tag_ids = [@tag1.id]
 
-      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id]
+      @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id], :ru
       is_get_unpublished_article = @filter.get_records.include?(@unpublished_article)
       expect(is_get_unpublished_article).to eq(false)
     end

@@ -1,6 +1,6 @@
 class Work < ActiveRecord::Base
   LANGUAGES = %w(ru en)
-  scope :published, -> {joins(:work_contents).where(work_contents: {published: true})}
+  scope :published, ->(lang) { joins(:work_contents).merge(WorkContent.send(lang).published) }
   
   has_many :work_contents
   has_many :images

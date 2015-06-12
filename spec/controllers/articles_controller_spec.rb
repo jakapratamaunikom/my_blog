@@ -10,7 +10,10 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "GET #show" do
-    it "returns http success for published_ru" do
+
+    it "returns http success for published_ru if current_lang ru" do
+      allow(controller).to receive(:current_lang).and_return(:ru)
+
       @article = FactoryGirl.create(:article)
       @article.get_content(:ru).set_published!
       @article.get_content(:en).set_unpublished!
@@ -18,7 +21,8 @@ RSpec.describe ArticlesController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it "returns http success for published_en" do
+    it "returns http success for published_en if current_lang en" do
+      allow(controller).to receive(:current_lang).and_return(:en)
       @article = FactoryGirl.create(:article)
       @article.get_content(:en).set_published!
       @article.get_content(:ru).set_unpublished!
@@ -27,10 +31,17 @@ RSpec.describe ArticlesController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it "returns not found for unplished article" do
+    it "returns not found for ru and en languages if unplished article_content" do
       @article = FactoryGirl.create(:article)
       @article.get_content(:ru).set_unpublished!
       @article.get_content(:en).set_unpublished!
+      
+      allow(controller).to receive(:current_lang).and_return(:ru)
+      expect do
+        get :show, id: @article.id
+      end.to raise_error ActiveRecord::RecordNotFound
+
+      allow(controller).to receive(:current_lang).and_return(:en)
       expect do
         get :show, id: @article.id
       end.to raise_error ActiveRecord::RecordNotFound

@@ -3,12 +3,12 @@ class ArticlesController < BaseController
   skip_before_action :reset_tag_ids, :only => [:index]
 
   def index
-    @filter   = VAlexL::MyBlog::Filters::Article.new session[:tag_ids]
+    @filter   = VAlexL::MyBlog::Filters::Article.new session[:tag_ids], current_lang
     @articles = @filter.get_records
   end
 
   def show
-    @article = Article.published.find(params[:id])
+    @article = Article.published(current_lang).find(params[:id])
     add_tasty_breadcrumb @article.get_content(current_lang).title, article_path(@article)
   end
 

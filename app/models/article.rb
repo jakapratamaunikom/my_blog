@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   LANGUAGES = %w(ru en)
-  scope :published, -> {joins(:article_contents).where(article_contents: {published: true})}
+
+  scope :published, ->(lang) { joins(:article_contents).merge(ArticleContent.send(lang).published) }
   
   has_many :comments
   has_many :article_contents
