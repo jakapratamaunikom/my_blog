@@ -13,8 +13,8 @@ class BaseController < ApplicationController
   helper_method :current_lang
 
   def current_lang
-    :ru
     :en
+    :ru
   end
 
   private
