@@ -9,7 +9,6 @@ class VAlexL::MyBlog::FormObjects::Work
   delegate :title=, :content=, :image=, :published=, to: :english_content, prefix: 'en'
   delegate :title,  :content,  :image,  :published,  to: :english_content, prefix: 'en'
 
-    
   attr_reader   :work
 
   validates :ru_content, presence: true, if: Proc.new {|af| af.ru_title.present?}

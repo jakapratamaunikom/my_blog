@@ -1,17 +1,33 @@
-'Разработка
+.container
+  .row
+    .container.about
+      = image_tag '/profile.jpg', alt: "Alexey V.", class: 'about-portrait img-responsive', width: 350, height: 200
 
-'Разработка сайтов, веб-приложений различной степени сложности под ключ.
-
-
-'Управление
-
-'Управление процессом разработки интернет-проектов от начала до конца
-
-'Партнерство
-
-'Участие в интересных веб-проектах в качестве разработчика или менеджера.
-
-
-
-http://ibrig.ru/
-http://programmer-web.ru/#/portfolio
+      h1
+        'My name is
+        span.about-bold
+          'Alex Volobuev.
+      br
+      span.about-large
+        span.about-bold
+          'I develop
+      span.about-small 
+        'web-applications and web-sites varying complexity.
+        br
+        'Default development stack:
+        span.about-bold PostgreSQL + Ruby On Rails + SpineJS.
+      br
+      br
+      span.about-large
+        span.about-italic.about-bold
+          'I manage
+      span.about-small 
+        'engineering process. I prefer Agile Methodology such as Scrum and Kanban.
+      br
+      br
+      span.about-large
+        span.about-italic.about-bold
+          'I open to suggestions
+      span.about-small 
+        'in intresting commercial projects or open-source projects as a manager or developer.
+  

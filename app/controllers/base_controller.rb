@@ -14,6 +14,7 @@ class BaseController < ApplicationController
 
   def current_lang
     :ru
+    :en
   end
 
   private
