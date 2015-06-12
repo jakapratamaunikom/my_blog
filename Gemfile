@@ -33,6 +33,8 @@ gem "jquery-fileupload-rails"
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master' # For 4.x
 # For javascript locaes
 gem "i18n-js"
+# For flag icongs
+gem 'famfamfam_flags_rails'
 
 
 # Use jquery as the JavaScript library

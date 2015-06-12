@@ -17,6 +17,10 @@ header
               = link_to I18n.t("views.header.my_works"), my_works_path 
             li class="#{class_list['pages']}"
               = link_to I18n.t("views.header.about_me"), about_me_path
+            li
+              = link_to switch_language_path, method: :PUT, title: I18n.t("views.header.switch_lang") do
+                i class="famfamfam-flag-#{current_lang_flag}"
+
   .widewrapper.subheader
     .container
       = display_tasty_breadcrumbs

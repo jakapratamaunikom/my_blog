@@ -1,10 +1,12 @@
 ru:
   views:
     header:
-      blog:      'Блог'
-      about_me:  'О себе'
-      search:    'Поиск'
-      my_works:  'Портфолио'
+      I:           'Алексей В.'
+      blog:        'Блог'
+      about_me:    'О себе'
+      search:      'Поиск'
+      my_works:    'Портфолио'
+      switch_lang: 'Смотреть на английском'
 
     footer:
       statistic: 'Статистика'

@@ -137,6 +137,8 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    famfamfam_flags_rails (0.3.0)
+      railties (>= 3.1.0)
     ffi (1.9.8)
     forgery (0.6.0)
     formatador (0.2.5)
@@ -365,6 +367,7 @@ DEPENDENCIES
   eco
   execjs
   factory_girl_rails
+  famfamfam_flags_rails
   forgery
   guard-bundler
   guard-livereload

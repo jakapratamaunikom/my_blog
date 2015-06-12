@@ -23,8 +23,13 @@ module ApplicationHelper
 
   def get_page_logo
     content_tag :h2, class: 'page-logo' do
-      'Алексей В.'
+      I18n.t("views.header.I")
     end
+  end
+
+  def current_lang_flag
+    return :ru if current_lang.to_sym == :ru
+    :gb
   end
 
   def display_actions_for(object, namespace='')
