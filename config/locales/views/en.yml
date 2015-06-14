@@ -1,0 +1,24 @@
+en:
+  views:
+    lightbox:
+      from: 'from'
+      
+    articles:
+      read_next: 'Read more...'
+      popular:   'Popular'
+      tags:      'Tags'
+      details:   'Read more'
+
+      count_comments: 'Comments %{quantity}  '
+
+    pages:
+      about_me: 'About me'
+
+    comments:
+      successful_create: 'Comment was successful added'
+      reply:             'Reply'
+      add_comment:       'Add comment'
+      placeholder:
+        name:            'Name'
+        email:           'E-mail for notifications'
+        content:         'Huh.. I think..'

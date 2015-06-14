@@ -6,7 +6,7 @@ ru:
       about_me:    'О себе'
       search:      'Поиск'
       my_works:    'Портфолио'
-      switch_lang: 'Смотреть на английском'
+      switch_lang: 'Switch to English'
 
     footer:
       statistic: 'Статистика'

@@ -1,5 +1,7 @@
 class MyWorksController < BaseController
-  add_tasty_breadcrumb I18n.t("views.header.my_works"), :my_works_path
+  before_action do
+    add_tasty_breadcrumb I18n.t("views.header.my_works"), :my_works_path
+  end
 
   def index
     @works = Work.published(current_lang)

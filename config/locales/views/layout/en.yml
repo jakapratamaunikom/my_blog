@@ -1,0 +1,21 @@
+en:
+  views:
+    header:
+      I:           'Alex V.'
+      blog:        'Blog'
+      about_me:    'About me'
+      search:      'Search'
+      my_works:    'My works'
+      switch_lang: 'Смотреть на русском'
+
+    footer:
+      statistic: 'Statistic'
+      articles:  'Articles'
+      comments:  'Comments'
+      applications_in_portfolio: 'My works'
+      statistic_hint: 'Small statistic by blog which help me understand is it cool or not'
+
+      hall_of_fame:  'Hall of fame'
+
+      contacts_info: 'Contact me'
+      feedback_info: "I'm happy to hear from my readers. Thoughts, feedback, critique - all welcome! Drop me a line:"

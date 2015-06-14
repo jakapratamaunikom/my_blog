@@ -10,7 +10,10 @@ ru:
       details:   'Подробнее'
 
       count_comments: 'Комментариев %{quantity}  '
-
+    
+    pages:
+      about_me: 'О себе'
+      
     comments:
       successful_create: 'Комментарий успешно добавлен'
       reply:             'Ответить'
