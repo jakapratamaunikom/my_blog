@@ -1,0 +1,19 @@
+form.form-horizontal
+  .pride role="tabpanel" 
+    .form-group
+      .row
+        label class='col-sm-3 col-md-3 control-label'
+          = 'Для русских читателей'
+        .col-md-7.col-sm-9
+          = select_tag "pride_#{:ru}_items", options_for_pride_items(:ru), class: "form-control", name: "pride[#{:ru}_items][]", include_blank: true, multiple: 'multiple'
+    .form-group
+      .row
+        label class='col-sm-3 col-md-3 control-label'
+          = 'Для англоязычных читателей'
+        .col-md-7.col-sm-9
+          = select_tag "pride_#{:en}_items", options_for_pride_items(:en), class: "form-control", name: "pride[#{:en}_items][]", include_blank: true, multiple: 'multiple'
+
+
+
+javascript:
+  new App.Admin.PrideForm({el: $("form")})

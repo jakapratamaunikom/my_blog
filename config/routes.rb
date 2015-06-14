@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     resources :images, only: [:create, :destroy]
     resources :tags
 
+    resource :pride,   only: [:show, :update]
+
     resources :articles do
       get :toggle_published_status, on: :member
     end

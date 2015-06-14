@@ -29,13 +29,15 @@
 
 
   ul.nav.navbar-nav.navbar-right
-    li.dropdown role="presentation" class="#{'active' if current_controller?('admin/tags') && params[:action] == 'portfolio'}"
+    li.dropdown role="presentation" class="#{'active' if current_controller?('admin/tags') || current_controller?('admin/prides')}"
       a.dropdown-toggle data-toggle="dropdown" href="#" 
         | Настройки
         span.caret
       ul.dropdown-menu role="menu" 
-        li
+        li class="#{'active' if current_controller?('admin/tags')}"
           = link_to 'Теги', admin_tags_path
+        li class="#{'active' if current_controller?('admin/prides')}"
+          = link_to 'Моя гордости', admin_pride_path
     li
       = link_to root_path, title: 'Обычный вид' do
         span.fa.fa-globe 
