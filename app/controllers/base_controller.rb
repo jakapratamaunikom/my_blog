@@ -1,4 +1,6 @@
 class BaseController < ApplicationController
+  
+  before_action :init_language
   before_action do
     set_container_template "div.tales-breadcrumb"
     set_simple_item_template   "a.breadcrumb-item"
@@ -13,5 +15,7 @@ class BaseController < ApplicationController
   helper_method :current_lang
 
   private
-    
+    def init_language
+      I18n.locale = current_lang
+    end 
 end
