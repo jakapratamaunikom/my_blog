@@ -4,7 +4,7 @@ header
       = link_to root_path, id: 'logo' do
         = get_page_logo
       #mobile-nav-toggle.pull-right
-        a data-target=(".tales-nav .navbar-collapse") data-toggle="collapse" href="index.html#" 
+        a data-target=(".tales-nav .navbar-collapse") data-toggle="collapse" href="#" 
           i.fa.fa-bars
       nav.pull-right.tales-nav
         .collapse.navbar-collapse
@@ -14,7 +14,7 @@ header
             li class="#{class_list['articles']}"
               = link_to I18n.t("views.header.blog"), articles_path
             li class="#{class_list['my_works']}"
-              = link_to I18n.t("views.header.my_works"), my_works_path 
+              = link_to I18n.t("views.header.my_works"), works_path 
             li class="#{class_list['pages']}"
               = link_to I18n.t("views.header.about_me"), about_me_path
             li
@@ -25,7 +25,7 @@ header
     .container
       = display_tasty_breadcrumbs
       .tales-searchbox
-        form accept-charset="utf-8" action="index.html#" method="get" 
+        form accept-charset="utf-8" action="" method="get" 
           button.searchbutton type="submit" 
             i.fa.fa-search
           input#searchbox.searchfield placeholder="#{I18n.t("views.header.search")}" type="text"

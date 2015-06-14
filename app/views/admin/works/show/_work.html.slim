@@ -7,7 +7,7 @@
         = work_content.title
   .row
     .btn-group.btn-group-lg.pull-right
-      = link_to preview_my_work_path(@work, lang: work_content.lang), class: 'btn btn-success', title: 'Демо' do
+      = link_to preview_work_path(@work, lang: work_content.lang), class: 'btn btn-success', title: 'Демо' do
           = "Демо "
       = link_to 'Изменить', edit_admin_work_path(@work, lang: work_content.lang), class: 'btn btn-primary'
 

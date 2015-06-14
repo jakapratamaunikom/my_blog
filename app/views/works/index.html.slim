@@ -5,4 +5,4 @@
         .image style='margin-top: 0px; text-align: center;'
           = image_tag work.get_content(current_lang).image.try(:thumb_740x280), class: 'img-responsive', style: 'width: 220px; height: 220px; display: inline-block;'
           h3 
-            = link_to work.get_content(current_lang).title, my_work_path(work)
+            = link_to work.get_content(current_lang).title, work_path(work)

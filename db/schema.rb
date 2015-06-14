@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612091610) do
+ActiveRecord::Schema.define(version: 20150614094152) do
 
   create_table "article_contents", force: :cascade do |t|
     t.text     "content"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 20150612091610) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "prides", force: :cascade do |t|
+    t.integer  "objective_id"
+    t.string   "objective_type"
+    t.string   "lang"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "prides", ["objective_type", "objective_id"], name: "index_prides_on_objective_type_and_objective_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "title"

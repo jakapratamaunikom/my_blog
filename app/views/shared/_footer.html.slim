@@ -29,16 +29,10 @@ footer
             i.fa.fa-star
             = I18n.t('views.footer.hall_of_fame')
           ul.tales-list
-            li
-              a href="index.html"  Why we Need to Encrypt All Communication
-            li
-              a href="index.html#"  Selling is a Function of Design. Not Vice-Versa.
-            li
-              a href="index.html#"  It’s Hard To Come Up With Dummy Titles
-            li
-              a href="index.html#"  Why the Internet is Full of Cats
-            li
-              a href="index.html#"  Last Made-Up Headline, I Swear!
+            - Pride.send(current_lang).each do |pride|
+              li
+                = link_to pride.objective.get_content(current_lang).title, pride.objective
+
         .col-md-4.footer-widget
           h3
             i.fa.fa-envelope

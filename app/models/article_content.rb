@@ -1,5 +1,6 @@
 class ArticleContent < ActiveRecord::Base
   include Localizable
+  include Publishable
 
   mount_uploader :image, AvatarUploader
   

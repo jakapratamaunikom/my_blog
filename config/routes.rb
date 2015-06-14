@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     put :mark, on: :member
   end
 
-  resources :my_works, only: [:show, :index] do
+  resources :works, only: [:show, :index] do
     get :preview, on: :member  
   end
   
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resources :images, only: [:create, :destroy]
     resources :tags
 
-    resource :pride,   only: [:show, :update]
+    resource :pride, only: [:show, :create]
 
     resources :articles do
       get :toggle_published_status, on: :member

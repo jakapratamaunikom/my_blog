@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MyWorksController, type: :controller do
+RSpec.describe WorksController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
