@@ -22,5 +22,5 @@ namespace :deploy do
     end
   end
 
-  # after :finished, 'unicorn:2'
+  after :finished, 'unicorn:2'
 end
