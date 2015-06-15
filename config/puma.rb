@@ -1,4 +1,6 @@
-if Rails.env.development? || Rails.env.test?
+rails_env = ENV['RAILS_ENV'] || 'development'
+
+if ['development', 'test'].include?(rails_env)
   bind  "tcp://0.0.0.0:3000"
   pidfile "tmp/puma/pid"
   state_path "tmp/puma/state"
