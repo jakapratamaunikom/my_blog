@@ -17,7 +17,7 @@ Rails.application.config.assets.precompile += %w( bootstrap/glyphicons-halflings
 Rails.application.config.assets.precompile += %w( bootstrap/glyphicons-halflings-regular.ttf )
 Rails.application.config.assets.precompile += %w( bootstrap/glyphicons-halflings-regular.svg )
 
-Rails.application.config.assets.precompile += %w( admin.js admin.css)
+Rails.application.config.assets.precompile += %w( admin.js admin.css tales.css.scss)
 Rails.application.config.assets.precompile += ['.svg', '.eot', '.woff', '.ttf', '*.png']
 Rails.application.config.assets.precompile += %w(*.jpg *.jpeg *.gif)
 Rails.application.config.assets.precompile += %w( i18n.js )
