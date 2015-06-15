@@ -4,7 +4,7 @@ if Rails.env.development? || Rails.env.test?
   state_path "tmp/puma/state"
   threads 4,4
 else
-  bind  "tcp://91.218.229.116:4444"
+  bind  "tcp://109.120.142.216:5555"
   pidfile "/var/www/my_blog/current/tmp/puma_pid"
   state_path "/var/www/my_blog/current/tmp/puma_state" 
   threads 0,1000
