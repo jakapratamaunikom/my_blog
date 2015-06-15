@@ -2,7 +2,7 @@ lock '3.4.0'
 
 set :application, 'my_blog'
 set :deploy_to, "/var/www/#{fetch(:application)}"
-set :repo_url, 'git@github.com:my_blog/my_blog.git'
+set :repo_url, 'git@github.com:valexl/my_blog.git'
 set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/uploads')
 set :bundle_binstubs, -> { shared_path.join('bin') }
@@ -22,6 +22,5 @@ namespace :deploy do
     end
   end
 
-  after :finished, 'unicorn:2'
-  after :finished, 'resque:restart'
+  # after :finished, 'unicorn:2'
 end
