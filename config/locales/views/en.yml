@@ -9,6 +9,10 @@ en:
       tags:      'Tags'
       details:   'Read more'
 
+      comments:
+        cancel: 'Cancel'
+        submit: 'Submit'
+
       count_comments: 'Comments %{quantity}  '
 
     pages:

@@ -54,5 +54,7 @@ aside#create-comment.create-comment
         .col-md-12.js-field-container
           = f.text_area :content, class: 'form-control input-lg', rows: 5, placeholder: I18n.t('views.comments.placeholder.content'), required: true
       .buttons.clearfix
-        button.btn.btn-xlarge.btn-tales-two Cancel
-        button.btn.btn-xlarge.btn-tales-one type="submit"  Submit
+        button.btn.btn-xlarge.btn-tales-two 
+          = I18n.t("views.articles.comments.cancel")
+        button.btn.btn-xlarge.btn-tales-one type="submit"
+          = I18n.t("views.articles.comments.submit")

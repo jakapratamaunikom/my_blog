@@ -9,6 +9,10 @@ ru:
       tags:      'Теги'
       details:   'Подробнее'
 
+      comments:
+        cancel: 'Отмена'
+        submit: 'Отправить'
+
       count_comments: 'Комментариев %{quantity}  '
     
     pages:
