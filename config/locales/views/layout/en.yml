@@ -1,6 +1,10 @@
 en:
   views:
     header:
+      titles:
+        articles: 'Alexey V. Blog'
+        works:    'My works'
+        about_me: 'About me'
       I:           'Alex V.'
       blog:        'Blog'
       about_me:    'About me'

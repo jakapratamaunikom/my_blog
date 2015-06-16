@@ -1,6 +1,10 @@
 ru:
   views:
     header:
+      titles:
+        articles: 'Блог Алексея В.'
+        works:    'Мои работы'
+        about_me: 'О себе'
       I:           'Алексей В.'
       blog:        'Блог'
       about_me:    'О себе'

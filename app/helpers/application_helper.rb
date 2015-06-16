@@ -12,7 +12,17 @@ module ApplicationHelper
     elsif current_controller?('admin/articles') && params[:action] == 'show'
       'Просмотр статьи'
     else
-      'Блог Алексея В.'
+      obj     = @article || @work
+      return obj.get_content(current_lang).title if obj.present?
+      
+      case params[:controller]
+      when 'works'
+        I18n.t("views.header.titles.works")
+      when 'pages'
+        I18n.t("views.header.titles.about_me")
+      else
+        I18n.t("views.header.titles.articles")
+      end
     end
   end
 
