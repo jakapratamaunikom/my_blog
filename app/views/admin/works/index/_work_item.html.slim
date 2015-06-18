@@ -3,9 +3,10 @@
     img.work-img src="#{work_content.image.try(:thumb_242x200).to_s}"
 
   .caption
-    - if work_content.fully_filled?
+    - if work_content.title.present?
       h3
         = link_to work_content.title, admin_work_path(work_content.work)
+    - if work_content.fully_filled?
       p
         - if work_content.published?
           = link_to 'Снять с публикации?', toggle_published_status_admin_work_path(work_content.work), class: 'text-danger'
