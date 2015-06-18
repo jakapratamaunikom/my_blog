@@ -23,6 +23,7 @@ class ShowArticle
     @el = el
     new FormValidator $(form) for form in @el.find("form")
     @el.on "click", "a[data-type=reply_comment]", @replyComment
+    @el.on "click", "a[data-type=clear_form]",    @clearForm
   
   replyComment: (e) =>
     e.preventDefault()
@@ -31,6 +32,12 @@ class ShowArticle
     form.find("#comment_parent_id").val comment_id
 
     @setCursorToTarget form
+
+  clearForm: (e) =>
+    e.preventDefault()
+    form = @el.find("#create-comment form")
+    form.find("input[type=text], input[type=hidden]#parent_id, textarea").val("");
+
 
   setCursorToTarget: (form) =>
     return if form.length == 0
