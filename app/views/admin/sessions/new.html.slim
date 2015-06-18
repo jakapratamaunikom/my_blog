@@ -8,11 +8,10 @@ br
       = hidden_field_tag 'auth[back_url]',  params[:back_url]
 
       .form-group
-        = label_tag :auth_password, "Пароль", class: 'control-label col-sm-2'
         .col-sm-10
           = password_field_tag 'auth[password]', @authenticator.password, class: 'form-control'
 
       .form-group
-        .col-sm-offset-2.col-sm-10
+        .col-sm-10
           = submit_tag "Пробуй", class: 'btn btn-primary'
 
