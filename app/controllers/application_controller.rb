@@ -23,5 +23,14 @@ class ApplicationController < ActionController::Base
       session[:tag_ids] = []
     end
 
+    def default_url_options
+      if current_lang.present?
+        { :lang => current_lang.id }.merge(super)
+      else
+        super
+      end
+    end
+
+
 
 end
