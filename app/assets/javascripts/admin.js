@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
-//= require 'bootstrap/bootstrap.min'
+//= require bootstrap/bootstrap.min
 //= require selectize
 //= require jquery-fileupload/basic
 

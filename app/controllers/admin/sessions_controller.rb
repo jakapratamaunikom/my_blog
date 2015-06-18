@@ -1,7 +1,9 @@
 class Admin::SessionsController < Admin::BaseController
   skip_before_action :authenticate!
-
+  layout 'sign_in'
+  
   def new
+    @authenticator = VAlexL::MyBlog::Authenticator.new
     redirect_to admin_root_path if current_user_admin?
   end
 

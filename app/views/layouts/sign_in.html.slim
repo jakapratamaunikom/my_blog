@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title
+      = get_page_title
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .container
+      = yield
+
+    .footer.navbar-fixed-bottom
+      .container
+        = yield :footer
+        
+    javascript:
+      displayNotices("#{notice}")

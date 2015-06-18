@@ -3,14 +3,16 @@ require 'bcrypt'
 class VAlexL::MyBlog::Authenticator
   class BlankPassword < Exception; end
 
-	def initialize(password)
+  attr_reader :password
+
+	def initialize(password='')
 		@password = password
 	end
 
   def allowed_access?
     raise BlankPassword if encrypted_password.blank?
     bcrypt       = ::BCrypt::Password.new(encrypted_password)
-    eng_password = ::BCrypt::Engine.hash_secret("#{@password}", bcrypt.salt)
+    eng_password = ::BCrypt::Engine.hash_secret("#{password}", bcrypt.salt)
     secure_compare(eng_password, encrypted_password)
   end
 
