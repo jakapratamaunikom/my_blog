@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
 
     def default_url_options
       if current_lang.present?
-        { :lang => current_lang.id }.merge(super)
+        { :lang => current_lang }.merge(super)
       else
         super
       end
