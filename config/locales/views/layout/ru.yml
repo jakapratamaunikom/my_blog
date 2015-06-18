@@ -11,6 +11,7 @@ ru:
       search:      'Поиск'
       my_works:    'Портфолио'
       switch_lang: 'Switch to English'
+      admin:       'Админка'
 
     footer:
       statistic: 'Статистика'

@@ -3,11 +3,18 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+
+  helper_method :current_user_admin?
   
   def current_lang
     return :ru if session[:current_lang].blank?
     session[:current_lang]
   end
+
+  def current_user_admin?
+    session[:is_admin]
+  end
+
 
   private
     def set_language(value)
@@ -25,7 +32,7 @@ class ApplicationController < ActionController::Base
 
     def default_url_options
       if current_lang.present?
-        { :lang => current_lang }.merge(super)
+      { :lang => current_lang }.merge(super)
       else
         super
       end

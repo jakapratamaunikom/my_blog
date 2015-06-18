@@ -20,6 +20,10 @@ header
             li
               = link_to switch_language_path, method: :PUT, title: I18n.t("views.header.switch_lang") do
                 i class="famfamfam-flag-#{current_lang_flag}"
+            - if current_user_admin?
+              li
+                = link_to admin_root_path, title: I18n.t("views.header.admin") do
+                  i.fa.fa-cogs 
 
   .widewrapper.subheader
     .container

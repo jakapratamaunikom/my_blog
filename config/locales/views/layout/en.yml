@@ -11,7 +11,8 @@ en:
       search:      'Search'
       my_works:    'My works'
       switch_lang: 'Смотреть на русском'
-
+      admin:       'Dashboard'
+      
     footer:
       statistic: 'Statistic'
       articles:  'Articles'

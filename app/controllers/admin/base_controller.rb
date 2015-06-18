@@ -18,10 +18,6 @@ class Admin::BaseController < ApplicationController
     current_lang == :en
   end
 
-  def current_user_admin?
-    session[:is_admin]
-  end
-
   def authenticate!
     redirect_to admin_sign_in_path(back_url: get_original_url) unless current_user_admin?
     true
