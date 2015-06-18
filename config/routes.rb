@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   
   namespace :admin do
     get '/' => "main#index", as: 'root'
+
+    get  '/sign_in'    => 'sessions#new', as: 'sign_in'
+    post '/sign_in'    => 'sessions#check'
+    put  '/sign_out'   => 'sessions#out', as: 'sign_out'
       
     resources :images, only: [:create, :destroy]
     resources :tags

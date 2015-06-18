@@ -2,6 +2,7 @@ class Admin::BaseController < ApplicationController
   layout 'admin'
 
   helper_method :current_lang
+  before_action :authenticate!
 
   add_tasty_breadcrumb 'Админка', :admin_root_path
 
@@ -15,5 +16,18 @@ class Admin::BaseController < ApplicationController
 
   def english_language?
     current_lang == :en
+  end
+
+  def current_user_admin?
+    session[:is_admin]
+  end
+
+  def authenticate!
+    redirect_to admin_sign_in_path(back_url: get_original_url) unless current_user_admin?
+    true
+  end
+
+  def get_original_url
+    @get_original_url ||= "http://#{request.host_with_port}#{request.fullpath}"
   end
 end

@@ -36,6 +36,12 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       get :index, {}, valid_session
       expect(assigns(:articles)).to eq([article])
     end
+
+    it 'redirect to sessions#new if current user not admin' do
+      allow(controller).to receive(:current_user_admin?).and_return(false)
+      get :index, {}, valid_session
+      expect(response).to redirect_to admin_sign_in_path(back_url: admin_articles_url)
+    end
   end
 
   describe "GET #show" do
