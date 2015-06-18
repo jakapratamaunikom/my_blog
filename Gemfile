@@ -52,6 +52,8 @@ gem 'jquery-validation-rails'
 
 #For form objects
 gem 'virtus'
+#For encrypt password
+gem "bcrypt-ruby", "~> 3.1.1"
 
 gem 'tasty_breadcrumbs', git: 'git://github.com/valexl/tasty_breadcrumbs.git'
 # gem 'tasty_breadcrumbs', path: '/Users/valexl/workspace/tasty_breadcrumbs/'
