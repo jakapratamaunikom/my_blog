@@ -3,9 +3,10 @@
     img.article-img src="#{article_content.image.try(:thumb_242x200).to_s}"
 
   .caption
-    - if article_content.fully_filled?
+    - if article_content.title.present?
       h3
         = link_to article_content.title, admin_article_path(article_content.article)
+    - if article_content.fully_filled?
       p
         - if article_content.published?
           = link_to 'Снять с публикации?', toggle_published_status_admin_article_path(article_content.article), class: 'text-danger'
