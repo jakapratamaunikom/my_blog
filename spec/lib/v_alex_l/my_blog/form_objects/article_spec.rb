@@ -72,63 +72,32 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
       expect(@article_form.errors.full_messages.first.strip).to eq('Статья должна содержать заголовок хотя бы на одном языке')
     end
 
-
-    it 'will return false and errors.full_messages will have information about blank content if ru_title present and ru_short_description present too,but ru_content, en_title and en_content blank' do
+    it 'will return true and errors.full_messages will be false if just ru_title present and another fields blank' do
       @invalid_params[:ru_title]             = 'Title'
-      @invalid_params[:ru_short_description] = '>..<'
+      @invalid_params[:ru_short_description] = ''
       @invalid_params[:ru_content]           = ''
       @invalid_params[:en_title]             = ''
       @invalid_params[:en_content]           = ''
       @invalid_params[:en_short_description] = ''
+      
       @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
 
-      expect(@article_form.valid?).to eq(false)
-      expect(@article_form.errors.full_messages.length).to eq(1)
-      expect(@article_form.errors.full_messages.first.strip).to eq('Описание (ru) не может быть пустым')
+      expect(@article_form.valid?).to eq(true)
+      expect(@article_form.errors.full_messages.length).to eq(0)
     end
 
-    it 'will return false and errors.full_messages will have information about blank content if en_title present and en_short_description present too, but en_content, ru_title and ru_content blank' do
-      @invalid_params[:en_title]             = 'Title'
-      @invalid_params[:en_short_description] = '>..<'
-      @invalid_params[:en_content]           = ''
+    it 'will return true and errors.full_messages will be false if just en_title present and another fields blank' do
       @invalid_params[:ru_title]             = ''
+      @invalid_params[:ru_short_description] = ''
       @invalid_params[:ru_content]           = ''
-      @invalid_params[:ru_short_description] = ''
-
-      @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
-
-      expect(@article_form.valid?).to eq(false)
-      expect(@article_form.errors.full_messages.length).to eq(1)
-      expect(@article_form.errors.full_messages.first.strip).to eq('Описание (en) не может быть пустым')
-    end
-
-    it 'will return false and errors.full_messages will have information about blank short_description if ru_title present and ru_content present too,but ru_content, en_title and en_short_description blank' do
-      @invalid_params[:ru_title]             = 'Title'
-      @invalid_params[:ru_content]           = '>..<'
-      @invalid_params[:ru_short_description] = ''
-      @invalid_params[:en_title]             = ''
+      @invalid_params[:en_title]             = 'Title'
       @invalid_params[:en_content]           = ''
       @invalid_params[:en_short_description] = ''
+      
       @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
 
-      expect(@article_form.valid?).to eq(false)
-      expect(@article_form.errors.full_messages.length).to eq(1)
-      expect(@article_form.errors.full_messages.first.strip).to eq('Краткое описание (ru) не может быть пустым')
-    end
-
-    it 'will return false and errors.full_messages will have information about blank short_description if en_title present and en_content present too, but en_content, ru_title and ru_short_description blank' do
-      @invalid_params[:en_title]             = 'Title'
-      @invalid_params[:en_content]           = '>..<'
-      @invalid_params[:en_short_description] = ''
-      @invalid_params[:ru_title]             = ''
-      @invalid_params[:ru_content]           = ''
-      @invalid_params[:ru_short_description] = ''
-
-      @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
-
-      expect(@article_form.valid?).to eq(false)
-      expect(@article_form.errors.full_messages.length).to eq(1)
-      expect(@article_form.errors.full_messages.first.strip).to eq('Краткое описание (en) не может быть пустым')
+      expect(@article_form.valid?).to eq(true)
+      expect(@article_form.errors.full_messages.length).to eq(0)
     end
 
   end
@@ -188,7 +157,6 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
         end
 
         it 'return arcticle with new attributes' do
-          @invalid_params[:ru_title] = 'Invalid params'
           @article_form = VAlexL::MyBlog::FormObjects::Article.new @article, @invalid_params
           expect(@article_form.save).to eq(false)
           expect(@article_form.ru_title).to eq(@invalid_params[:ru_title])

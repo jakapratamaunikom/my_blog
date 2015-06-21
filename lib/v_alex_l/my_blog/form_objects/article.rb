@@ -15,9 +15,6 @@ class VAlexL::MyBlog::FormObjects::Article
   attr_reader   :article
   attr_accessor :ru_tags, :en_tags
 
-  validates :ru_content, :ru_short_description, presence: true, if: Proc.new {|af| af.ru_title.present?}
-  validates :en_content, :en_short_description, presence: true, if: Proc.new {|af| af.en_title.present?}
-
   validate :should_have_title_least_one_language
 
   def self.human_attribute_name(attr, options = {}) #для отображения сообщений валидации
