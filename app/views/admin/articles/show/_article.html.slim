@@ -21,16 +21,22 @@
       = link_to 'Изменить', edit_admin_article_path(@article, lang: article_content.lang), class: 'btn btn-primary'
 
     .col-sm-8
-      - if article_content.published?
-        .alert.alert-success
-          strong
-            'Статья опубликована и радует своих читателей.
-          = "Сделать статью еще лучше, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_article_path(@article, lang: article_content.lang), class: 'text-danger'}".html_safe
+      - if article_content.fully_filled?
+        - if article_content.published?
+          .alert.alert-success
+            strong
+              'Статья опубликована и радует своих читателей.
+            = "Сделать статью еще лучше, но перед этим #{link_to 'снять на время ее с публикации?', toggle_published_status_admin_article_path(@article, lang: article_content.lang), class: 'text-danger'}".html_safe
+        - else
+          .alert.alert-warning
+            strong
+              'Статья неопубликованна!
+            = "Сделать людей счастливыми и #{link_to 'опубликовать статью?', toggle_published_status_admin_article_path(@article, lang: article_content.lang), class: 'text-success'}".html_safe
       - else
-        .alert.alert-warning
+        .alert.alert-warning role="alert"
           strong
-            'Статья неопубликованна!
-          = "Сделать людей счастливыми и #{link_to 'опубликовать статью?', toggle_published_status_admin_article_path(@article, lang: article_content.lang), class: 'text-success'}".html_safe
+          'Братиш, заполнить нужно!
+
 
   p
     = article_content.content.html_safe
