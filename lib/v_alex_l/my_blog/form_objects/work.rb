@@ -11,9 +11,6 @@ class VAlexL::MyBlog::FormObjects::Work
 
   attr_reader   :work
 
-  validates :ru_content, presence: true, if: Proc.new {|af| af.ru_title.present?}
-  validates :en_content, presence: true, if: Proc.new {|af| af.en_title.present?}
-
   validate :should_have_title_least_one_language
 
   def self.human_attribute_name(attr, options = {}) #для отображения сообщений валидации

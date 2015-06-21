@@ -67,28 +67,26 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
     end
 
 
-    it 'will return false and errors.full_messages will have information about blank content if ru_title present but ru_content, en_title and en_content blank' do
+    it 'will return true and errors.full_messages will be blank if ru_title present but ru_content, en_title and en_content blank' do
       @invalid_params[:ru_title]   = 'Title'
       @invalid_params[:ru_content] = ''
       @invalid_params[:en_title]   = ''
       @invalid_params[:en_content] = ''
       @work_form = VAlexL::MyBlog::FormObjects::Work.new @work, @invalid_params
 
-      expect(@work_form.valid?).to eq(false)
-      expect(@work_form.errors.full_messages.length).to eq(1)
-      expect(@work_form.errors.full_messages.first.strip).to eq('Описание (ru) не может быть пустым')
+      expect(@work_form.valid?).to eq(true)
+      expect(@work_form.errors.full_messages.length).to eq(0)
     end
 
-    it 'will return false and errors.full_messages will have information about blank content if en_title present but en_content, ru_title and ru_content blank' do
+    it 'will return true and errors.full_messages will be blank if en_title present but en_content, ru_title and ru_content blank' do
       @invalid_params[:en_title]   = 'Title'
       @invalid_params[:en_content] = ''
       @invalid_params[:ru_title]   = ''
       @invalid_params[:ru_content] = ''
       @work_form = VAlexL::MyBlog::FormObjects::Work.new @work, @invalid_params
 
-      expect(@work_form.valid?).to eq(false)
-      expect(@work_form.errors.full_messages.length).to eq(1)
-      expect(@work_form.errors.full_messages.first.strip).to eq('Описание (en) не может быть пустым')
+      expect(@work_form.valid?).to eq(true)
+      expect(@work_form.errors.full_messages.length).to eq(0)
     end
 
   end
@@ -143,7 +141,6 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
         end
 
         it 'return work with new attributes' do
-          @invalid_params[:ru_title] = 'Invalid params'
           @work_form = VAlexL::MyBlog::FormObjects::Work.new @work, @invalid_params
           expect(@work_form.save).to eq(false)
           expect(@work_form.ru_title).to eq(@invalid_params[:ru_title])
