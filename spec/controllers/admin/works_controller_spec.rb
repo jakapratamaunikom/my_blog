@@ -161,6 +161,15 @@ RSpec.describe Admin::WorksController, type: :controller do
       delete :destroy, {:id => work.to_param}, valid_session
       expect(response).to redirect_to(admin_works_url)
     end
+
+    it "set removed field to true" do
+      work = FactoryGirl.create(:work)
+      expect(work.removed).to eq(false)
+      delete :destroy, {:id => work.to_param}, valid_session
+      work.reload
+      expect(work.removed).to eq(true)
+    end
+
   end
 
   describe "PUT toggle_published_status" do

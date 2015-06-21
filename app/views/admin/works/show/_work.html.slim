@@ -10,6 +10,7 @@
       = link_to preview_work_path(@work, lang: work_content.lang), class: 'btn btn-success', title: 'Демо' do
           = "Демо "
       = link_to 'Изменить', edit_admin_work_path(@work, lang: work_content.lang), class: 'btn btn-primary'
+      = link_to 'Удалить', admin_article_path(@work), method: :delete, class: 'btn btn-danger'
 
     .col-sm-8
       - if work_content.fully_filled?

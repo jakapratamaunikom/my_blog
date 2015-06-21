@@ -64,5 +64,23 @@ RSpec.describe Article, type: :model do
       expect(@article.english_content).to eq(en_article_content)
     end
 
+    context 'remove!' do
+      before(:each) do
+        @article.removed = false
+        @article.remove!
+      end
+      
+      it 'will change removed field to true' do
+        expect(@article.removed).to eq(true)
+      end
+
+      it 'can not find record via default scope' do
+        expect(Article.where(id: @article.id).count).to eq(0)
+      end
+    end
+    
+
   end
+
+
 end

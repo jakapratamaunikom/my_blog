@@ -59,5 +59,22 @@ RSpec.describe Work, type: :model do
       expect(@work.english_content).to eq(en_work_content)
     end
 
+    context 'remove!' do
+      before(:each) do
+        @work.removed = false
+        @work.remove!
+      end
+      
+      it 'will change removed field to true' do
+        expect(@work.removed).to eq(true)
+      end
+
+      it 'can not find record via default scope' do
+        expect(Work.where(id: @work.id).count).to eq(0)
+      end
+    end
+    
+
+
   end
 end

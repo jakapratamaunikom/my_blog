@@ -76,7 +76,7 @@ class Admin::WorksController < Admin::BaseController
 
   def destroy
     @work = Work.find(params[:id])
-    @work.destroy
+    @work.remove!
 
     respond_to do |format|
       format.html { redirect_to admin_works_path, notice: 'Гавнопроект удалена! Завязывай о таких писать..' }

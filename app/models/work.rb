@@ -1,12 +1,18 @@
 class Work < ActiveRecord::Base
   LANGUAGES = %w(ru en)
+
+  default_scope { where(removed: false) }
   scope :published, ->(lang) { joins(:work_contents).merge(WorkContent.send(lang).published) }
   
   has_many :work_contents
   has_many :images
   
   accepts_nested_attributes_for :work_contents
-  
+
+  def remove!
+    self.removed = true and save!
+  end
+
   def get_content(lang)
     check_given_lang!(lang)
     return russian_content if lang.to_s == 'ru'

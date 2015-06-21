@@ -76,7 +76,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   def destroy
     @article = Article.find(params[:id])
-    @article.destroy
+    @article.remove!
 
     respond_to do |format|
       format.html { redirect_to admin_articles_path, notice: 'Гавностатья удалена! Завязывай такие писать..' }

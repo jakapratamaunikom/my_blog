@@ -1,6 +1,8 @@
 class Article < ActiveRecord::Base
   LANGUAGES = %w(ru en)
 
+  default_scope { where(removed: false) }
+
   scope :published, ->(lang) { joins(:article_contents).merge(ArticleContent.send(lang).published) }
   
   has_many :comments
@@ -12,7 +14,12 @@ class Article < ActiveRecord::Base
 
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :article_contents
-  
+    
+
+  def remove!
+    self.removed = true and save!
+  end
+
   def get_content(lang)
     check_given_lang!(lang)
     return russian_content if lang.to_s == 'ru'

@@ -170,6 +170,14 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       delete :destroy, {:id => article.to_param}, valid_session
       expect(response).to redirect_to(admin_articles_url)
     end
+
+    it "set removed field to true" do
+      article = FactoryGirl.create(:article)
+      expect(article.removed).to eq(false)
+      delete :destroy, {:id => article.to_param}, valid_session
+      article.reload
+      expect(article.removed).to eq(true)
+    end
   end
 
   describe "PUT toggle_published_status" do
