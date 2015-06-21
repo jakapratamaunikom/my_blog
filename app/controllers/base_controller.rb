@@ -12,8 +12,6 @@ class BaseController < ApplicationController
   before_action :init_tag_ids
   before_action :reset_tag_ids
 
-  helper_method :current_lang
-
   private
     def init_language
       I18n.locale = current_lang

@@ -9,8 +9,6 @@ Rails.application.routes.draw do
     root 'articles#index'
     get "/about_me" => "pages#about_me", as: 'about_me'
     
-    put '/switch_language' => "settings#switch_language", as: 'switch_language'
-
     resources :comments, only: [:create]
     resources :articles, only: [:show, :index] do
       get :preview, on: :member  

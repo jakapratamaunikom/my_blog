@@ -5,14 +5,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user_admin?
+  helper_method :current_lang
   
-  def current_lang
-    return :ru if session[:current_lang].blank?
-    session[:current_lang]
-  end
-
   def current_user_admin?
     session[:is_admin]
+  end
+
+  def current_lang
+    params[:lang].present? ? params[:lang].to_sym : :ru 
+  end
+
+  def russian_language?
+    current_lang == :ru
+  end
+
+  def english_language?
+    current_lang == :en
   end
 
 

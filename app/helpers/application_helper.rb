@@ -70,7 +70,35 @@ module ApplicationHelper
             end
         ul
       end
-
     end
   end
+
+
+  def current_path_to_anothre_lang
+    get_path_to_controller_and_action(params[:controller], params[:action])
+  end
+
+  private
+    def another_lang
+      @another_lang ||= current_lang.eql?(:en) ? :ru  : :en
+      @another_lang
+    end
+
+    def get_path_to_controller_and_action(controller, action)
+      case action
+      when 'index'
+        send("#{controller}_path", lang: another_lang)
+      when 'show'
+        object   = @article
+        object ||= @work
+        return send("#{controller}_path", lang: another_lang) unless object.get_content(another_lang).published?
+        send("#{controller.singularize}_path", lang: another_lang)
+      when 'about_me'
+        about_me_path(lang: another_lang)
+      else
+        root_url(lang: another_lang)
+      end
+    end
+      
+
 end
