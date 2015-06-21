@@ -13,7 +13,7 @@ header
             - class_list = {params[:controller] => 'active'}
             li class="#{class_list['articles']}"
               = link_to I18n.t("views.header.blog"), articles_path
-            li class="#{class_list['my_works']}"
+            li class="#{class_list['works']}"
               = link_to I18n.t("views.header.my_works"), works_path 
             li class="#{class_list['pages']}"
               = link_to I18n.t("views.header.about_me"), about_me_path
