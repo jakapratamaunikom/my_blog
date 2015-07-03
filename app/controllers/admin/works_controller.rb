@@ -7,7 +7,7 @@ class Admin::WorksController < Admin::BaseController
 
   def show
     @work = Work.find(params[:id])
-    add_tasty_breadcrumb @work.get_content(current_lang).title, admin_work_path(1)
+    add_tasty_breadcrumb @work.get_content(current_lang).title, admin_work_path(@work)
   end
 
   def new
@@ -37,8 +37,8 @@ class Admin::WorksController < Admin::BaseController
     @work = Work.find(params[:id])
     @work_form = VAlexL::MyBlog::FormObjects::Work.new @work
     
-    add_tasty_breadcrumb @work.get_content(current_lang).title, admin_work_path(1)
-    add_tasty_breadcrumb 'Редактирование', edit_admin_work_path(1)
+    add_tasty_breadcrumb @work.get_content(current_lang).title, admin_work_path(@work)
+    add_tasty_breadcrumb 'Редактирование', edit_admin_work_path(@work)
   end
 
   def update
@@ -50,7 +50,7 @@ class Admin::WorksController < Admin::BaseController
         format.html { redirect_to admin_work_path(@work_form.work, lang: current_lang), notice: 'Йо! Теперь ты описал свою работу еще лучше!!!' }
         format.json { render :show, status: :ok, location: @work_form.work }
       else
-        add_tasty_breadcrumb @work_form.work.get_content(current_lang).title, admin_work_path(1)
+        add_tasty_breadcrumb @work_form.work.get_content(current_lang).title, admin_work_path(@work)
         add_tasty_breadcrumb 'Редактирование', edit_admin_work_path(@work)
 
         format.html { render :edit }
