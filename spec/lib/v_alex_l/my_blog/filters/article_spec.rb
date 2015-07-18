@@ -57,7 +57,7 @@ RSpec.describe VAlexL::MyBlog::Filters::Article do
     it 'will return articles which market tag1 for filter by tag1' do
       @filter = VAlexL::MyBlog::Filters::Article.new [@tag1.id], :ru
       expect(@filter.get_records.count).to eq(2)
-      expect(@filter.get_records.to_a).to eq([@article_with_tag_1_and_tag_2, @article_with_tag_1])
+      expect(@filter.get_records.to_a).to eq([@article_with_tag_1, @article_with_tag_1_and_tag_2])
     end
 
     it 'will return articles which market tag1 and tag2 for filter by tag1 and tag2' do

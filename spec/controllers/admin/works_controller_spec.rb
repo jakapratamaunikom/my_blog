@@ -80,12 +80,12 @@ RSpec.describe Admin::WorksController, type: :controller do
 
       it "redirects to the created work" do
         post :create, {:work => valid_attributes}, valid_session
-        expect(response).to redirect_to([:admin, Work.last])
+        expect(response).to redirect_to([:admin, Work.first])
       end
 
       it 'create references between images' do
         post :create, {:work => valid_attributes}, valid_session
-        expect(Work.last.images.count).to eq(2)
+        expect(Work.first.images.count).to eq(2)
       end
     end
 

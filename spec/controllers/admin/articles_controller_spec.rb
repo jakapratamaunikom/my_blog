@@ -84,7 +84,7 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 
       it "redirects to the created article" do
         post :create, {:article => valid_attributes}, valid_session
-        expect(response).to redirect_to([:admin, Article.last])
+        expect(response).to redirect_to([:admin, Article.first])
       end
 
       it 'create link on tag' do
