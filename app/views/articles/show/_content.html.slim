@@ -21,6 +21,11 @@ article.blog-post
           span.data data-type='article-comments'
             = I18n.t("views.articles.count_comments", quantity: @article.count_comments)
   .body
+    - if current_user_admin?
+      = link_to edit_admin_article_path(@article), class: 'btn btn-info btn-sm pull-right' do
+        i.fa.fa-edit
+        |  Изменить
+      br
     = @article.get_content(current_lang).content.html_safe
          
 

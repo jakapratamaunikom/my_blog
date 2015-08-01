@@ -17,6 +17,11 @@
                   = article.get_content(current_lang).short_description
                 .clearfix
                   = link_to I18n.t("views.articles.details"), article, class: 'btn btn-tales-one'
+                  - if current_user_admin?
+                    = link_to edit_admin_article_path(article), class: 'btn btn-info pull-right' do
+                      i.fa.fa-edit
+                      |  Изменить
+
       / .paging
       /   a.newer href="index.html#" 
       /     i.fa.fa-long-arrow-left
