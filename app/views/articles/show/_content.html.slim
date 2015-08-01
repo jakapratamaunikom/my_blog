@@ -1,5 +1,6 @@
 article.blog-post
   header
+    = get_available_languages_for_page(@article)
     h1 
       = @article.get_content(current_lang).title
     .lead-image
@@ -20,7 +21,7 @@ article.blog-post
           i.fa.fa-comments
           span.data data-type='article-comments'
             = I18n.t("views.articles.count_comments", quantity: @article.count_comments)
-  .body
+  .body    
     - if current_user_admin?
       = link_to edit_admin_article_path(@article), class: 'btn btn-info btn-sm pull-right' do
         i.fa.fa-edit

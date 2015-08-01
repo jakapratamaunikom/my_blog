@@ -38,8 +38,7 @@ module ApplicationHelper
   end
 
   def current_lang_flag
-    return :ru if current_lang.to_sym == :ru
-    :gb
+    get_flag_for_lang(current_lang.to_sym)
   end
 
   def display_actions_for(object, namespace='')
@@ -73,14 +72,42 @@ module ApplicationHelper
     end
   end
 
-
   def current_path_to_anothre_lang
     get_path_to_controller_and_action(params[:controller], params[:action])
   end
 
+  def current_lang_russian?
+    current_lang.eql?(:ru)
+  end
+
+  def current_lang_english?
+    current_lang.eql?(:en)
+  end
+
+  def get_available_languages_for_page(object)
+    content_tag :div, class: 'pull-right btn-group available-languages' do
+      [:en, :ru].inject(''.html_safe) do |res, lang|
+        content = object.get_content(lang)
+        if content.published?
+          class_list = 'btn btn-default'
+          class_list += ' active' if current_lang.eql?(lang)
+          res += link_to({lang: lang}, {class: class_list}) do
+            content_tag :i, '', class: "famfamfam-flag-#{get_flag_for_lang(lang)}"
+          end
+        end
+        res
+      end
+    end
+  end
+
   private
+    def get_flag_for_lang(lang)
+      return :gb if lang.eql?(:en)
+      lang
+    end
+
     def another_lang
-      @another_lang ||= current_lang.eql?(:en) ? :ru  : :en
+      @another_lang ||= current_lang_english? ? :ru  : :en
       @another_lang
     end
 
