@@ -15,6 +15,7 @@
   hr
   .row
     .col-xs-12
+      = get_available_languages_for_page(@work)
       h2
         = @work.get_content(current_lang).title
       = @work.get_content(current_lang).content.html_safe
