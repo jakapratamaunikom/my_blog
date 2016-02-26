@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150621090713) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "article_contents", force: :cascade do |t|
     t.text     "content"
     t.string   "title"
@@ -61,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150621090713) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "prides", ["objective_type", "objective_id"], name: "index_prides_on_objective_type_and_objective_id"
+  add_index "prides", ["objective_type", "objective_id"], name: "index_prides_on_objective_type_and_objective_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "title"
