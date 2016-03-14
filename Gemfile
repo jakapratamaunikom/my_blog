@@ -39,6 +39,10 @@ gem "i18n-js"
 # For flag icongs
 gem 'famfamfam_flags_rails'
 
+#For monitoring
+gem 'rollbar', '~> 2.7.1'
+
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
