@@ -17,3 +17,6 @@
 /tmp
 /public/uploads
 /cookbooks
+*.DS_Store
+.DS_Store
+.vagrant/
