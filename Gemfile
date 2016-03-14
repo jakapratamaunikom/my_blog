@@ -42,8 +42,6 @@ gem 'famfamfam_flags_rails'
 #For monitoring
 gem 'rollbar', '~> 2.7.1'
 
-
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
