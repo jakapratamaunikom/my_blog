@@ -20,3 +20,5 @@
 *.DS_Store
 .DS_Store
 .vagrant/
+rollbar.rb
+database.yml
