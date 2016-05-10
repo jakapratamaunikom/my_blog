@@ -42,6 +42,26 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       get :index, {}, valid_session
       expect(response).to redirect_to admin_sign_in_path(back_url: admin_articles_url)
     end
+
+    context 'search by title articles' do
+      it 'search by title articles with empty query' do
+        article = FactoryGirl.create(:article)
+        get :index, {:query_search => ''}, valid_session
+        expect(assigns(:articles)).to eq([article])
+      end  
+
+      it 'search by title articles with not exist title' do
+        article = FactoryGirl.create(:article)
+        get :index, {:query_search => 'search_text'}, valid_session
+        expect(assigns(:articles)).to eq([])
+      end  
+
+      it 'search by title articles' do
+        article = FactoryGirl.create(:article)
+        get :index, {:query_search => 'Lorem Ipsum'}, valid_session
+        expect(assigns(:articles)).to eq([article])
+      end
+    end  
   end
 
   describe "GET #show" do

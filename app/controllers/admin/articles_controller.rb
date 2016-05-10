@@ -2,7 +2,8 @@ class Admin::ArticlesController < Admin::BaseController
   add_tasty_breadcrumb 'Статьи',  :admin_articles_path
 
   def index
-    @articles = Article.all
+    @search_article = VAlexL::MyBlog::Search::Article.new(params[:query_search])
+    @articles = @search_article.search
   end
 
   def show
