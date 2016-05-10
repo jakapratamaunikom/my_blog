@@ -29,12 +29,12 @@ RSpec.describe Admin::ArticlesController, type: :controller do
   describe "GET #index" do
     before(:each) do
       Article.destroy_all
+      @article = FactoryGirl.create(:article)
     end
     
     it "assigns all articles as @articles" do
-      article = FactoryGirl.create(:article)
       get :index, {}, valid_session
-      expect(assigns(:articles)).to eq([article])
+      expect(assigns(:articles)).to eq([@article])
     end
 
     it 'redirect to sessions#new if current user not admin' do
@@ -45,21 +45,20 @@ RSpec.describe Admin::ArticlesController, type: :controller do
 
     context 'search by title articles' do
       it 'search by title articles with empty query' do
-        article = FactoryGirl.create(:article)
         get :index, {:query_search => ''}, valid_session
-        expect(assigns(:articles)).to eq([article])
+        expect(assigns(:articles)).to eq([@article])
       end  
 
       it 'search by title articles with not exist title' do
-        article = FactoryGirl.create(:article)
         get :index, {:query_search => 'search_text'}, valid_session
         expect(assigns(:articles)).to eq([])
       end  
 
       it 'search by title articles' do
-        article = FactoryGirl.create(:article)
-        get :index, {:query_search => 'Lorem Ipsum'}, valid_session
-        expect(assigns(:articles)).to eq([article])
+        content = @article.get_content('ru')
+        ArticleContent.update(content.id, :title => "тест")
+        get :index, {:query_search => 'тест'}, valid_session
+        expect(assigns(:articles)).to eq([@article])
       end
     end  
   end
