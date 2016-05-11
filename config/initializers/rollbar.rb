@@ -5,8 +5,8 @@ Rollbar.configure do |config|
   config.access_token = '89a24488c2f640cb9a11ed6f81ee5787'
 
   # Here we'll disable in 'test':
-  if Rails.env.test?
-    config.enabled = false
+  if Rails.env.test? || Rails.env.develop?
+    config.enabled = false 
   end
 
   # By default, Rollbar will try to call the `current_user` controller method
@@ -53,5 +53,5 @@ Rollbar.configure do |config|
   # environment variable like this: `ROLLBAR_ENV=staging`. This is a recommended
   # setup for Heroku. See:
   # https://devcenter.heroku.com/articles/deploying-to-a-custom-rails-environment
-  config.environment = ENV['ROLLBAR_ENV'] || Rails.env
+  # config.environment = ENV['ROLLBAR_ENV'] || Rails.env
 end
