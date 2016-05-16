@@ -2,7 +2,7 @@ class Admin::ArticlesController < Admin::BaseController
   add_tasty_breadcrumb 'Статьи',  :admin_articles_path
 
   def index
-    @articles = Article.all
+    @articles = Article.page(params[:page]).per(2)
   end
 
   def show

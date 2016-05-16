@@ -202,6 +202,9 @@ GEM
       thor (~> 0.14)
     json (1.8.2)
     json2-rails (1.1.0)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kgio (2.9.3)
     libv8 (3.16.14.7)
     listen (2.10.0)
@@ -391,6 +394,7 @@ DEPENDENCIES
   jquery-rails
   jquery-validation-rails
   json2-rails
+  kaminari
   messengerjs-rails (~> 1.4.1)
   pg
   rails (= 4.2.0)
@@ -414,3 +418,6 @@ DEPENDENCIES
   unicorn
   virtus
   web-console (~> 2.0)
+
+BUNDLED WITH
+   1.11.2

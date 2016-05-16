@@ -1,7 +1,8 @@
 = link_to 'Добавить проект', new_admin_work_path, class: 'btn btn-default btn-sm'
 br
 br
-
+.pagination
+  = paginate @articles 
 .row.works
   - @works.each do |work|
     .col-sm-6.col-md-3.work
