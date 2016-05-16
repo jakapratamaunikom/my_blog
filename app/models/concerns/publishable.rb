@@ -2,7 +2,7 @@ module Publishable
   extend ActiveSupport::Concern
   
   def fully_filled?
-    title.present? && content.present? && image.present?
+    title.present? && content.present? && image.present? && image.file.present?
   end
 
   def toggle_published!

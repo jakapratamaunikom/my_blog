@@ -23,7 +23,7 @@ br
               'EN
         .tab-content
           .tab-pane.active role="tabpanel" id="#{work.id}_ru"
-            = render 'admin/works/index/work_item', work_content: work.get_content('ru')
+            = render 'admin/works/index/work_item', work_content: work.get_content('ru'), work_image: work.image
 
           .tab-pane role="tabpanel" id="#{work.id}_en"
-            = render 'admin/works/index/work_item', work_content: work.get_content('en')
+            = render 'admin/works/index/work_item', work_content: work.get_content('en'), work_image: work.image
