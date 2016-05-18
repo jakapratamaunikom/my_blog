@@ -1,6 +1,6 @@
 .thumbnail role="tabpanel"
   = link_to admin_article_path(article_content.article, lang: article_content.lang) do
-    img.article-img src="#{article_content.image.try(:thumb_242x200).to_s}"
+    img.article-img.center src="#{article_image.try(:thumb_242x200).to_s}"
 
   .caption
     - if article_content.title.present?

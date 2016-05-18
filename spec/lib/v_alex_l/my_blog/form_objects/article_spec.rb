@@ -16,12 +16,10 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
       :ru_title             => @ru_content.title,
       :ru_content           => @ru_content.content,
       :ru_short_description => @ru_content.short_description,
-      :ru_image             => @ru_content.image,
       :ru_published         => @ru_content.published,
       :en_title             => @en_content.title,
       :en_content           => @en_content.content,
       :en_short_description => @en_content.short_description,
-      :en_image             => @en_content.image,
       :en_published         => @en_content.published,
     }
     @params.merge!('ru_tags' => [@ru_tag1.id, @ru_tag2.id])
@@ -213,19 +211,11 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Article do
       expect(@article_form.article.english_content.content).to eq('Что-то умное на русском языке')
     end
 
-    it 'ru_image= wich save image for article_content with russian language' do
+    it 'image= wich save image for article' do
       File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
-        @article_form.ru_image= f
+        @article.image= f
       end
-      filename = File.basename(@article_form.article.russian_content.image.file.file)
-      expect(filename).to eq("img.jpeg")
-    end
-    
-    it 'en_image= wich save image for article_content with english language' do
-      File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
-        @article_form.en_image = f
-      end
-      filename = File.basename(@article_form.article.english_content.image.file.file)
+      filename = File.basename(@article.image.file.file)
       expect(filename).to eq("img.jpeg")
     end
 

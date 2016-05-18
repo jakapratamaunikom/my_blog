@@ -10,12 +10,10 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       :ru_title             => ru_content.title,
       :ru_content           => ru_content.content,
       :ru_short_description => ru_content.short_description,
-      :ru_image             => ru_content.image,
       :ru_published         => ru_content.published,
       :en_title             => en_content.title,
       :en_content           => en_content.content,
       :en_short_description => en_content.short_description,
-      :en_image             => en_content.image,
       :en_published         => en_content.published,
     }
   }

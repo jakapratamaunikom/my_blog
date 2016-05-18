@@ -30,7 +30,7 @@ br
               'EN
         .tab-content
           .tab-pane.active role="tabpanel" id="#{article.id}_ru"
-            = render 'admin/articles/index/article_item', article_content: article.get_content('ru')
+            = render 'admin/articles/index/article_item', article_content: article.get_content('ru'), article_image: article.image
 
           .tab-pane role="tabpanel" id="#{article.id}_en"
-            = render 'admin/articles/index/article_item', article_content: article.get_content('en')
+            = render 'admin/articles/index/article_item', article_content: article.get_content('en'), article_image: article.image
