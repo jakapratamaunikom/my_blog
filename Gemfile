@@ -70,6 +70,8 @@ gem 'carrierwave'
 #For truncate html
 gem 'truncate_html'
 
+gem 'sidekiq'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -78,7 +80,6 @@ gem 'truncate_html'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
 group :production do
   gem 'unicorn'
 end
@@ -88,10 +89,8 @@ group :development do
   gem 'capistrano-rails'
   gem 'rvm1-capistrano3', require: false
   gem 'capistrano-rails-console'
+  gem 'letter_opener'
 end
-
-
-
 
 
 group :development, :test do
@@ -100,8 +99,6 @@ group :development, :test do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
-
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   # gem 'database_cleaner' #чистит тестувую базу
