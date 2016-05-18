@@ -8,7 +8,7 @@ class VAlexL::MyBlog::Search::Article
     if @query_search == nil then
       @articles = ::Article.all
     else
-      @articles = ::Article.joins(:article_contents).where("title LIKE ?", "%#{@query_search}%").uniq
+      @articles = ::Article.joins(:article_contents).where("title LIKE ?", "%#{@query_search}%")
     end
   end
 end

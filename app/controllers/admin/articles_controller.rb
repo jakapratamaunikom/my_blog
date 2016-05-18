@@ -4,6 +4,7 @@ class Admin::ArticlesController < Admin::BaseController
   def index
     @search_article = VAlexL::MyBlog::Search::Article.new(params[:query_search])
     @articles = @search_article.search
+    @articles = @articles.page(params[:page]).per(10).uniq
   end
 
   def show

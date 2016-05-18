@@ -2,7 +2,7 @@ class Admin::WorksController < Admin::BaseController
   add_tasty_breadcrumb 'Мои работы',  :admin_works_path
 
   def index
-    @works = Work.all
+    @works = Work.page(params[:page]).per(10)
   end
 
   def show

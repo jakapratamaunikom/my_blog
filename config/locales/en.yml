@@ -5,3 +5,10 @@ en:
   time:
     formats:
       default: "%Y-%m-%d %H:%M"
+  views:
+    pagination:
+      previous: "&lt; Previous"
+      next: "Next &gt;"
+      truncate: "..."
+      last: "Last"
+      first: "First"
