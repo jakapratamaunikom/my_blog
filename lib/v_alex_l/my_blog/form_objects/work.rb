@@ -4,12 +4,13 @@ class VAlexL::MyBlog::FormObjects::Work
 
   delegate :russian_content, :english_content, to: :@work
   delegate :to_key, :persisted?, :to_model, to: :@work
-  delegate :title=, :content=, :image=, :published=, to: :russian_content, prefix: 'ru'
-  delegate :title,  :content,  :image,  :published,  to: :russian_content, prefix: 'ru'
-  delegate :title=, :content=, :image=, :published=, to: :english_content, prefix: 'en'
-  delegate :title,  :content,  :image,  :published,  to: :english_content, prefix: 'en'
+  delegate :title=, :content=, :published=, to: :russian_content, prefix: 'ru'
+  delegate :title,  :content,  :published,  to: :russian_content, prefix: 'ru'
+  delegate :title=, :content=, :published=, to: :english_content, prefix: 'en'
+  delegate :title,  :content,  :published,  to: :english_content, prefix: 'en'
 
   attr_reader   :work
+  attr_accessor :image
 
   validate :should_have_title_least_one_language
 
@@ -21,6 +22,7 @@ class VAlexL::MyBlog::FormObjects::Work
 
   def initialize(work, attributes={})
     @work = work
+    @work.image = attributes['image']
 
     attributes = {image_ids: @work.image_ids} if attributes.blank?
 

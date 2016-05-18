@@ -1,7 +1,7 @@
 .jumbotron
   .row
     .col-sm-3
-      img.article-img.pull-left src="#{article_content.image.try(:thumb_242x200).to_s}"
+      img.article-img.pull-left src="#{article_image.try(:thumb_242x200).to_s}"
     .col-sm-9
       h1.text-center
         = article_content.title

@@ -1,3 +1,10 @@
+= form_tag(admin_articles_path, :method => "get")
+  .input-group
+    input.form-control type="text" name="query_search"
+    span.input-group-btn
+      button.btn.btn-default type="submit"
+        | Поиск по названию статьи
+br      
 = link_to 'Добавить статью', new_admin_article_path, class: 'btn btn-default btn-sm'
 br
 br
@@ -24,7 +31,7 @@ br
               'EN
         .tab-content
           .tab-pane.active role="tabpanel" id="#{article.id}_ru"
-            = render 'admin/articles/index/article_item', article_content: article.get_content('ru')
+            = render 'admin/articles/index/article_item', article_content: article.get_content('ru'), article_image: article.image
 
           .tab-pane role="tabpanel" id="#{article.id}_en"
-            = render 'admin/articles/index/article_item', article_content: article.get_content('en')
+            = render 'admin/articles/index/article_item', article_content: article.get_content('en'), article_image: article.image
