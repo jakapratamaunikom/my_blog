@@ -5,7 +5,7 @@ class CommentsController < BaseController
 
     respond_to do |format|
       if @comment.save
-        EmailWorker.perform_async(@comment.id)
+        EmailWorker.perform_async(@comment.id) if @comment.parent.present?
         format.js
       else
         format.json { render json: @comment.errors, status: :unprocessable_entity }

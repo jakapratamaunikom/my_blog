@@ -89,7 +89,6 @@ group :development do
   gem 'capistrano-rails'
   gem 'rvm1-capistrano3', require: false
   gem 'capistrano-rails-console'
-  gem 'letter_opener'
 end
 
 
@@ -115,6 +114,6 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-bundler'
   gem 'guard-spork'
-
+  gem 'letter_opener'
 end
 
