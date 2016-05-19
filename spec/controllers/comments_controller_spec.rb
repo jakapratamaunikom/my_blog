@@ -27,7 +27,6 @@ RSpec.describe CommentsController, type: :controller do
         comment = FactoryGirl.create(:comment)
         valid_attributes['parent_id'] = comment.id
         comment2 = Comment.find(comment.id)
-        puts comment2.email
         expect {
           post :create, {:comment => valid_attributes, format: 'js'}, valid_session
         }.to change { ActionMailer::Base.deliveries.count}.by(1)
