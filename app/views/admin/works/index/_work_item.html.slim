@@ -1,6 +1,6 @@
 .thumbnail role="tabpanel"
   = link_to admin_work_path(work_content.work, lang: work_content.lang) do
-    img.work-img src="#{work_content.image.try(:thumb_242x200).to_s}"
+    img.work-img src="#{work_image.try(:thumb_242x200).to_s}"
 
   .caption
     - if work_content.title.present?

@@ -12,11 +12,9 @@ RSpec.describe Admin::WorksController, type: :controller do
     params = {
       :ru_title     => ru_content.title,
       :ru_content   => ru_content.content,
-      :ru_image     => ru_content.image,
       :ru_published => ru_content.published,
       :en_title     => en_content.title,
       :en_content   => en_content.content,
-      :en_image     => en_content.image,
       :en_published => en_content.published,
       :image_ids    => [first_image.id, second_image.id],
     }

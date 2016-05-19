@@ -4,16 +4,16 @@ class VAlexL::MyBlog::FormObjects::Article
 
   delegate :russian_content, :english_content, to: :@article
   delegate :to_key, :persisted?, :to_model, to: :@article
-  delegate :title=, :content=, :image=, :published=, :short_description=, to: :russian_content, prefix: 'ru'
-  delegate :title,  :content,  :image,  :published,  :short_description,  to: :russian_content, prefix: 'ru'
-  delegate :title=, :content=, :image=, :published=, :short_description=, to: :english_content, prefix: 'en'
-  delegate :title,  :content,  :image,  :published,  :short_description,  to: :english_content, prefix: 'en'
+  delegate :title=, :content=, :published=, :short_description=, to: :russian_content, prefix: 'ru'
+  delegate :title,  :content,  :published,  :short_description,  to: :russian_content, prefix: 'ru'
+  delegate :title=, :content=, :published=, :short_description=, to: :english_content, prefix: 'en'
+  delegate :title,  :content,  :published,  :short_description,  to: :english_content, prefix: 'en'
 
   attribute :ru_tags,    Array
   attribute :en_tags,    Array
     
   attr_reader   :article
-  attr_accessor :ru_tags, :en_tags
+  attr_accessor :ru_tags, :en_tags, :image
 
   validate :should_have_title_least_one_language
 
@@ -25,7 +25,8 @@ class VAlexL::MyBlog::FormObjects::Article
 
   def initialize(article, attributes={})
     @article = article
-
+    @article.image = attributes['image']
+    
     if attributes.blank?
       attributes = {}
       attributes.merge! ru_tags: russian_content.tags.map(&:id)

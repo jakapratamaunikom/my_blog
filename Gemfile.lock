@@ -205,6 +205,9 @@ GEM
       thor (~> 0.14)
     json (1.8.2)
     json2-rails (1.1.0)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kgio (2.9.3)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -403,6 +406,7 @@ DEPENDENCIES
   jquery-rails
   jquery-validation-rails
   json2-rails
+  kaminari
   letter_opener
   messengerjs-rails (~> 1.4.1)
   pg

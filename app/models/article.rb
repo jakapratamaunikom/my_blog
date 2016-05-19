@@ -1,6 +1,8 @@
 class Article < ActiveRecord::Base
   LANGUAGES = %w(ru en)
 
+  mount_uploader :image, AvatarUploader
+  
   default_scope { where(removed: false).order(:created_at => :desc) }
 
   scope :published, ->(lang) { joins(:article_contents).merge(ArticleContent.send(lang).published) }

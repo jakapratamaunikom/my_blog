@@ -2,7 +2,9 @@ class Admin::ArticlesController < Admin::BaseController
   add_tasty_breadcrumb 'Статьи',  :admin_articles_path
 
   def index
-    @articles = Article.all
+    @search_article = VAlexL::MyBlog::Search::Article.new(params[:query_search])
+    @articles = @search_article.search
+    @articles = @articles.page(params[:page]).per(10).uniq
   end
 
   def show
@@ -87,11 +89,11 @@ class Admin::ArticlesController < Admin::BaseController
 
   private
     def article_params
-      params.require(:article).permit(:ru_title, :ru_content, :ru_image, :ru_short_description,
-                                      :en_title, :en_content, :en_image, :en_short_description,
-                                      :ru_tags => [], :en_tags => [],
+      params.require(:article).permit(:image, 
+                                      :ru_title, :ru_content, :ru_short_description,
+                                      :en_title, :en_content, :en_short_description,
+                                      :ru_tags => [], :en_tags => []
                                       )
-                                      
     end
 
     def to_back_url

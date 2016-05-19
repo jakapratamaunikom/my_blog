@@ -2,7 +2,7 @@ class Admin::WorksController < Admin::BaseController
   add_tasty_breadcrumb 'Мои работы',  :admin_works_path
 
   def index
-    @works = Work.all
+    @works = Work.page(params[:page]).per(10)
   end
 
   def show
@@ -87,8 +87,9 @@ class Admin::WorksController < Admin::BaseController
 
   private
     def work_params
-      params.require(:work).permit(:ru_title, :ru_content, :ru_image,
-                                   :en_title, :en_content, :en_image,
+      params.require(:work).permit(:image,
+                                   :ru_title, :ru_content,
+                                   :en_title, :en_content,
                                    :image_ids => [],
                                   )
                                       

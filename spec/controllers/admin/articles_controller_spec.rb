@@ -10,12 +10,10 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       :ru_title             => ru_content.title,
       :ru_content           => ru_content.content,
       :ru_short_description => ru_content.short_description,
-      :ru_image             => ru_content.image,
       :ru_published         => ru_content.published,
       :en_title             => en_content.title,
       :en_content           => en_content.content,
       :en_short_description => en_content.short_description,
-      :en_image             => en_content.image,
       :en_published         => en_content.published,
     }
   }
@@ -29,12 +27,12 @@ RSpec.describe Admin::ArticlesController, type: :controller do
   describe "GET #index" do
     before(:each) do
       Article.destroy_all
+      @article = FactoryGirl.create(:article)
     end
     
     it "assigns all articles as @articles" do
-      article = FactoryGirl.create(:article)
       get :index, {}, valid_session
-      expect(assigns(:articles)).to eq([article])
+      expect(assigns(:articles)).to eq([@article])
     end
 
     it 'redirect to sessions#new if current user not admin' do
@@ -42,6 +40,25 @@ RSpec.describe Admin::ArticlesController, type: :controller do
       get :index, {}, valid_session
       expect(response).to redirect_to admin_sign_in_path(back_url: admin_articles_url)
     end
+
+    context 'search by title articles' do
+      it 'search by title articles with empty query' do
+        get :index, {:query_search => ''}, valid_session
+        expect(assigns(:articles)).to eq([@article])
+      end  
+
+      it 'search by title articles with not exist title' do
+        get :index, {:query_search => 'search_text'}, valid_session
+        expect(assigns(:articles)).to eq([])
+      end  
+
+      it 'search by title articles' do
+        content = @article.get_content('ru')
+        ArticleContent.update(content.id, :title => "тест")
+        get :index, {:query_search => 'тест'}, valid_session
+        expect(assigns(:articles)).to eq([@article])
+      end
+    end  
   end
 
   describe "GET #show" do

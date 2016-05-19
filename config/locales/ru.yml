@@ -5,3 +5,10 @@ ru:
   time:
     formats:
       default: "%d.%m.%Y %H:%M"
+  views:
+    pagination:
+      previous: "&lt; Предыдущая"
+      next: "Следующая &gt;"
+      last: "Последняя"
+      first: "Первая"
+      truncate: "..."

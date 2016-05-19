@@ -69,6 +69,7 @@ gem 'carrierwave'
 
 #For truncate html
 gem 'truncate_html'
+gem 'kaminari'
 
 gem 'sidekiq'
 

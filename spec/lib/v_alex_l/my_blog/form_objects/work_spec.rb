@@ -12,11 +12,9 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
     @params = {
       :ru_title     => @ru_content.title,
       :ru_content   => @ru_content.content,
-      :ru_image     => @ru_content.image,
       :ru_published => @ru_content.published,
       :en_title     => @en_content.title,
       :en_content   => @en_content.content,
-      :en_image     => @en_content.image,
       :en_published => @en_content.published,
       :image_ids    => [@first_image.id, @second_image.id],
     }
@@ -177,19 +175,11 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Work do
       expect(@work_form.work.english_content.content).to eq('Что-то умное на русском языке')
     end
 
-    it 'ru_image= wich save image for work_content with russian language' do
+    it 'image= wich save image for work' do
       File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
-        @work_form.ru_image = f
+        @work.image = f
       end
       filename = File.basename(@work_form.work.russian_content.image.file.file)
-      expect(filename).to eq("img.jpeg")
-    end
-    
-    it 'en_image= wich save image for work_content with english language' do
-      File.open("#{::Rails.root}/spec/files/img.jpeg") do |f|
-        @work_form.en_image = f
-      end
-      filename = File.basename(@work_form.work.english_content.image.file.file)
       expect(filename).to eq("img.jpeg")
     end
 
