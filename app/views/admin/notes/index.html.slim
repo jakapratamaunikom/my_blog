@@ -1,0 +1,11 @@
+= form_tag(admin_notes_path, :method => "get")
+br      
+= link_to 'Добавить заметку', new_admin_note_path, class: 'btn btn-default btn-sm'
+br
+br
+.pagination
+  = paginate @notes 
+.row.notes
+  - @notes.each do |note|
+    .col-sm-6.col-md-3.note
+      = render 'admin/notes/index/note_item', note: note

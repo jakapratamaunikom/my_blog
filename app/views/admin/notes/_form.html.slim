@@ -1,0 +1,25 @@
+= form_for([:admin, @note_form], html: { :class => 'form-horizontal', :multipart => true }) do |f|
+  - if @note_form.errors.any? 
+    - unless @note_form.errors.full_messages.length.zero?
+      .alert.alert-danger
+        strong 
+          'Исправьте ошибки:
+        ul
+          - @note_form.errors.full_messages.each do |msg|
+            li
+              = msg
+  div
+    = render 'admin/notes/form/note_fields', f: f
+
+    .form-group
+      .row
+        .col-md-8.col-sm-10.col-sm-offset-2.col-md-offset-2
+          .btn-group.pull-right
+            = f.submit 'Сохранить', class: 'btn btn-primary'
+            = link_to 'Отмена', :back, class: 'btn btn-default'
+
+
+javascript:
+  $("textarea[data-type=editable]").editable({inlineMode: false})
+  $("a[href='http://editor.froala.com']").parent().hide()
+  new App.Admin.NoteForm({el: $("form")})

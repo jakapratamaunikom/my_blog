@@ -26,7 +26,15 @@
           = link_to 'Список', admin_works_path
         li class="#{'active' if current_page?(new_admin_work_path)}"
           = link_to 'Добавить',  new_admin_work_path
-
+    li.dropdown role="presentation" class="#{'active' if current_controller?('admin/notes')}"
+      a.dropdown-toggle data-toggle="dropdown" href="#" 
+        | Заметки
+        span.caret
+      ul.dropdown-menu role="menu" 
+        li class="#{'active' if current_page?(admin_notes_path)}"
+          = link_to 'Список', admin_notes_path
+        li class="#{'active' if current_page?(new_admin_note_path)}"
+          = link_to 'Добавить', new_admin_note_path
 
   ul.nav.navbar-nav.navbar-right
     li.dropdown role="presentation" class="#{'active' if current_controller?('admin/tags') || current_controller?('admin/prides')}"

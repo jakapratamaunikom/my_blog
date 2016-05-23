@@ -1,0 +1,11 @@
+.jumbotron
+  .row
+    .col-sm-12
+      h1.text-center
+        = note.title
+  .row
+    .btn-group.btn-group-lg.pull-right
+      = link_to 'Изменить', edit_admin_note_path(@note), class: 'btn btn-primary'
+      = link_to 'Удалить', admin_note_path(@note), method: :delete, class: 'btn btn-danger', data: { confirm: 'Оу Оу полегче!! Подумай что ты делаешь!?!?!?' }
+  p
+    = note.description.html_safe
