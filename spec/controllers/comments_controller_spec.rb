@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'sidekiq/testing'
+Sidekiq::Testing.inline!
 
 RSpec.describe CommentsController, type: :controller do
 
@@ -16,6 +18,20 @@ RSpec.describe CommentsController, type: :controller do
 
   describe "POST #create" do
     context "with valid params" do
+      before(:each) {
+        ActionMailer::Base.deliveries.clear 
+        ActionMailer::Base.delivery_method = :test
+        ActionMailer::Base.perform_deliveries = true
+      }
+      it "sends email" do
+        comment = FactoryGirl.create(:comment)
+        valid_attributes['parent_id'] = comment.id
+        comment2 = Comment.find(comment.id)
+        expect {
+          post :create, {:comment => valid_attributes, format: 'js'}, valid_session
+        }.to change { ActionMailer::Base.deliveries.count}.by(1)
+      end
+
       it "creates a new Comment" do
         expect {
           post :create, {:comment => valid_attributes, format: 'js'}, valid_session

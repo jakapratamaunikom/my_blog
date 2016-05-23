@@ -71,6 +71,8 @@ gem 'carrierwave'
 gem 'truncate_html'
 gem 'kaminari'
 
+gem 'sidekiq'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -79,7 +81,6 @@ gem 'kaminari'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
 group :production do
   gem 'unicorn'
 end
@@ -92,17 +93,12 @@ group :development do
 end
 
 
-
-
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-
-
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   # gem 'database_cleaner' #чистит тестувую базу
@@ -119,6 +115,6 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-bundler'
   gem 'guard-spork'
-
+  gem 'letter_opener'
 end
 
