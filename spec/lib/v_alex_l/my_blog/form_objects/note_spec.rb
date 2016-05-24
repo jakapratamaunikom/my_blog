@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe VAlexL::MyBlog::FormObjects::Note do
+  let(:params) {
+    { :title => 'test_title', :description => 'description' }
+  }
+
+  let(:invalid_params) {
+    { :title => nil, :description => nil }
+  }
 
   before(:each) do
-    @params = {:title => 'test_title', :description => 'description'}
-    @invalid_params = {:title => nil, :description => nil}
-
     @note = FactoryGirl.build(:note)
     @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, @params
   end
@@ -18,29 +22,29 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Note do
       end
 
       it 'fills all params' do
-        @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, @params
+        @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, params
       end  
     end
     
     it 'will return false and errors.full_messages will have information about blank title if title are blank' do
-      @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, @invalid_params
+      @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, invalid_params
       expect(@note_form.valid?).to eq(false)
       expect(@note_form.errors.full_messages.length).to eq(2)
     end
 
     it 'will return false and errors.full_messages will be blank if title present but description blank' do
-      @invalid_params[:title]   = 'Title'
-      @invalid_params[:description] = ''
-      @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, @invalid_params
+      invalid_params[:title]   = 'Title'
+      invalid_params[:description] = ''
+      @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, invalid_params
 
       expect(@note_form.valid?).to eq(false)
       expect(@note_form.errors.full_messages.length).to eq(1)
     end
 
     it 'will return false and errors.full_messages will be blank if description present but title blank' do
-      @invalid_params[:title]   = ''
-      @invalid_params[:description] = 'Description'
-      @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, @invalid_params
+      invalid_params[:title]   = ''
+      invalid_params[:description] = 'Description'
+      @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, invalid_params
 
       expect(@note_form.valid?).to eq(false)
       expect(@note_form.errors.full_messages.length).to eq(1)
@@ -61,8 +65,7 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Note do
 
       describe "with invalid params" do
         before(:each) do
-          @invalid_params = {:title => nil, :description => nil}
-          @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, @invalid_params
+          @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, invalid_params
         end
 
         it 'return false' do
@@ -74,9 +77,9 @@ RSpec.describe VAlexL::MyBlog::FormObjects::Note do
         end
 
         it 'return note with new attributes' do
-          @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, @invalid_params
+          @note_form = VAlexL::MyBlog::FormObjects::Note.new @note, invalid_params
           expect(@note_form.save).to eq(false)
-          expect(@note_form.title).to eq(@invalid_params[:title])
+          expect(@note_form.title).to eq(invalid_params[:title])
         end
       end
     end

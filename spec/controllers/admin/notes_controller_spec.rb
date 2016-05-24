@@ -10,6 +10,8 @@ RSpec.describe Admin::NotesController, type: :controller do
     {'title' => nil, 'description' => nil}
   }
 
+  let!(:note) { FactoryGirl.create(:note) }
+
   let(:valid_session) { {} }
 
   describe "GET #index" do
@@ -32,7 +34,6 @@ RSpec.describe Admin::NotesController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested note as @note" do
-      note = FactoryGirl.create(:note)
       get :show, {:id => note.to_param}, valid_session
       expect(assigns(:note)).to eq(note)
     end
@@ -47,7 +48,6 @@ RSpec.describe Admin::NotesController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested note as @note" do
-      note = FactoryGirl.create(:note)
       get :edit, {:id => note.to_param}, valid_session
       expect(assigns(:note)).to eq(note)
     end
@@ -83,13 +83,11 @@ RSpec.describe Admin::NotesController, type: :controller do
       }
 
       it "updates the requested note" do
-        note = FactoryGirl.create(:note)
         put :update, {:id => note.to_param, :note => new_attributes}, valid_session
         note.reload
       end
 
       it "assigns the requested note as @note" do
-        note = FactoryGirl.create(:note)
         put :update, {:id => note.to_param, :note => valid_attributes}, valid_session
         expect(assigns(:note)).to eq(note)
       end
@@ -97,13 +95,11 @@ RSpec.describe Admin::NotesController, type: :controller do
 
     context "with invalid params" do
       it "assigns the note as @note" do
-        note = FactoryGirl.create(:note)
         put :update, {:id => note.to_param, :note => invalid_attributes}, valid_session
         expect(assigns(:note)).to eq(note)
       end
 
       it "re-renders the 'edit' template" do
-        note = FactoryGirl.create(:note)
         put :update, {:id => note.to_param, :note => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
@@ -112,14 +108,12 @@ RSpec.describe Admin::NotesController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested note" do
-      note = FactoryGirl.create(:note)
       expect {
         delete :destroy, {:id => note.to_param}, valid_session
       }.to change(Note, :count).by(-1)
     end
 
     it "redirects to the notes list" do
-      note = FactoryGirl.create(:note)
       delete :destroy, {:id => note.to_param}, valid_session
       expect(response).to redirect_to(admin_notes_url)
     end

@@ -1,8 +1,7 @@
 .thumbnail
   .caption
-    - if note.title.present?
-      h3
-        = link_to note.title, admin_note_path(note)
+    h3
+      = link_to note.title, admin_note_path(note)
   hr
 
   .text-center

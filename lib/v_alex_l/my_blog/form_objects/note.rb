@@ -37,7 +37,7 @@ class VAlexL::MyBlog::FormObjects::Note
   private
 
   def persist!
-    if @note.id then
+    if @note.new_record?
       @note.update(attributes)
     else
       @note.save
