@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         
       resources :images, only: [:create, :destroy]
       resources :tags
+      resources :notes
 
       resource :pride, only: [:show, :create]
 

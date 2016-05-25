@@ -1,0 +1,12 @@
+.thumbnail
+  .caption
+    h3
+      = link_to note.title, admin_note_path(note)
+  hr
+
+  .text-center
+    .btn.btn-group
+      = link_to edit_admin_note_path(note), class: 'btn btn-primary', title: 'Изменить' do
+        i.fa.fa-pencil-square-o
+      = link_to admin_note_path(note), class: 'btn btn-default', title: 'Просмотр' do
+        i.fa.fa-search
