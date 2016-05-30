@@ -12,3 +12,10 @@ en:
       truncate: "..."
       last: "Last"
       first: "First"
+  helpers:
+    submit:
+      devise:
+        sign_up: "Sign Up"    
+        log_in: "Log In"
+        send_reset_pass_instruction: "Send me reset password instructions"
+        forgot_password: "Forgot your password?"

@@ -15,6 +15,12 @@ ru:
 
       count_comments: 'Комментариев %{quantity}  '
     
+    devise:
+      page_header_reg: "Регистрация"
+      page_header_auth: "Авторизация"
+      password_length: "минимум %{quantity} символов"
+      forgot_password: "Напомнить пароль?"
+    
     pages:
       about_me: 'О себе'
       

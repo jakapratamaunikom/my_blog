@@ -21,3 +21,10 @@ ru:
         name:    'Имя'
         email:   'E-mail'
         content: 'Контент'
+
+      user:
+        username: 'Имя'
+        email:    'E-mail'
+        password: 'Пароль'
+        password_confirmation: 'Повторите пароль'
+        remember_me: 'Запомнить меня'

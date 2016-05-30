@@ -40,7 +40,7 @@ gem "i18n-js"
 gem 'famfamfam_flags_rails'
 
 #For monitoring
-gem 'rollbar', '~> 2.7.1'
+gem 'rollbar', '~> 2.9.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -72,6 +72,8 @@ gem 'truncate_html'
 gem 'kaminari'
 
 gem 'sidekiq'
+#For registration
+gem 'devise', '~> 3.4.0' 
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -99,7 +101,7 @@ group :development, :test do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.4.2'
   gem 'factory_girl_rails'
   # gem 'database_cleaner' #чистит тестувую базу
   # gem 'capybara'

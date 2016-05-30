@@ -122,6 +122,8 @@ module ApplicationHelper
         send("#{controller.singularize}_path", lang: another_lang)
       when 'about_me'
         about_me_path(lang: another_lang)
+      when 'new'
+        new_user_session_path(lang: another_lang)  
       else
         root_url(lang: another_lang)
       end

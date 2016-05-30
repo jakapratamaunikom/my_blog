@@ -1,0 +1,4 @@
+en:
+  views:
+    em:
+      password_length: "символов минмиум"

@@ -10,8 +10,12 @@ ru:
       about_me:    'О себе'
       search:      'Поиск'
       my_works:    'Портфолио'
+      users: 'Пользователь'
       switch_lang: 'Switch to English'
       admin:       'Админка'
+      sign_in: 'Войти'
+      sign_up: 'Регистрация'
+      log_out: 'Выйти'  
 
     footer:
       statistic: 'Статистика'

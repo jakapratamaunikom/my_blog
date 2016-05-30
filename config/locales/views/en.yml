@@ -15,6 +15,13 @@ en:
 
       count_comments: 'Comments %{quantity}  '
 
+    devise:
+      page_header_reg: "Sign Up"
+      page_header_auth: "Sign In"
+      password_length: "%{quantity} characters minimum"
+      forgot_password: "Forgot your password?"
+      
+
     pages:
       about_me: 'About me'
 

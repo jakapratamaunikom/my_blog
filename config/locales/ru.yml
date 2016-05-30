@@ -12,3 +12,10 @@ ru:
       last: "Последняя"
       first: "Первая"
       truncate: "..."
+  helpers:
+    submit:
+      devise:
+        sign_up: "Регистрация"  
+        log_in: "Войти"
+        send_reset_pass_instruction: "Отправить мне инструкцию по сбросу пароля"
+        forgot_password: "Напомнить пароль?"
