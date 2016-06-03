@@ -26,6 +26,18 @@ module ApplicationHelper
     end
   end
 
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+
   def current_controller?(controller_names)
     controller_names = [controller_names] unless controller_names.instance_of?(Array)
     controller_names.any? {|controller_name| controller_name.to_s == params[:controller].to_s }

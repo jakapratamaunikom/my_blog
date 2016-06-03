@@ -15,5 +15,5 @@ class SessionsController < Devise::SessionsController
   private
     def init_language
       I18n.locale = current_lang
-    end 
+    end
 end    

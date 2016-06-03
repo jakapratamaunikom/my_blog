@@ -62,5 +62,52 @@ aside#create-comment.create-comment
       .buttons.clearfix
         a.btn.btn-xlarge.btn-tales-two data-type='clear_form'
           = I18n.t("views.articles.comments.cancel")
-        button.btn.btn-xlarge.btn-tales-one type="submit"
+        button.btn.btn-xlarge.btn-tales-one type="submit" id="send-comment"
           = I18n.t("views.articles.comments.submit")
+
+.modal.fade id="SignUpModal"
+  .modal-header
+    button.close data-dismiss="modal"
+      | ×
+    h3
+      = I18n.t('views.devise.page_header_reg')
+  
+  .modal-body
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| 
+      = devise_error_messages! 
+
+      .field
+        = f.label :email
+        br
+        = f.email_field :email, autofocus: true 
+
+      .field
+        = f.label :username
+        br
+        = f.text_field :username, autocomplete: "on" 
+      br
+      = f.submit I18n.t('helpers.submit.devise.sign_up'), :class => 'btn btn-large btn-tales-two'
+  .modal-footer
+      
+
+coffee:
+  $('#send-comment').on "click", ->
+    email = $('#comment_email').val()
+
+    if (user_signed_in? || email != '') 
+      $.ajax '/users/check_registration',
+        type: 'GET',
+        dataType: "json",
+        data: { email: email }
+        success: (data) ->
+          if data.empty? 
+            $('#SignUpModal').modal('show');
+          else
+            user = data[0]
+            $.ajax '/users/sign_in',
+              type: 'POST',
+              data: { user: { email: email , password: 'password',  username: user.username } }
+              success: (data) ->
+                location.reload()
+    else 
+      $('#SignUpModal').modal('show')

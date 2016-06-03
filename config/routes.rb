@@ -6,7 +6,14 @@ Rails.application.routes.draw do
   #############################
   
   scope "(:lang)", lang: /ru|en/ do
-    devise_for :users, :controllers => {:registrations => "registrations", sessions: "sessions"}
+    devise_for :users, :controllers => {
+      :registrations => "registrations",
+      sessions: "sessions"
+    }
+    devise_scope :user do
+      get '/users/check_registration' => 'registrations#check_registration', as: 'check_registration'
+    end
+    
     root 'articles#index'
     get "/about_me" => "pages#about_me", as: 'about_me'
     resources :comments, only: [:create]

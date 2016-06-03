@@ -1,0 +1,23 @@
+.row  
+  .col-md-1
+  .col-md-10
+    h2
+      = I18n.t('views.devise.page_header_auth')
+
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .field
+        = f.label :email
+        br
+        = f.email_field :email, autofocus: true
+
+      .field
+        = f.label :password
+        br
+        = f.password_field :password, autocomplete: "off"
+      br
+      .actions
+        = f.submit I18n.t('helpers.submit.devise.log_in'), :class => 'btn btn-large btn-tales-two'
+    br
+
+    = render "devise/shared/links"
+  .col-md-1
