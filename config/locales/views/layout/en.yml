@@ -12,6 +12,10 @@ en:
       my_works:    'My works'
       switch_lang: 'Смотреть на русском'
       admin:       'Dashboard'
+      users: 'User'
+      sign_in: 'Sign in'
+      sign_up: 'Sign up'
+      log_out: 'Log out'  
       
     footer:
       statistic: 'Statistic'

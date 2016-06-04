@@ -1,0 +1,25 @@
+.row
+  .col-md-1
+  .col-md-10
+    h2
+      = I18n.t('views.devise.page_header_reg')
+
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| 
+      = devise_error_messages!
+
+      .field
+        = f.label :email
+        br
+        = f.email_field :email, autofocus: true 
+
+      .field
+        = f.label :username
+        br
+        = f.text_field :username, autocomplete: "on"
+      br
+      .actions
+        = f.submit I18n.t('helpers.submit.devise.sign_up'), :class => 'btn btn-large btn-tales-two'
+    br
+
+    = render "devise/shared/links"
+  .col-md-1    

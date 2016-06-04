@@ -20,6 +20,16 @@ header
             li
               = link_to current_path_to_anothre_lang, title: I18n.t("views.header.switch_lang") do
                 i class="famfamfam-flag-#{current_lang_flag}"
+
+            - if user_signed_in?
+              li
+                span
+                  = current_user.username
+                = link_to I18n.t("views.header.log_out"), destroy_user_session_path, :method => :delete 
+            - else
+              li
+                = link_to I18n.t("views.header.sign_in"), new_user_session_path
+                = link_to I18n.t("views.header.sign_up"), new_user_registration_path
             - if current_user_admin?
               li
                 = link_to admin_root_path, title: I18n.t("views.header.admin") do

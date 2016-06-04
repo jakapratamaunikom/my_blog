@@ -1,0 +1,30 @@
+en:
+  activerecord:
+    attributes:
+      article:
+        title_ru:   'Title (ru)'
+        title_en:   'Title (en)'
+        content_ru: 'Content (ru)'
+        content_en: 'Content (en)'
+        image_ru:   'Image (ru)'
+        image_en:   'Image (en)'
+        tag_ru:     'Tags (ru)'
+        tag_en:     'Tags (en)'
+      
+      tag: 
+        title: 'Title'
+        lang:  'Lang'
+        article: 'Article'
+        count_articles: 'Count articles'
+
+      comment:
+        name:    'Name'
+        email:   'Email'
+        content: 'Content'
+
+      user:
+        username: 'Username'
+        email:    'E-mail'
+        password: 'Password'
+        password_confirmation: 'Password confirmation'
+        remember_me: 'Remember me'
