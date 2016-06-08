@@ -5,11 +5,15 @@ Rails.application.routes.draw do
   # site.com/en/article
   #############################
   
+devise_for :users, skip: [:session, :registration], controllers: { omniauth_callbacks: "omniauth_callbacks" }
+
   scope "(:lang)", lang: /ru|en/ do
-    devise_for :users, :controllers => {
-      :registrations => "registrations",
-      sessions: "sessions"
-    }
+    devise_for :users, skip: [:omniauth_callbacks]
+    # devise_for :users, :controllers => { 
+    #   :omniauth_callbacks => "omniauth_callbacks",
+    #   :registrations => "registrations",
+    #   sessions: "sessions"
+    # }
     devise_scope :user do
       get '/users/check_registration' => 'registrations#check_registration', as: 'check_registration'
     end

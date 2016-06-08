@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe WorksController, type: :controller do
-
+  include Devise::TestHelpers
+  
   describe "GET #index" do
     it "returns http success" do
       get :index

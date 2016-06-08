@@ -9,12 +9,13 @@ Spork.prefork do
   ActiveRecord::Migration.maintain_test_schema!
 
   RSpec.configure do |config|
+    config.include Devise::TestHelpers, type: :controller
+    config.include Devise::TestHelpers, type: :view
     config.fixture_path = "#{::Rails.root}/spec/fixtures"
     config.use_transactional_fixtures = true
     config.run_all_when_everything_filtered = true
     config.infer_spec_type_from_file_location!
     config.render_views = true
-
     config.before(:each, :type => :controller) do
       session[:is_admin] = true
     end

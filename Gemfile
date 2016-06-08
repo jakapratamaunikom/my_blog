@@ -73,7 +73,9 @@ gem 'kaminari'
 
 gem 'sidekiq'
 #For registration
-gem 'devise', '~> 3.4.0' 
+gem 'devise', '~> 3.4.0'
+gem 'omniauth'
+gem 'omniauth-google-oauth2' 
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -33,3 +33,4 @@ en:
         name:            'Name'
         email:           'E-mail for notifications'
         content:         'Huh.. I think..'
+      need_authorization: 'Leave a comment can only authorized users'  
