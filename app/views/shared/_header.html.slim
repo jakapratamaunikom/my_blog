@@ -25,11 +25,9 @@ header
               li
                 span
                   = current_user.username
-                = link_to I18n.t("views.header.log_out"), destroy_user_session_path, :method => :delete 
             - else
               li
-                = link_to I18n.t("views.header.sign_in"), new_user_session_path
-                = link_to I18n.t("views.header.sign_up"), new_user_registration_path
+                = link_to I18n.t("views.header.sign_in_with_google"), user_omniauth_authorize_path(:google_oauth2)
             - if current_user_admin?
               li
                 = link_to admin_root_path, title: I18n.t("views.header.admin") do

@@ -36,7 +36,8 @@ aside#comments.comments
           = child.content
       
 aside#create-comment.create-comment
-    hr
+  hr
+  -if user_signed_in? 
     h2
       i.fa.fa-heart
       |  
@@ -47,15 +48,9 @@ aside#create-comment.create-comment
       = f.hidden_field :parent_id,  value: nil
       .row
         .col-md-6.js-field-container
-          -if user_signed_in? 
-            = f.text_field :name, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.name'), required: true, value: current_user.username, readonly: true
-          -else
-            = f.text_field :name, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.name'), required: true
+          = f.text_field :name, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.name'), required: true, value: current_user.username, readonly: true
         .col-md-6.js-field-container
-          - if user_signed_in?
-            = f.email_field :email, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.email'), value: current_user.email, readonly: true
-          - else
-            = f.email_field :email, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.email')
+          = f.email_field :email, class: 'form-control input-lg', placeholder: I18n.t('views.comments.placeholder.email'), value: current_user.email, readonly: true
       .row
         .col-md-12.js-field-container
           = f.text_area :content, class: 'form-control input-lg', rows: 5, placeholder: I18n.t('views.comments.placeholder.content'), required: true
@@ -64,50 +59,8 @@ aside#create-comment.create-comment
           = I18n.t("views.articles.comments.cancel")
         button.btn.btn-xlarge.btn-tales-one type="submit" id="send-comment"
           = I18n.t("views.articles.comments.submit")
-
-.modal.fade id="SignUpModal"
-  .modal-header
-    button.close data-dismiss="modal"
-      | ×
+  -else
     h3
-      = I18n.t('views.devise.page_header_reg')
-  
-  .modal-body
-    = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| 
-      = devise_error_messages! 
-
-      .field
-        = f.label :email
-        br
-        = f.email_field :email, autofocus: true 
-
-      .field
-        = f.label :username
-        br
-        = f.text_field :username, autocomplete: "on" 
-      br
-      = f.submit I18n.t('helpers.submit.devise.sign_up'), :class => 'btn btn-large btn-tales-two'
-  .modal-footer
-      
-
-coffee:
-  $('#send-comment').on "click", ->
-    email = $('#comment_email').val()
-
-    if (user_signed_in? || email != '') 
-      $.ajax '/users/check_registration',
-        type: 'GET',
-        dataType: "json",
-        data: { email: email }
-        success: (data) ->
-          if data.empty? 
-            $('#SignUpModal').modal('show');
-          else
-            user = data[0]
-            $.ajax '/users/sign_in',
-              type: 'POST',
-              data: { user: { email: email , password: 'password',  username: user.username } }
-              success: (data) ->
-                location.reload()
-    else 
-      $('#SignUpModal').modal('show')
+      | #{I18n.t("views.comments.need_authorization")}
+    .center  
+      = link_to I18n.t("views.header.sign_in_with_google"), user_omniauth_authorize_path(:google_oauth2) 

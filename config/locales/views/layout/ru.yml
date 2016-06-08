@@ -15,7 +15,8 @@ ru:
       admin:       'Админка'
       sign_in: 'Войти'
       sign_up: 'Регистрация'
-      log_out: 'Выйти'  
+      log_out: 'Выйти' 
+      sign_in_with_google: 'Войти через Google'
 
     footer:
       statistic: 'Статистика'
